@@ -8,6 +8,7 @@
 class Connector : public ConnectableElement
 {
 public:
+	void addInterface(InterfaceConnector* interface);
 private:
 	std::list<InterfaceConnector*> _interfaces;
 

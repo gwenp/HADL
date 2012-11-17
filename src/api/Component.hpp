@@ -11,6 +11,7 @@
 class Component : public ConnectableElement
 {
 public:
+	void addInterface(InterfaceComposant* interface);
 private:
 	std::list<InterfaceComposant*> _interfaces;
 	Configuration* _linkedConfiguration;
