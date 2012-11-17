@@ -1,6 +1,6 @@
 #include "Connector.hpp"
 
-void Connector::addInterface(InterfaceConnector* interface)
+void Connector::addInterface(std::string name, InterfaceConnector* interface)
 {
-	_interfaces.push_back(interface);
+	_interfaces.insert(std::pair<std::string, InterfaceConnector*>(name, interface));
 }

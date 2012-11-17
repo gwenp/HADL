@@ -6,14 +6,15 @@
 #include "Configuration.hpp"
 #include "InterfaceComposant.hpp"
 
-#include <list>
+#include <map>
+#include <string>
 
 class Component : public ConnectableElement
 {
 public:
-	void addInterface(InterfaceComposant* interface);
+	void addInterface(std::string name, InterfaceComposant* interface);
 private:
-	std::list<InterfaceComposant*> _interfaces;
+	std::map<std::string, InterfaceComposant*> _interfaces;
 	Configuration* _linkedConfiguration;
 };
 

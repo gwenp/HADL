@@ -5,12 +5,15 @@
 #include "Configuration.hpp"
 #include "InterfaceConnector.hpp"
 
+#include <map>
+#include <string>
+
 class Connector : public ConnectableElement
 {
 public:
-	void addInterface(InterfaceConnector* interface);
+	void addInterface(std::string name, InterfaceConnector* interface);
 private:
-	std::list<InterfaceConnector*> _interfaces;
+	std::map<std::string, InterfaceConnector*> _interfaces;
 
 	Configuration* _linkedConfiguration;
 };
