@@ -50,7 +50,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_hadl_OBJECTS = hadl-main.$(OBJEXT)
+am_hadl_OBJECTS = hadl-main.$(OBJEXT) \
+	hadl-ConnectableElement.$(OBJEXT)
 hadl_OBJECTS = $(am_hadl_OBJECTS)
 am__DEPENDENCIES_1 =
 hadl_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
@@ -183,6 +184,7 @@ top_srcdir = .
 hadl_LDADD = $(LIBJSONCPP_LIBS) $(LIBSIGC_LIBS) 
 hadl_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS) -std=c++0x
 hadl_SOURCES = src/main.cpp \
+				src/api/ConnectableElement.cpp \
 				src/api/Component.hpp \
 				src/api/PortConfigProvided.hpp \
 				src/api/Configuration.hpp \
@@ -308,6 +310,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/hadl-ConnectableElement.Po
 include ./$(DEPDIR)/hadl-main.Po
 
 .cpp.o:
@@ -337,6 +340,20 @@ hadl-main.obj: src/main.cpp
 #	source='src/main.cpp' object='hadl-main.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+
+hadl-ConnectableElement.o: src/api/ConnectableElement.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-ConnectableElement.o -MD -MP -MF $(DEPDIR)/hadl-ConnectableElement.Tpo -c -o hadl-ConnectableElement.o `test -f 'src/api/ConnectableElement.cpp' || echo '$(srcdir)/'`src/api/ConnectableElement.cpp
+	$(am__mv) $(DEPDIR)/hadl-ConnectableElement.Tpo $(DEPDIR)/hadl-ConnectableElement.Po
+#	source='src/api/ConnectableElement.cpp' object='hadl-ConnectableElement.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-ConnectableElement.o `test -f 'src/api/ConnectableElement.cpp' || echo '$(srcdir)/'`src/api/ConnectableElement.cpp
+
+hadl-ConnectableElement.obj: src/api/ConnectableElement.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-ConnectableElement.obj -MD -MP -MF $(DEPDIR)/hadl-ConnectableElement.Tpo -c -o hadl-ConnectableElement.obj `if test -f 'src/api/ConnectableElement.cpp'; then $(CYGPATH_W) 'src/api/ConnectableElement.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/ConnectableElement.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-ConnectableElement.Tpo $(DEPDIR)/hadl-ConnectableElement.Po
+#	source='src/api/ConnectableElement.cpp' object='hadl-ConnectableElement.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-ConnectableElement.obj `if test -f 'src/api/ConnectableElement.cpp'; then $(CYGPATH_W) 'src/api/ConnectableElement.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/ConnectableElement.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

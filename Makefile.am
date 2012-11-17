@@ -5,6 +5,7 @@ hadl_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS) -std=c++0x
 
 
 hadl_SOURCES = 	src/main.cpp \
+				src/api/ConnectableElement.cpp \
 				src/api/Component.hpp \
 				src/api/PortConfigProvided.hpp \
 				src/api/Configuration.hpp \

@@ -10,8 +10,7 @@ public:
 	PortConfigRequired();
 	~PortConfigRequired();
 private:
-	PortComposantRequired* _bindingRequired;
-	
+	PortComposantRequired* _bindingRequired;	
 };
 
 #endif /* PORTCONFIGREQUIRED_HPP */

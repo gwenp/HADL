@@ -1,6 +1,7 @@
-hadl-main.o: src/main.cpp src/api/Component.hpp src/api/Element.hpp \
- src/api/InterfaceComposant.hpp src/api/Interface.hpp \
- /usr/include/c++/4.6/list /usr/include/c++/4.6/bits/stl_algobase.h \
+hadl-main.o: src/main.cpp src/api/Component.hpp \
+ src/api/ConnectableElement.hpp src/api/Element.hpp \
+ src/api/Configuration.hpp /usr/include/c++/4.6/list \
+ /usr/include/c++/4.6/bits/stl_algobase.h \
  /usr/include/c++/4.6/x86_64-linux-gnu/./bits/c++config.h \
  /usr/include/c++/4.6/x86_64-linux-gnu/./bits/os_defines.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/bits/predefs.h \
@@ -28,36 +29,37 @@ hadl-main.o: src/main.cpp src/api/Component.hpp src/api/Element.hpp \
  /usr/include/c++/4.6/bits/range_access.h \
  /usr/include/c++/4.6/bits/stl_list.h \
  /usr/include/c++/4.6/initializer_list /usr/include/c++/4.6/bits/list.tcc \
- src/api/PortConfigProvided.hpp src/api/PortConfig.hpp \
- src/api/InterfaceConfiguration.hpp src/api/PortComposantProvided.hpp \
+ src/api/InterfaceConfiguration.hpp src/api/Interface.hpp \
+ src/api/InterfaceComposant.hpp src/api/Configuration.hpp \
+ src/api/Connector.hpp src/api/InterfaceConnector.hpp src/api/Element.hpp \
+ src/api/Interface.hpp src/api/InterfaceComposant.hpp \
+ src/api/InterfaceConfiguration.hpp src/api/InterfaceConnector.hpp \
+ src/api/PortComposant.hpp src/api/PortComposantProvided.hpp \
  src/api/PortComposant.hpp src/api/RoleRequired.hpp src/api/Role.hpp \
- src/api/InterfaceConnector.hpp src/api/Configuration.hpp \
- src/api/PortConfigRequired.hpp src/api/PortComposantRequired.hpp \
- src/api/Connector.hpp src/api/RoleConfig.hpp src/api/Element.hpp \
- src/api/RoleConfigProvided.hpp src/api/RoleConfig.hpp \
- src/api/RoleProvided.hpp src/api/InterfaceComposant.hpp \
- src/api/RoleConfigRequired.hpp src/api/InterfaceConfiguration.hpp \
- src/api/Role.hpp src/api/InterfaceConnector.hpp src/api/RoleProvided.hpp \
- src/api/Interface.hpp src/api/RoleRequired.hpp src/api/PortComposant.hpp \
- src/api/Service.hpp src/api/PortComposantProvided.hpp \
- src/api/ServiceProvided.hpp /usr/include/c++/4.6/vector \
- /usr/include/c++/4.6/bits/stl_construct.h \
+ src/api/PortComposantRequired.hpp src/api/PortConfig.hpp \
+ src/api/PortConfigProvided.hpp src/api/PortConfig.hpp \
+ src/api/PortComposantProvided.hpp src/api/PortConfigRequired.hpp \
+ src/api/PortComposantRequired.hpp src/api/Role.hpp \
+ src/api/RoleConfig.hpp src/api/RoleConfigProvided.hpp \
+ src/api/RoleConfig.hpp src/api/RoleProvided.hpp \
+ src/api/RoleConfigRequired.hpp src/api/RoleProvided.hpp \
+ src/api/RoleRequired.hpp src/api/Service.hpp src/api/ServiceProvided.hpp \
+ /usr/include/c++/4.6/vector /usr/include/c++/4.6/bits/stl_construct.h \
  /usr/include/c++/4.6/bits/stl_uninitialized.h \
  /usr/include/c++/4.6/bits/stl_vector.h \
  /usr/include/c++/4.6/bits/stl_bvector.h \
  /usr/include/c++/4.6/bits/functional_hash.h \
  /usr/include/c++/4.6/bits/hash_bytes.h \
  /usr/include/c++/4.6/bits/vector.tcc src/api/Service.hpp \
- src/api/PortComposantRequired.hpp src/api/ServiceRequired.hpp \
- src/api/PortConfig.hpp
+ src/api/ServiceRequired.hpp
 
 src/api/Component.hpp:
 
+src/api/ConnectableElement.hpp:
+
 src/api/Element.hpp:
 
-src/api/InterfaceComposant.hpp:
-
-src/api/Interface.hpp:
+src/api/Configuration.hpp:
 
 /usr/include/c++/4.6/list:
 
@@ -129,11 +131,29 @@ src/api/Interface.hpp:
 
 /usr/include/c++/4.6/bits/list.tcc:
 
-src/api/PortConfigProvided.hpp:
+src/api/InterfaceConfiguration.hpp:
 
-src/api/PortConfig.hpp:
+src/api/Interface.hpp:
+
+src/api/InterfaceComposant.hpp:
+
+src/api/Configuration.hpp:
+
+src/api/Connector.hpp:
+
+src/api/InterfaceConnector.hpp:
+
+src/api/Element.hpp:
+
+src/api/Interface.hpp:
+
+src/api/InterfaceComposant.hpp:
 
 src/api/InterfaceConfiguration.hpp:
+
+src/api/InterfaceConnector.hpp:
+
+src/api/PortComposant.hpp:
 
 src/api/PortComposantProvided.hpp:
 
@@ -143,19 +163,23 @@ src/api/RoleRequired.hpp:
 
 src/api/Role.hpp:
 
-src/api/InterfaceConnector.hpp:
+src/api/PortComposantRequired.hpp:
 
-src/api/Configuration.hpp:
+src/api/PortConfig.hpp:
+
+src/api/PortConfigProvided.hpp:
+
+src/api/PortConfig.hpp:
+
+src/api/PortComposantProvided.hpp:
 
 src/api/PortConfigRequired.hpp:
 
 src/api/PortComposantRequired.hpp:
 
-src/api/Connector.hpp:
+src/api/Role.hpp:
 
 src/api/RoleConfig.hpp:
-
-src/api/Element.hpp:
 
 src/api/RoleConfigProvided.hpp:
 
@@ -163,27 +187,13 @@ src/api/RoleConfig.hpp:
 
 src/api/RoleProvided.hpp:
 
-src/api/InterfaceComposant.hpp:
-
 src/api/RoleConfigRequired.hpp:
-
-src/api/InterfaceConfiguration.hpp:
-
-src/api/Role.hpp:
-
-src/api/InterfaceConnector.hpp:
 
 src/api/RoleProvided.hpp:
 
-src/api/Interface.hpp:
-
 src/api/RoleRequired.hpp:
 
-src/api/PortComposant.hpp:
-
 src/api/Service.hpp:
-
-src/api/PortComposantProvided.hpp:
 
 src/api/ServiceProvided.hpp:
 
@@ -205,8 +215,4 @@ src/api/ServiceProvided.hpp:
 
 src/api/Service.hpp:
 
-src/api/PortComposantRequired.hpp:
-
 src/api/ServiceRequired.hpp:
-
-src/api/PortConfig.hpp:

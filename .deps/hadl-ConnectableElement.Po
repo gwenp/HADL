@@ -1,0 +1,6 @@
+hadl-ConnectableElement.o: src/api/ConnectableElement.cpp \
+ src/api/ConnectableElement.hpp src/api/Element.hpp
+
+src/api/ConnectableElement.hpp:
+
+src/api/Element.hpp:
