@@ -25,6 +25,8 @@
 
 int main(int argc, char const *argv[])
 {
-	
+	Component c;
+	Configuration cfg;
+	Connector cn;
 	return 0;
 }

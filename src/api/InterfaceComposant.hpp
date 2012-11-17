@@ -6,9 +6,6 @@
 class InterfaceComposant : public Interface
 {
 public:
-	InterfaceComposant();
-	~InterfaceComposant();
-
 };
 
 #endif /* INTERFACECOMPOSANT_HPP */

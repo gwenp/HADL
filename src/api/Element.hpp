@@ -5,8 +5,6 @@
 class Element
 {
 public:
-	Element();
-	~Element();
 
 };
 

@@ -6,8 +6,6 @@
 class PortConfig : public InterfaceConfiguration
 {
 public:
-	PortConfig();
-	~PortConfig();
 private:
 	
 };

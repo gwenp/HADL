@@ -7,8 +7,6 @@
 class RoleConfigRequired : public RoleConfig
 {
 public:
-	RoleConfigRequired();
-	~RoleConfigRequired();
 private:
 	RoleRequired* _bindingRequired;
 };

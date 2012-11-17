@@ -8,8 +8,6 @@
 class Connector : public ConnectableElement
 {
 public:
-	Connector();
-	~Connector();
 private:
 	std::list<InterfaceConnector*> _interfaces;
 

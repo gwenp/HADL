@@ -6,8 +6,6 @@
 class PortComposant : public InterfaceComposant
 {
 public:
-	PortComposant();
-	~PortComposant();
 
 };
 

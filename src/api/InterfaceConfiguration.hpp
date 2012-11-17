@@ -7,8 +7,6 @@
 class InterfaceConfiguration : public Interface
 {
 public:
-	InterfaceConfiguration();
-	~InterfaceConfiguration();
 private:
 	
 };

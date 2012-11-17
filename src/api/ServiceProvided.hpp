@@ -2,17 +2,16 @@
 #define SERVICEPROVIDED_HPP
 
 
-#include <vector>
+#include <list>
 #include "Service.hpp"
+#include "PortComposantProvided.hpp"
 
 
 class ServiceProvided : public Service
 {
 public:
-	ServiceProvided();
-	~ServiceProvided();
 private:
-	std::vector<PortComposantProvided*> _providedPorts;
+	std::list<PortComposantProvided*> _providedPorts;
 };
 
 #endif /* SERVICEPROVIDED_HPP */

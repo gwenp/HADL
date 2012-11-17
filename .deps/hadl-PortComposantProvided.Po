@@ -1,0 +1,18 @@
+hadl-PortComposantProvided.o: src/api/PortComposantProvided.cpp \
+ src/api/PortComposantProvided.hpp src/api/PortComposant.hpp \
+ src/api/InterfaceComposant.hpp src/api/Interface.hpp \
+ src/api/RoleRequired.hpp src/api/Role.hpp src/api/InterfaceConnector.hpp
+
+src/api/PortComposantProvided.hpp:
+
+src/api/PortComposant.hpp:
+
+src/api/InterfaceComposant.hpp:
+
+src/api/Interface.hpp:
+
+src/api/RoleRequired.hpp:
+
+src/api/Role.hpp:
+
+src/api/InterfaceConnector.hpp:

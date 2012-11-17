@@ -7,8 +7,6 @@
 class PortConfigRequired : public PortConfig
 {
 public:
-	PortConfigRequired();
-	~PortConfigRequired();
 private:
 	PortComposantRequired* _bindingRequired;	
 };

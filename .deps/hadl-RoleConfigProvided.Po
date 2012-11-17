@@ -1,0 +1,26 @@
+hadl-RoleConfigProvided.o: src/api/RoleConfigProvided.cpp \
+ src/api/RoleConfigProvided.hpp src/api/RoleConfig.hpp \
+ src/api/InterfaceConfiguration.hpp src/api/Interface.hpp \
+ src/api/RoleProvided.hpp src/api/Role.hpp src/api/InterfaceConnector.hpp \
+ src/api/PortComposantRequired.hpp src/api/PortComposant.hpp \
+ src/api/InterfaceComposant.hpp
+
+src/api/RoleConfigProvided.hpp:
+
+src/api/RoleConfig.hpp:
+
+src/api/InterfaceConfiguration.hpp:
+
+src/api/Interface.hpp:
+
+src/api/RoleProvided.hpp:
+
+src/api/Role.hpp:
+
+src/api/InterfaceConnector.hpp:
+
+src/api/PortComposantRequired.hpp:
+
+src/api/PortComposant.hpp:
+
+src/api/InterfaceComposant.hpp:

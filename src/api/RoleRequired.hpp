@@ -6,8 +6,6 @@
 class RoleRequired : public Role
 {
 public:
-	RoleRequired();
-	~RoleRequired();
 
 };
 

@@ -1,0 +1,6 @@
+hadl-InterfaceConfiguration.o: src/api/InterfaceConfiguration.cpp \
+ src/api/InterfaceConfiguration.hpp src/api/Interface.hpp
+
+src/api/InterfaceConfiguration.hpp:
+
+src/api/Interface.hpp:

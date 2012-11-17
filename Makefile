@@ -51,7 +51,21 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_hadl_OBJECTS = hadl-main.$(OBJEXT) \
-	hadl-ConnectableElement.$(OBJEXT)
+	hadl-PortConfigProvided.$(OBJEXT) hadl-Configuration.$(OBJEXT) \
+	hadl-ConnectableElement.$(OBJEXT) hadl-Component.$(OBJEXT) \
+	hadl-PortConfigRequired.$(OBJEXT) hadl-Connector.$(OBJEXT) \
+	hadl-RoleConfig.$(OBJEXT) hadl-Element.$(OBJEXT) \
+	hadl-RoleConfigProvided.$(OBJEXT) \
+	hadl-InterfaceComposant.$(OBJEXT) \
+	hadl-RoleConfigRequired.$(OBJEXT) \
+	hadl-InterfaceConfiguration.$(OBJEXT) hadl-Role.$(OBJEXT) \
+	hadl-InterfaceConnector.$(OBJEXT) hadl-RoleProvided.$(OBJEXT) \
+	hadl-Interface.$(OBJEXT) hadl-RoleRequired.$(OBJEXT) \
+	hadl-PortComposant.$(OBJEXT) hadl-Service.$(OBJEXT) \
+	hadl-PortComposantProvided.$(OBJEXT) \
+	hadl-ServiceProvided.$(OBJEXT) \
+	hadl-PortComposantRequired.$(OBJEXT) \
+	hadl-ServiceRequired.$(OBJEXT) hadl-PortConfig.$(OBJEXT)
 hadl_OBJECTS = $(am_hadl_OBJECTS)
 am__DEPENDENCIES_1 =
 hadl_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
@@ -64,10 +78,6 @@ CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(hadl_SOURCES)
 DIST_SOURCES = $(hadl_SOURCES)
 ETAGS = etags
@@ -182,32 +192,32 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 hadl_LDADD = $(LIBJSONCPP_LIBS) $(LIBSIGC_LIBS) 
-hadl_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS) -std=c++0x
+hadl_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS)
 hadl_SOURCES = src/main.cpp \
+				src/api/PortConfigProvided.cpp \
+				src/api/Configuration.cpp \
 				src/api/ConnectableElement.cpp \
-				src/api/Component.hpp \
-				src/api/PortConfigProvided.hpp \
-				src/api/Configuration.hpp \
-				src/api/PortConfigRequired.hpp \
-				src/api/Connector.hpp \
-				src/api/RoleConfig.hpp \
-				src/api/Element.hpp \
-				src/api/RoleConfigProvided.hpp \
-				src/api/InterfaceComposant.hpp \
-				src/api/RoleConfigRequired.hpp \
-				src/api/InterfaceConfiguration.hpp \
-				src/api/Role.hpp \
-				src/api/InterfaceConnector.hpp \
-				src/api/RoleProvided.hpp \
-				src/api/Interface.hpp \
-				src/api/RoleRequired.hpp \
-				src/api/PortComposant.hpp \
-				src/api/Service.hpp \
-				src/api/PortComposantProvided.hpp \
-				src/api/ServiceProvided.hpp \
-				src/api/PortComposantRequired.hpp \
-				src/api/ServiceRequired.hpp \
-				src/api/PortConfig.hpp
+				src/api/Component.cpp \
+				src/api/PortConfigRequired.cpp \
+				src/api/Connector.cpp \
+				src/api/RoleConfig.cpp \
+				src/api/Element.cpp \
+				src/api/RoleConfigProvided.cpp \
+				src/api/InterfaceComposant.cpp \
+				src/api/RoleConfigRequired.cpp \
+				src/api/InterfaceConfiguration.cpp \
+				src/api/Role.cpp \
+				src/api/InterfaceConnector.cpp \
+				src/api/RoleProvided.cpp \
+				src/api/Interface.cpp \
+				src/api/RoleRequired.cpp \
+				src/api/PortComposant.cpp \
+				src/api/Service.cpp \
+				src/api/PortComposantProvided.cpp \
+				src/api/ServiceProvided.cpp \
+				src/api/PortComposantRequired.cpp \
+				src/api/ServiceRequired.cpp \
+				src/api/PortConfig.cpp
 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -310,7 +320,30 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/hadl-Component.Po
+include ./$(DEPDIR)/hadl-Configuration.Po
 include ./$(DEPDIR)/hadl-ConnectableElement.Po
+include ./$(DEPDIR)/hadl-Connector.Po
+include ./$(DEPDIR)/hadl-Element.Po
+include ./$(DEPDIR)/hadl-Interface.Po
+include ./$(DEPDIR)/hadl-InterfaceComposant.Po
+include ./$(DEPDIR)/hadl-InterfaceConfiguration.Po
+include ./$(DEPDIR)/hadl-InterfaceConnector.Po
+include ./$(DEPDIR)/hadl-PortComposant.Po
+include ./$(DEPDIR)/hadl-PortComposantProvided.Po
+include ./$(DEPDIR)/hadl-PortComposantRequired.Po
+include ./$(DEPDIR)/hadl-PortConfig.Po
+include ./$(DEPDIR)/hadl-PortConfigProvided.Po
+include ./$(DEPDIR)/hadl-PortConfigRequired.Po
+include ./$(DEPDIR)/hadl-Role.Po
+include ./$(DEPDIR)/hadl-RoleConfig.Po
+include ./$(DEPDIR)/hadl-RoleConfigProvided.Po
+include ./$(DEPDIR)/hadl-RoleConfigRequired.Po
+include ./$(DEPDIR)/hadl-RoleProvided.Po
+include ./$(DEPDIR)/hadl-RoleRequired.Po
+include ./$(DEPDIR)/hadl-Service.Po
+include ./$(DEPDIR)/hadl-ServiceProvided.Po
+include ./$(DEPDIR)/hadl-ServiceRequired.Po
 include ./$(DEPDIR)/hadl-main.Po
 
 .cpp.o:
@@ -341,6 +374,34 @@ hadl-main.obj: src/main.cpp
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
 
+hadl-PortConfigProvided.o: src/api/PortConfigProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortConfigProvided.o -MD -MP -MF $(DEPDIR)/hadl-PortConfigProvided.Tpo -c -o hadl-PortConfigProvided.o `test -f 'src/api/PortConfigProvided.cpp' || echo '$(srcdir)/'`src/api/PortConfigProvided.cpp
+	$(am__mv) $(DEPDIR)/hadl-PortConfigProvided.Tpo $(DEPDIR)/hadl-PortConfigProvided.Po
+#	source='src/api/PortConfigProvided.cpp' object='hadl-PortConfigProvided.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortConfigProvided.o `test -f 'src/api/PortConfigProvided.cpp' || echo '$(srcdir)/'`src/api/PortConfigProvided.cpp
+
+hadl-PortConfigProvided.obj: src/api/PortConfigProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortConfigProvided.obj -MD -MP -MF $(DEPDIR)/hadl-PortConfigProvided.Tpo -c -o hadl-PortConfigProvided.obj `if test -f 'src/api/PortConfigProvided.cpp'; then $(CYGPATH_W) 'src/api/PortConfigProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortConfigProvided.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-PortConfigProvided.Tpo $(DEPDIR)/hadl-PortConfigProvided.Po
+#	source='src/api/PortConfigProvided.cpp' object='hadl-PortConfigProvided.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortConfigProvided.obj `if test -f 'src/api/PortConfigProvided.cpp'; then $(CYGPATH_W) 'src/api/PortConfigProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortConfigProvided.cpp'; fi`
+
+hadl-Configuration.o: src/api/Configuration.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Configuration.o -MD -MP -MF $(DEPDIR)/hadl-Configuration.Tpo -c -o hadl-Configuration.o `test -f 'src/api/Configuration.cpp' || echo '$(srcdir)/'`src/api/Configuration.cpp
+	$(am__mv) $(DEPDIR)/hadl-Configuration.Tpo $(DEPDIR)/hadl-Configuration.Po
+#	source='src/api/Configuration.cpp' object='hadl-Configuration.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Configuration.o `test -f 'src/api/Configuration.cpp' || echo '$(srcdir)/'`src/api/Configuration.cpp
+
+hadl-Configuration.obj: src/api/Configuration.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Configuration.obj -MD -MP -MF $(DEPDIR)/hadl-Configuration.Tpo -c -o hadl-Configuration.obj `if test -f 'src/api/Configuration.cpp'; then $(CYGPATH_W) 'src/api/Configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Configuration.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-Configuration.Tpo $(DEPDIR)/hadl-Configuration.Po
+#	source='src/api/Configuration.cpp' object='hadl-Configuration.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Configuration.obj `if test -f 'src/api/Configuration.cpp'; then $(CYGPATH_W) 'src/api/Configuration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Configuration.cpp'; fi`
+
 hadl-ConnectableElement.o: src/api/ConnectableElement.cpp
 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-ConnectableElement.o -MD -MP -MF $(DEPDIR)/hadl-ConnectableElement.Tpo -c -o hadl-ConnectableElement.o `test -f 'src/api/ConnectableElement.cpp' || echo '$(srcdir)/'`src/api/ConnectableElement.cpp
 	$(am__mv) $(DEPDIR)/hadl-ConnectableElement.Tpo $(DEPDIR)/hadl-ConnectableElement.Po
@@ -354,6 +415,300 @@ hadl-ConnectableElement.obj: src/api/ConnectableElement.cpp
 #	source='src/api/ConnectableElement.cpp' object='hadl-ConnectableElement.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-ConnectableElement.obj `if test -f 'src/api/ConnectableElement.cpp'; then $(CYGPATH_W) 'src/api/ConnectableElement.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/ConnectableElement.cpp'; fi`
+
+hadl-Component.o: src/api/Component.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Component.o -MD -MP -MF $(DEPDIR)/hadl-Component.Tpo -c -o hadl-Component.o `test -f 'src/api/Component.cpp' || echo '$(srcdir)/'`src/api/Component.cpp
+	$(am__mv) $(DEPDIR)/hadl-Component.Tpo $(DEPDIR)/hadl-Component.Po
+#	source='src/api/Component.cpp' object='hadl-Component.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Component.o `test -f 'src/api/Component.cpp' || echo '$(srcdir)/'`src/api/Component.cpp
+
+hadl-Component.obj: src/api/Component.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Component.obj -MD -MP -MF $(DEPDIR)/hadl-Component.Tpo -c -o hadl-Component.obj `if test -f 'src/api/Component.cpp'; then $(CYGPATH_W) 'src/api/Component.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Component.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-Component.Tpo $(DEPDIR)/hadl-Component.Po
+#	source='src/api/Component.cpp' object='hadl-Component.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Component.obj `if test -f 'src/api/Component.cpp'; then $(CYGPATH_W) 'src/api/Component.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Component.cpp'; fi`
+
+hadl-PortConfigRequired.o: src/api/PortConfigRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortConfigRequired.o -MD -MP -MF $(DEPDIR)/hadl-PortConfigRequired.Tpo -c -o hadl-PortConfigRequired.o `test -f 'src/api/PortConfigRequired.cpp' || echo '$(srcdir)/'`src/api/PortConfigRequired.cpp
+	$(am__mv) $(DEPDIR)/hadl-PortConfigRequired.Tpo $(DEPDIR)/hadl-PortConfigRequired.Po
+#	source='src/api/PortConfigRequired.cpp' object='hadl-PortConfigRequired.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortConfigRequired.o `test -f 'src/api/PortConfigRequired.cpp' || echo '$(srcdir)/'`src/api/PortConfigRequired.cpp
+
+hadl-PortConfigRequired.obj: src/api/PortConfigRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortConfigRequired.obj -MD -MP -MF $(DEPDIR)/hadl-PortConfigRequired.Tpo -c -o hadl-PortConfigRequired.obj `if test -f 'src/api/PortConfigRequired.cpp'; then $(CYGPATH_W) 'src/api/PortConfigRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortConfigRequired.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-PortConfigRequired.Tpo $(DEPDIR)/hadl-PortConfigRequired.Po
+#	source='src/api/PortConfigRequired.cpp' object='hadl-PortConfigRequired.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortConfigRequired.obj `if test -f 'src/api/PortConfigRequired.cpp'; then $(CYGPATH_W) 'src/api/PortConfigRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortConfigRequired.cpp'; fi`
+
+hadl-Connector.o: src/api/Connector.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Connector.o -MD -MP -MF $(DEPDIR)/hadl-Connector.Tpo -c -o hadl-Connector.o `test -f 'src/api/Connector.cpp' || echo '$(srcdir)/'`src/api/Connector.cpp
+	$(am__mv) $(DEPDIR)/hadl-Connector.Tpo $(DEPDIR)/hadl-Connector.Po
+#	source='src/api/Connector.cpp' object='hadl-Connector.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Connector.o `test -f 'src/api/Connector.cpp' || echo '$(srcdir)/'`src/api/Connector.cpp
+
+hadl-Connector.obj: src/api/Connector.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Connector.obj -MD -MP -MF $(DEPDIR)/hadl-Connector.Tpo -c -o hadl-Connector.obj `if test -f 'src/api/Connector.cpp'; then $(CYGPATH_W) 'src/api/Connector.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Connector.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-Connector.Tpo $(DEPDIR)/hadl-Connector.Po
+#	source='src/api/Connector.cpp' object='hadl-Connector.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Connector.obj `if test -f 'src/api/Connector.cpp'; then $(CYGPATH_W) 'src/api/Connector.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Connector.cpp'; fi`
+
+hadl-RoleConfig.o: src/api/RoleConfig.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleConfig.o -MD -MP -MF $(DEPDIR)/hadl-RoleConfig.Tpo -c -o hadl-RoleConfig.o `test -f 'src/api/RoleConfig.cpp' || echo '$(srcdir)/'`src/api/RoleConfig.cpp
+	$(am__mv) $(DEPDIR)/hadl-RoleConfig.Tpo $(DEPDIR)/hadl-RoleConfig.Po
+#	source='src/api/RoleConfig.cpp' object='hadl-RoleConfig.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleConfig.o `test -f 'src/api/RoleConfig.cpp' || echo '$(srcdir)/'`src/api/RoleConfig.cpp
+
+hadl-RoleConfig.obj: src/api/RoleConfig.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleConfig.obj -MD -MP -MF $(DEPDIR)/hadl-RoleConfig.Tpo -c -o hadl-RoleConfig.obj `if test -f 'src/api/RoleConfig.cpp'; then $(CYGPATH_W) 'src/api/RoleConfig.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleConfig.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-RoleConfig.Tpo $(DEPDIR)/hadl-RoleConfig.Po
+#	source='src/api/RoleConfig.cpp' object='hadl-RoleConfig.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleConfig.obj `if test -f 'src/api/RoleConfig.cpp'; then $(CYGPATH_W) 'src/api/RoleConfig.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleConfig.cpp'; fi`
+
+hadl-Element.o: src/api/Element.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Element.o -MD -MP -MF $(DEPDIR)/hadl-Element.Tpo -c -o hadl-Element.o `test -f 'src/api/Element.cpp' || echo '$(srcdir)/'`src/api/Element.cpp
+	$(am__mv) $(DEPDIR)/hadl-Element.Tpo $(DEPDIR)/hadl-Element.Po
+#	source='src/api/Element.cpp' object='hadl-Element.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Element.o `test -f 'src/api/Element.cpp' || echo '$(srcdir)/'`src/api/Element.cpp
+
+hadl-Element.obj: src/api/Element.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Element.obj -MD -MP -MF $(DEPDIR)/hadl-Element.Tpo -c -o hadl-Element.obj `if test -f 'src/api/Element.cpp'; then $(CYGPATH_W) 'src/api/Element.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Element.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-Element.Tpo $(DEPDIR)/hadl-Element.Po
+#	source='src/api/Element.cpp' object='hadl-Element.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Element.obj `if test -f 'src/api/Element.cpp'; then $(CYGPATH_W) 'src/api/Element.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Element.cpp'; fi`
+
+hadl-RoleConfigProvided.o: src/api/RoleConfigProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleConfigProvided.o -MD -MP -MF $(DEPDIR)/hadl-RoleConfigProvided.Tpo -c -o hadl-RoleConfigProvided.o `test -f 'src/api/RoleConfigProvided.cpp' || echo '$(srcdir)/'`src/api/RoleConfigProvided.cpp
+	$(am__mv) $(DEPDIR)/hadl-RoleConfigProvided.Tpo $(DEPDIR)/hadl-RoleConfigProvided.Po
+#	source='src/api/RoleConfigProvided.cpp' object='hadl-RoleConfigProvided.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleConfigProvided.o `test -f 'src/api/RoleConfigProvided.cpp' || echo '$(srcdir)/'`src/api/RoleConfigProvided.cpp
+
+hadl-RoleConfigProvided.obj: src/api/RoleConfigProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleConfigProvided.obj -MD -MP -MF $(DEPDIR)/hadl-RoleConfigProvided.Tpo -c -o hadl-RoleConfigProvided.obj `if test -f 'src/api/RoleConfigProvided.cpp'; then $(CYGPATH_W) 'src/api/RoleConfigProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleConfigProvided.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-RoleConfigProvided.Tpo $(DEPDIR)/hadl-RoleConfigProvided.Po
+#	source='src/api/RoleConfigProvided.cpp' object='hadl-RoleConfigProvided.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleConfigProvided.obj `if test -f 'src/api/RoleConfigProvided.cpp'; then $(CYGPATH_W) 'src/api/RoleConfigProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleConfigProvided.cpp'; fi`
+
+hadl-InterfaceComposant.o: src/api/InterfaceComposant.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-InterfaceComposant.o -MD -MP -MF $(DEPDIR)/hadl-InterfaceComposant.Tpo -c -o hadl-InterfaceComposant.o `test -f 'src/api/InterfaceComposant.cpp' || echo '$(srcdir)/'`src/api/InterfaceComposant.cpp
+	$(am__mv) $(DEPDIR)/hadl-InterfaceComposant.Tpo $(DEPDIR)/hadl-InterfaceComposant.Po
+#	source='src/api/InterfaceComposant.cpp' object='hadl-InterfaceComposant.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-InterfaceComposant.o `test -f 'src/api/InterfaceComposant.cpp' || echo '$(srcdir)/'`src/api/InterfaceComposant.cpp
+
+hadl-InterfaceComposant.obj: src/api/InterfaceComposant.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-InterfaceComposant.obj -MD -MP -MF $(DEPDIR)/hadl-InterfaceComposant.Tpo -c -o hadl-InterfaceComposant.obj `if test -f 'src/api/InterfaceComposant.cpp'; then $(CYGPATH_W) 'src/api/InterfaceComposant.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/InterfaceComposant.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-InterfaceComposant.Tpo $(DEPDIR)/hadl-InterfaceComposant.Po
+#	source='src/api/InterfaceComposant.cpp' object='hadl-InterfaceComposant.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-InterfaceComposant.obj `if test -f 'src/api/InterfaceComposant.cpp'; then $(CYGPATH_W) 'src/api/InterfaceComposant.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/InterfaceComposant.cpp'; fi`
+
+hadl-RoleConfigRequired.o: src/api/RoleConfigRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleConfigRequired.o -MD -MP -MF $(DEPDIR)/hadl-RoleConfigRequired.Tpo -c -o hadl-RoleConfigRequired.o `test -f 'src/api/RoleConfigRequired.cpp' || echo '$(srcdir)/'`src/api/RoleConfigRequired.cpp
+	$(am__mv) $(DEPDIR)/hadl-RoleConfigRequired.Tpo $(DEPDIR)/hadl-RoleConfigRequired.Po
+#	source='src/api/RoleConfigRequired.cpp' object='hadl-RoleConfigRequired.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleConfigRequired.o `test -f 'src/api/RoleConfigRequired.cpp' || echo '$(srcdir)/'`src/api/RoleConfigRequired.cpp
+
+hadl-RoleConfigRequired.obj: src/api/RoleConfigRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleConfigRequired.obj -MD -MP -MF $(DEPDIR)/hadl-RoleConfigRequired.Tpo -c -o hadl-RoleConfigRequired.obj `if test -f 'src/api/RoleConfigRequired.cpp'; then $(CYGPATH_W) 'src/api/RoleConfigRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleConfigRequired.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-RoleConfigRequired.Tpo $(DEPDIR)/hadl-RoleConfigRequired.Po
+#	source='src/api/RoleConfigRequired.cpp' object='hadl-RoleConfigRequired.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleConfigRequired.obj `if test -f 'src/api/RoleConfigRequired.cpp'; then $(CYGPATH_W) 'src/api/RoleConfigRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleConfigRequired.cpp'; fi`
+
+hadl-InterfaceConfiguration.o: src/api/InterfaceConfiguration.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-InterfaceConfiguration.o -MD -MP -MF $(DEPDIR)/hadl-InterfaceConfiguration.Tpo -c -o hadl-InterfaceConfiguration.o `test -f 'src/api/InterfaceConfiguration.cpp' || echo '$(srcdir)/'`src/api/InterfaceConfiguration.cpp
+	$(am__mv) $(DEPDIR)/hadl-InterfaceConfiguration.Tpo $(DEPDIR)/hadl-InterfaceConfiguration.Po
+#	source='src/api/InterfaceConfiguration.cpp' object='hadl-InterfaceConfiguration.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-InterfaceConfiguration.o `test -f 'src/api/InterfaceConfiguration.cpp' || echo '$(srcdir)/'`src/api/InterfaceConfiguration.cpp
+
+hadl-InterfaceConfiguration.obj: src/api/InterfaceConfiguration.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-InterfaceConfiguration.obj -MD -MP -MF $(DEPDIR)/hadl-InterfaceConfiguration.Tpo -c -o hadl-InterfaceConfiguration.obj `if test -f 'src/api/InterfaceConfiguration.cpp'; then $(CYGPATH_W) 'src/api/InterfaceConfiguration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/InterfaceConfiguration.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-InterfaceConfiguration.Tpo $(DEPDIR)/hadl-InterfaceConfiguration.Po
+#	source='src/api/InterfaceConfiguration.cpp' object='hadl-InterfaceConfiguration.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-InterfaceConfiguration.obj `if test -f 'src/api/InterfaceConfiguration.cpp'; then $(CYGPATH_W) 'src/api/InterfaceConfiguration.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/InterfaceConfiguration.cpp'; fi`
+
+hadl-Role.o: src/api/Role.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Role.o -MD -MP -MF $(DEPDIR)/hadl-Role.Tpo -c -o hadl-Role.o `test -f 'src/api/Role.cpp' || echo '$(srcdir)/'`src/api/Role.cpp
+	$(am__mv) $(DEPDIR)/hadl-Role.Tpo $(DEPDIR)/hadl-Role.Po
+#	source='src/api/Role.cpp' object='hadl-Role.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Role.o `test -f 'src/api/Role.cpp' || echo '$(srcdir)/'`src/api/Role.cpp
+
+hadl-Role.obj: src/api/Role.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Role.obj -MD -MP -MF $(DEPDIR)/hadl-Role.Tpo -c -o hadl-Role.obj `if test -f 'src/api/Role.cpp'; then $(CYGPATH_W) 'src/api/Role.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Role.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-Role.Tpo $(DEPDIR)/hadl-Role.Po
+#	source='src/api/Role.cpp' object='hadl-Role.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Role.obj `if test -f 'src/api/Role.cpp'; then $(CYGPATH_W) 'src/api/Role.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Role.cpp'; fi`
+
+hadl-InterfaceConnector.o: src/api/InterfaceConnector.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-InterfaceConnector.o -MD -MP -MF $(DEPDIR)/hadl-InterfaceConnector.Tpo -c -o hadl-InterfaceConnector.o `test -f 'src/api/InterfaceConnector.cpp' || echo '$(srcdir)/'`src/api/InterfaceConnector.cpp
+	$(am__mv) $(DEPDIR)/hadl-InterfaceConnector.Tpo $(DEPDIR)/hadl-InterfaceConnector.Po
+#	source='src/api/InterfaceConnector.cpp' object='hadl-InterfaceConnector.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-InterfaceConnector.o `test -f 'src/api/InterfaceConnector.cpp' || echo '$(srcdir)/'`src/api/InterfaceConnector.cpp
+
+hadl-InterfaceConnector.obj: src/api/InterfaceConnector.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-InterfaceConnector.obj -MD -MP -MF $(DEPDIR)/hadl-InterfaceConnector.Tpo -c -o hadl-InterfaceConnector.obj `if test -f 'src/api/InterfaceConnector.cpp'; then $(CYGPATH_W) 'src/api/InterfaceConnector.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/InterfaceConnector.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-InterfaceConnector.Tpo $(DEPDIR)/hadl-InterfaceConnector.Po
+#	source='src/api/InterfaceConnector.cpp' object='hadl-InterfaceConnector.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-InterfaceConnector.obj `if test -f 'src/api/InterfaceConnector.cpp'; then $(CYGPATH_W) 'src/api/InterfaceConnector.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/InterfaceConnector.cpp'; fi`
+
+hadl-RoleProvided.o: src/api/RoleProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleProvided.o -MD -MP -MF $(DEPDIR)/hadl-RoleProvided.Tpo -c -o hadl-RoleProvided.o `test -f 'src/api/RoleProvided.cpp' || echo '$(srcdir)/'`src/api/RoleProvided.cpp
+	$(am__mv) $(DEPDIR)/hadl-RoleProvided.Tpo $(DEPDIR)/hadl-RoleProvided.Po
+#	source='src/api/RoleProvided.cpp' object='hadl-RoleProvided.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleProvided.o `test -f 'src/api/RoleProvided.cpp' || echo '$(srcdir)/'`src/api/RoleProvided.cpp
+
+hadl-RoleProvided.obj: src/api/RoleProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleProvided.obj -MD -MP -MF $(DEPDIR)/hadl-RoleProvided.Tpo -c -o hadl-RoleProvided.obj `if test -f 'src/api/RoleProvided.cpp'; then $(CYGPATH_W) 'src/api/RoleProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleProvided.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-RoleProvided.Tpo $(DEPDIR)/hadl-RoleProvided.Po
+#	source='src/api/RoleProvided.cpp' object='hadl-RoleProvided.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleProvided.obj `if test -f 'src/api/RoleProvided.cpp'; then $(CYGPATH_W) 'src/api/RoleProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleProvided.cpp'; fi`
+
+hadl-Interface.o: src/api/Interface.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Interface.o -MD -MP -MF $(DEPDIR)/hadl-Interface.Tpo -c -o hadl-Interface.o `test -f 'src/api/Interface.cpp' || echo '$(srcdir)/'`src/api/Interface.cpp
+	$(am__mv) $(DEPDIR)/hadl-Interface.Tpo $(DEPDIR)/hadl-Interface.Po
+#	source='src/api/Interface.cpp' object='hadl-Interface.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Interface.o `test -f 'src/api/Interface.cpp' || echo '$(srcdir)/'`src/api/Interface.cpp
+
+hadl-Interface.obj: src/api/Interface.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Interface.obj -MD -MP -MF $(DEPDIR)/hadl-Interface.Tpo -c -o hadl-Interface.obj `if test -f 'src/api/Interface.cpp'; then $(CYGPATH_W) 'src/api/Interface.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Interface.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-Interface.Tpo $(DEPDIR)/hadl-Interface.Po
+#	source='src/api/Interface.cpp' object='hadl-Interface.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Interface.obj `if test -f 'src/api/Interface.cpp'; then $(CYGPATH_W) 'src/api/Interface.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Interface.cpp'; fi`
+
+hadl-RoleRequired.o: src/api/RoleRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleRequired.o -MD -MP -MF $(DEPDIR)/hadl-RoleRequired.Tpo -c -o hadl-RoleRequired.o `test -f 'src/api/RoleRequired.cpp' || echo '$(srcdir)/'`src/api/RoleRequired.cpp
+	$(am__mv) $(DEPDIR)/hadl-RoleRequired.Tpo $(DEPDIR)/hadl-RoleRequired.Po
+#	source='src/api/RoleRequired.cpp' object='hadl-RoleRequired.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleRequired.o `test -f 'src/api/RoleRequired.cpp' || echo '$(srcdir)/'`src/api/RoleRequired.cpp
+
+hadl-RoleRequired.obj: src/api/RoleRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-RoleRequired.obj -MD -MP -MF $(DEPDIR)/hadl-RoleRequired.Tpo -c -o hadl-RoleRequired.obj `if test -f 'src/api/RoleRequired.cpp'; then $(CYGPATH_W) 'src/api/RoleRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleRequired.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-RoleRequired.Tpo $(DEPDIR)/hadl-RoleRequired.Po
+#	source='src/api/RoleRequired.cpp' object='hadl-RoleRequired.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-RoleRequired.obj `if test -f 'src/api/RoleRequired.cpp'; then $(CYGPATH_W) 'src/api/RoleRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/RoleRequired.cpp'; fi`
+
+hadl-PortComposant.o: src/api/PortComposant.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortComposant.o -MD -MP -MF $(DEPDIR)/hadl-PortComposant.Tpo -c -o hadl-PortComposant.o `test -f 'src/api/PortComposant.cpp' || echo '$(srcdir)/'`src/api/PortComposant.cpp
+	$(am__mv) $(DEPDIR)/hadl-PortComposant.Tpo $(DEPDIR)/hadl-PortComposant.Po
+#	source='src/api/PortComposant.cpp' object='hadl-PortComposant.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortComposant.o `test -f 'src/api/PortComposant.cpp' || echo '$(srcdir)/'`src/api/PortComposant.cpp
+
+hadl-PortComposant.obj: src/api/PortComposant.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortComposant.obj -MD -MP -MF $(DEPDIR)/hadl-PortComposant.Tpo -c -o hadl-PortComposant.obj `if test -f 'src/api/PortComposant.cpp'; then $(CYGPATH_W) 'src/api/PortComposant.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortComposant.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-PortComposant.Tpo $(DEPDIR)/hadl-PortComposant.Po
+#	source='src/api/PortComposant.cpp' object='hadl-PortComposant.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortComposant.obj `if test -f 'src/api/PortComposant.cpp'; then $(CYGPATH_W) 'src/api/PortComposant.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortComposant.cpp'; fi`
+
+hadl-Service.o: src/api/Service.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Service.o -MD -MP -MF $(DEPDIR)/hadl-Service.Tpo -c -o hadl-Service.o `test -f 'src/api/Service.cpp' || echo '$(srcdir)/'`src/api/Service.cpp
+	$(am__mv) $(DEPDIR)/hadl-Service.Tpo $(DEPDIR)/hadl-Service.Po
+#	source='src/api/Service.cpp' object='hadl-Service.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Service.o `test -f 'src/api/Service.cpp' || echo '$(srcdir)/'`src/api/Service.cpp
+
+hadl-Service.obj: src/api/Service.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-Service.obj -MD -MP -MF $(DEPDIR)/hadl-Service.Tpo -c -o hadl-Service.obj `if test -f 'src/api/Service.cpp'; then $(CYGPATH_W) 'src/api/Service.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Service.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-Service.Tpo $(DEPDIR)/hadl-Service.Po
+#	source='src/api/Service.cpp' object='hadl-Service.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-Service.obj `if test -f 'src/api/Service.cpp'; then $(CYGPATH_W) 'src/api/Service.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/Service.cpp'; fi`
+
+hadl-PortComposantProvided.o: src/api/PortComposantProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortComposantProvided.o -MD -MP -MF $(DEPDIR)/hadl-PortComposantProvided.Tpo -c -o hadl-PortComposantProvided.o `test -f 'src/api/PortComposantProvided.cpp' || echo '$(srcdir)/'`src/api/PortComposantProvided.cpp
+	$(am__mv) $(DEPDIR)/hadl-PortComposantProvided.Tpo $(DEPDIR)/hadl-PortComposantProvided.Po
+#	source='src/api/PortComposantProvided.cpp' object='hadl-PortComposantProvided.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortComposantProvided.o `test -f 'src/api/PortComposantProvided.cpp' || echo '$(srcdir)/'`src/api/PortComposantProvided.cpp
+
+hadl-PortComposantProvided.obj: src/api/PortComposantProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortComposantProvided.obj -MD -MP -MF $(DEPDIR)/hadl-PortComposantProvided.Tpo -c -o hadl-PortComposantProvided.obj `if test -f 'src/api/PortComposantProvided.cpp'; then $(CYGPATH_W) 'src/api/PortComposantProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortComposantProvided.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-PortComposantProvided.Tpo $(DEPDIR)/hadl-PortComposantProvided.Po
+#	source='src/api/PortComposantProvided.cpp' object='hadl-PortComposantProvided.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortComposantProvided.obj `if test -f 'src/api/PortComposantProvided.cpp'; then $(CYGPATH_W) 'src/api/PortComposantProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortComposantProvided.cpp'; fi`
+
+hadl-ServiceProvided.o: src/api/ServiceProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-ServiceProvided.o -MD -MP -MF $(DEPDIR)/hadl-ServiceProvided.Tpo -c -o hadl-ServiceProvided.o `test -f 'src/api/ServiceProvided.cpp' || echo '$(srcdir)/'`src/api/ServiceProvided.cpp
+	$(am__mv) $(DEPDIR)/hadl-ServiceProvided.Tpo $(DEPDIR)/hadl-ServiceProvided.Po
+#	source='src/api/ServiceProvided.cpp' object='hadl-ServiceProvided.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-ServiceProvided.o `test -f 'src/api/ServiceProvided.cpp' || echo '$(srcdir)/'`src/api/ServiceProvided.cpp
+
+hadl-ServiceProvided.obj: src/api/ServiceProvided.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-ServiceProvided.obj -MD -MP -MF $(DEPDIR)/hadl-ServiceProvided.Tpo -c -o hadl-ServiceProvided.obj `if test -f 'src/api/ServiceProvided.cpp'; then $(CYGPATH_W) 'src/api/ServiceProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/ServiceProvided.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-ServiceProvided.Tpo $(DEPDIR)/hadl-ServiceProvided.Po
+#	source='src/api/ServiceProvided.cpp' object='hadl-ServiceProvided.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-ServiceProvided.obj `if test -f 'src/api/ServiceProvided.cpp'; then $(CYGPATH_W) 'src/api/ServiceProvided.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/ServiceProvided.cpp'; fi`
+
+hadl-PortComposantRequired.o: src/api/PortComposantRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortComposantRequired.o -MD -MP -MF $(DEPDIR)/hadl-PortComposantRequired.Tpo -c -o hadl-PortComposantRequired.o `test -f 'src/api/PortComposantRequired.cpp' || echo '$(srcdir)/'`src/api/PortComposantRequired.cpp
+	$(am__mv) $(DEPDIR)/hadl-PortComposantRequired.Tpo $(DEPDIR)/hadl-PortComposantRequired.Po
+#	source='src/api/PortComposantRequired.cpp' object='hadl-PortComposantRequired.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortComposantRequired.o `test -f 'src/api/PortComposantRequired.cpp' || echo '$(srcdir)/'`src/api/PortComposantRequired.cpp
+
+hadl-PortComposantRequired.obj: src/api/PortComposantRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortComposantRequired.obj -MD -MP -MF $(DEPDIR)/hadl-PortComposantRequired.Tpo -c -o hadl-PortComposantRequired.obj `if test -f 'src/api/PortComposantRequired.cpp'; then $(CYGPATH_W) 'src/api/PortComposantRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortComposantRequired.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-PortComposantRequired.Tpo $(DEPDIR)/hadl-PortComposantRequired.Po
+#	source='src/api/PortComposantRequired.cpp' object='hadl-PortComposantRequired.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortComposantRequired.obj `if test -f 'src/api/PortComposantRequired.cpp'; then $(CYGPATH_W) 'src/api/PortComposantRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortComposantRequired.cpp'; fi`
+
+hadl-ServiceRequired.o: src/api/ServiceRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-ServiceRequired.o -MD -MP -MF $(DEPDIR)/hadl-ServiceRequired.Tpo -c -o hadl-ServiceRequired.o `test -f 'src/api/ServiceRequired.cpp' || echo '$(srcdir)/'`src/api/ServiceRequired.cpp
+	$(am__mv) $(DEPDIR)/hadl-ServiceRequired.Tpo $(DEPDIR)/hadl-ServiceRequired.Po
+#	source='src/api/ServiceRequired.cpp' object='hadl-ServiceRequired.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-ServiceRequired.o `test -f 'src/api/ServiceRequired.cpp' || echo '$(srcdir)/'`src/api/ServiceRequired.cpp
+
+hadl-ServiceRequired.obj: src/api/ServiceRequired.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-ServiceRequired.obj -MD -MP -MF $(DEPDIR)/hadl-ServiceRequired.Tpo -c -o hadl-ServiceRequired.obj `if test -f 'src/api/ServiceRequired.cpp'; then $(CYGPATH_W) 'src/api/ServiceRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/ServiceRequired.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-ServiceRequired.Tpo $(DEPDIR)/hadl-ServiceRequired.Po
+#	source='src/api/ServiceRequired.cpp' object='hadl-ServiceRequired.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-ServiceRequired.obj `if test -f 'src/api/ServiceRequired.cpp'; then $(CYGPATH_W) 'src/api/ServiceRequired.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/ServiceRequired.cpp'; fi`
+
+hadl-PortConfig.o: src/api/PortConfig.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortConfig.o -MD -MP -MF $(DEPDIR)/hadl-PortConfig.Tpo -c -o hadl-PortConfig.o `test -f 'src/api/PortConfig.cpp' || echo '$(srcdir)/'`src/api/PortConfig.cpp
+	$(am__mv) $(DEPDIR)/hadl-PortConfig.Tpo $(DEPDIR)/hadl-PortConfig.Po
+#	source='src/api/PortConfig.cpp' object='hadl-PortConfig.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortConfig.o `test -f 'src/api/PortConfig.cpp' || echo '$(srcdir)/'`src/api/PortConfig.cpp
+
+hadl-PortConfig.obj: src/api/PortConfig.cpp
+	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT hadl-PortConfig.obj -MD -MP -MF $(DEPDIR)/hadl-PortConfig.Tpo -c -o hadl-PortConfig.obj `if test -f 'src/api/PortConfig.cpp'; then $(CYGPATH_W) 'src/api/PortConfig.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortConfig.cpp'; fi`
+	$(am__mv) $(DEPDIR)/hadl-PortConfig.Tpo $(DEPDIR)/hadl-PortConfig.Po
+#	source='src/api/PortConfig.cpp' object='hadl-PortConfig.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(hadl_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o hadl-PortConfig.obj `if test -f 'src/api/PortConfig.cpp'; then $(CYGPATH_W) 'src/api/PortConfig.cpp'; else $(CYGPATH_W) '$(srcdir)/src/api/PortConfig.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

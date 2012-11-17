@@ -11,8 +11,7 @@
 class Configuration : public Element
 {
 public:
-	Configuration();
-	~Configuration();
+	void linkElement(ConnectableElement* element, bool _internal);
 private:
 	std::list<Element*> _elements;
 	std::list<InterfaceConfiguration*> _interfaces;

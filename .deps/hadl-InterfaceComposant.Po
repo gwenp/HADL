@@ -1,0 +1,6 @@
+hadl-InterfaceComposant.o: src/api/InterfaceComposant.cpp \
+ src/api/InterfaceComposant.hpp src/api/Interface.hpp
+
+src/api/InterfaceComposant.hpp:
+
+src/api/Interface.hpp:

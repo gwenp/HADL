@@ -1,0 +1,8 @@
+hadl-PortComposant.o: src/api/PortComposant.cpp src/api/PortComposant.hpp \
+ src/api/InterfaceComposant.hpp src/api/Interface.hpp
+
+src/api/PortComposant.hpp:
+
+src/api/InterfaceComposant.hpp:
+
+src/api/Interface.hpp:

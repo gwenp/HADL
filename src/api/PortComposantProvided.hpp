@@ -7,8 +7,6 @@
 class PortComposantProvided : public PortComposant
 {
 public:
-	PortComposantProvided();
-	~PortComposantProvided();
 private:
 	RoleRequired* _rolerequired;
 };

@@ -1,11 +1,8 @@
 #include "Configuration.hpp"
 
-Configuration::Configuration()
+void Configuration::linkElement(ConnectableElement* e, bool _internal = false)
 {
-	
-}
-
-Configuration::~Configuration()
-{
-	
+	_linkedElement = e;	
+	if(!_internal && e != NULL)
+		e->linkConfiguration(this, true);
 }

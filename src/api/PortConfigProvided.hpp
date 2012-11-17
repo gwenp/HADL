@@ -7,8 +7,6 @@
 class PortConfigProvided : public PortConfig
 {
 public:
-	PortConfigProvided();
-	~PortConfigProvided();
 private:
 	PortComposantProvided* _bindingProvided;
 };

@@ -1,0 +1,26 @@
+hadl-PortConfigProvided.o: src/api/PortConfigProvided.cpp \
+ src/api/PortConfigProvided.hpp src/api/PortConfig.hpp \
+ src/api/InterfaceConfiguration.hpp src/api/Interface.hpp \
+ src/api/PortComposantProvided.hpp src/api/PortComposant.hpp \
+ src/api/InterfaceComposant.hpp src/api/RoleRequired.hpp src/api/Role.hpp \
+ src/api/InterfaceConnector.hpp
+
+src/api/PortConfigProvided.hpp:
+
+src/api/PortConfig.hpp:
+
+src/api/InterfaceConfiguration.hpp:
+
+src/api/Interface.hpp:
+
+src/api/PortComposantProvided.hpp:
+
+src/api/PortComposant.hpp:
+
+src/api/InterfaceComposant.hpp:
+
+src/api/RoleRequired.hpp:
+
+src/api/Role.hpp:
+
+src/api/InterfaceConnector.hpp:

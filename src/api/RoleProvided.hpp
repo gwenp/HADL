@@ -8,8 +8,6 @@
 class RoleProvided : public Role
 {
 public:
-	RoleProvided();
-	~RoleProvided();
 private: 
 	PortComposantRequired* _portRequired;
 };

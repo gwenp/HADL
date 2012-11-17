@@ -6,8 +6,6 @@
 class RoleConfig : public InterfaceConfiguration
 {
 public:
-	RoleConfig();
-	~RoleConfig();
 private:
 	
 };

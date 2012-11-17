@@ -11,8 +11,6 @@
 class Component : public ConnectableElement
 {
 public:
-	Component();
-	~Component();
 private:
 	std::list<InterfaceComposant*> _interfaces;
 	Configuration* _linkedConfiguration;

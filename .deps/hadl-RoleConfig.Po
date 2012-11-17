@@ -1,0 +1,8 @@
+hadl-RoleConfig.o: src/api/RoleConfig.cpp src/api/RoleConfig.hpp \
+ src/api/InterfaceConfiguration.hpp src/api/Interface.hpp
+
+src/api/RoleConfig.hpp:
+
+src/api/InterfaceConfiguration.hpp:
+
+src/api/Interface.hpp:

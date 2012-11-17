@@ -3,13 +3,11 @@
 
 #include <list>
 #include "Service.hpp"
-
+#include "PortComposantRequired.hpp"
 
 class ServiceRequired : public Service
 {
 public:
-	ServiceRequired();
-	~ServiceRequired();
 private:
 	std::list<PortComposantRequired*> _requiredPorts;
 };

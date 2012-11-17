@@ -1,0 +1,18 @@
+hadl-RoleConfigRequired.o: src/api/RoleConfigRequired.cpp \
+ src/api/RoleConfigRequired.hpp src/api/RoleConfig.hpp \
+ src/api/InterfaceConfiguration.hpp src/api/Interface.hpp \
+ src/api/RoleRequired.hpp src/api/Role.hpp src/api/InterfaceConnector.hpp
+
+src/api/RoleConfigRequired.hpp:
+
+src/api/RoleConfig.hpp:
+
+src/api/InterfaceConfiguration.hpp:
+
+src/api/Interface.hpp:
+
+src/api/RoleRequired.hpp:
+
+src/api/Role.hpp:
+
+src/api/InterfaceConnector.hpp:

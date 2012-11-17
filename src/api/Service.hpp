@@ -9,8 +9,6 @@
 class Service : public InterfaceComposant
 {
 public:
-	Service();
-	~Service();
 
 
 private:

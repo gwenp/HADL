@@ -1,0 +1,8 @@
+hadl-PortConfig.o: src/api/PortConfig.cpp src/api/PortConfig.hpp \
+ src/api/InterfaceConfiguration.hpp src/api/Interface.hpp
+
+src/api/PortConfig.hpp:
+
+src/api/InterfaceConfiguration.hpp:
+
+src/api/Interface.hpp:

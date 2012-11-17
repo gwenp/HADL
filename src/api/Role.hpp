@@ -6,8 +6,6 @@
 class Role : public InterfaceConnector
 {
 public:
-	Role();
-	~Role();
 
 };
 

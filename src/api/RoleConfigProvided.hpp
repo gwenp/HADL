@@ -7,8 +7,6 @@
 class RoleConfigProvided : public RoleConfig
 {
 public:
-	RoleConfigProvided();
-	~RoleConfigProvided();
 private:
 	RoleProvided* _bindingProvided;
 };

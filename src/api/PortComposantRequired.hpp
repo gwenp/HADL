@@ -6,8 +6,6 @@
 class PortComposantRequired : public PortComposant
 {
 public:
-	PortComposantRequired();
-	~PortComposantRequired();
 
 };
 
