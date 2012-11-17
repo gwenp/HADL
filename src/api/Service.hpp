@@ -1,9 +1,12 @@
 #ifndef SERVICE_HPP
 #define SERVICE_HPP
 
-#include <vector>
+#include <list>
 
-class Service
+#include "InterfaceComposant.hpp"
+#include "PortComposant.hpp"
+
+class Service : public InterfaceComposant
 {
 public:
 	Service();
@@ -11,7 +14,7 @@ public:
 
 
 private:
-	std::vector<Port*> _ports;
+	std::list<PortComposant*> _ports;
 };
 
 #endif /* SERVICE_HPP */

@@ -86,11 +86,11 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/gwen/Programmation/cpp/HADL-client-server/missing --run aclocal-1.11
+ACLOCAL = ${SHELL} /home/gwen/Programmation/cpp/HADL/missing --run aclocal-1.11
 AMTAR = $${TAR-tar}
-AUTOCONF = ${SHELL} /home/gwen/Programmation/cpp/HADL-client-server/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/gwen/Programmation/cpp/HADL-client-server/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/gwen/Programmation/cpp/HADL-client-server/missing --run automake-1.11
+AUTOCONF = ${SHELL} /home/gwen/Programmation/cpp/HADL/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/gwen/Programmation/cpp/HADL/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/gwen/Programmation/cpp/HADL/missing --run automake-1.11
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -119,7 +119,7 @@ LIBS =
 LIBSIGC_CFLAGS = -I/usr/include/sigc++-2.0 -I/usr/lib/x86_64-linux-gnu/sigc++-2.0/include  
 LIBSIGC_LIBS = -lsigc-2.0  
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/gwen/Programmation/cpp/HADL-client-server/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/gwen/Programmation/cpp/HADL/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
 PACKAGE = hop
@@ -137,10 +137,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 1
-abs_builddir = /home/gwen/Programmation/cpp/HADL-client-server
-abs_srcdir = /home/gwen/Programmation/cpp/HADL-client-server
-abs_top_builddir = /home/gwen/Programmation/cpp/HADL-client-server
-abs_top_srcdir = /home/gwen/Programmation/cpp/HADL-client-server
+abs_builddir = /home/gwen/Programmation/cpp/HADL
+abs_srcdir = /home/gwen/Programmation/cpp/HADL
+abs_top_builddir = /home/gwen/Programmation/cpp/HADL
+abs_top_srcdir = /home/gwen/Programmation/cpp/HADL
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 am__include = include
@@ -160,7 +160,7 @@ host_alias =
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/gwen/Programmation/cpp/HADL-client-server/install-sh
+install_sh = ${SHELL} /home/gwen/Programmation/cpp/HADL/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -184,12 +184,28 @@ hadl_LDADD = $(LIBJSONCPP_LIBS) $(LIBSIGC_LIBS)
 hadl_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS) -std=c++0x
 hadl_SOURCES = src/main.cpp \
 				src/api/Component.hpp \
-				src/api/Port.hpp \
+				src/api/PortConfigProvided.hpp \
 				src/api/Configuration.hpp \
-				src/api/Role.hpp \
+				src/api/PortConfigRequired.hpp \
 				src/api/Connector.hpp \
+				src/api/RoleConfig.hpp \
+				src/api/Element.hpp \
+				src/api/RoleConfigProvided.hpp \
+				src/api/InterfaceComposant.hpp \
+				src/api/RoleConfigRequired.hpp \
+				src/api/InterfaceConfiguration.hpp \
+				src/api/Role.hpp \
+				src/api/InterfaceConnector.hpp \
+				src/api/RoleProvided.hpp \
+				src/api/Interface.hpp \
+				src/api/RoleRequired.hpp \
+				src/api/PortComposant.hpp \
 				src/api/Service.hpp \
-				src/api/Element.hpp
+				src/api/PortComposantProvided.hpp \
+				src/api/ServiceProvided.hpp \
+				src/api/PortComposantRequired.hpp \
+				src/api/ServiceRequired.hpp \
+				src/api/PortConfig.hpp
 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
