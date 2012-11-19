@@ -1,0 +1,14 @@
+/------------------ libhadl.pc.in ------------------------
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: LibHADL
+Description: Homemade Architecture Language
+URL: http://hadl.org
+Version: 0.0.1
+Requires: jsoncpp
+Libs: -L${exec_prefix}/lib -lhadl -ljsoncpp
+Cflags: -I${prefix}/include/
+\-------------------------------------------------------
