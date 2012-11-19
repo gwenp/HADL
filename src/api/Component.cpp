@@ -4,11 +4,13 @@
 
 void Component::addPortRequired(std::string name, PortComposantRequired* port)
 {
+	port->setComponent(this);
 	_portsRequired.insert(std::pair<std::string, PortComposantRequired*>(name, port));
 }
 
 void Component::addPortProvided(std::string name, PortComposantProvided* port)
 {
+	port->setComponent(this);
 	_portsProvided.insert(std::pair<std::string, PortComposantProvided*>(name, port));
 }
 
@@ -35,4 +37,11 @@ void Component::attachToConnector(Connector* c, std::string portName, std::strin
 {
 	_portsRequired[portName]->_providedRole = c->_rolesProvided[roleName];
 	// _providedRole
+}
+
+void Component::sendNotificationTo(std::string portRequired)
+{
+	std::cout << "Component::sendNotificationTo" <<std::endl;
+	
+	_portsRequired[portRequired]->propagateNotificationToRole();
 }

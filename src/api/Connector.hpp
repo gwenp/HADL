@@ -20,6 +20,7 @@ public:
 	void addRoleRequired(std::string name, RoleRequired* roleRequired);
 
 	void info();
+	void on_notify(RoleProvided* port);
 
 	void attachToComponent(Component* c, std::string roleName, std::string portName);
 

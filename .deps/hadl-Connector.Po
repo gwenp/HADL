@@ -77,9 +77,9 @@ hadl-Connector.o: src/api/Connector.cpp src/api/Connector.hpp \
  /usr/include/c++/4.6/bits/stl_list.h /usr/include/c++/4.6/bits/list.tcc \
  src/api/InterfaceConnector.hpp src/api/RoleProvided.hpp src/api/Role.hpp \
  src/api/PortComposantRequired.hpp src/api/PortComposant.hpp \
- src/api/InterfaceComposant.hpp src/api/RoleRequired.hpp \
- /usr/include/c++/4.6/iostream /usr/include/c++/4.6/ostream \
- /usr/include/c++/4.6/ios /usr/include/c++/4.6/bits/ios_base.h \
+ src/api/InterfaceComposant.hpp /usr/include/c++/4.6/iostream \
+ /usr/include/c++/4.6/ostream /usr/include/c++/4.6/ios \
+ /usr/include/c++/4.6/bits/ios_base.h \
  /usr/include/c++/4.6/bits/locale_classes.h \
  /usr/include/c++/4.6/bits/locale_classes.tcc \
  /usr/include/c++/4.6/streambuf /usr/include/c++/4.6/bits/streambuf.tcc \
@@ -92,8 +92,8 @@ hadl-Connector.o: src/api/Connector.cpp src/api/Connector.hpp \
  /usr/include/c++/4.6/bits/locale_facets.tcc \
  /usr/include/c++/4.6/bits/basic_ios.tcc \
  /usr/include/c++/4.6/bits/ostream.tcc /usr/include/c++/4.6/istream \
- /usr/include/c++/4.6/bits/istream.tcc src/api/Component.hpp \
- src/api/PortComposantProvided.hpp
+ /usr/include/c++/4.6/bits/istream.tcc src/api/RoleRequired.hpp \
+ src/api/Component.hpp src/api/PortComposantProvided.hpp
 
 src/api/Connector.hpp:
 
@@ -313,8 +313,6 @@ src/api/PortComposant.hpp:
 
 src/api/InterfaceComposant.hpp:
 
-src/api/RoleRequired.hpp:
-
 /usr/include/c++/4.6/iostream:
 
 /usr/include/c++/4.6/ostream:
@@ -354,6 +352,8 @@ src/api/RoleRequired.hpp:
 /usr/include/c++/4.6/istream:
 
 /usr/include/c++/4.6/bits/istream.tcc:
+
+src/api/RoleRequired.hpp:
 
 src/api/Component.hpp:
 

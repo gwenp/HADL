@@ -23,6 +23,7 @@ public:
 	void info();
 
 	void attachToConnector(Connector* c, std::string portName, std::string roleName);
+	void sendNotificationTo(std::string portRequired);
 
 	std::map<std::string, PortComposantRequired*> _portsRequired;
 	std::map<std::string, PortComposantProvided*> _portsProvided;
