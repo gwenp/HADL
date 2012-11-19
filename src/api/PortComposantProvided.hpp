@@ -10,7 +10,8 @@ class PortComposantProvided : public PortComposant
 {
 public:
 	std::string getType(){ return "provided"; };
-	RoleRequired* _rolerequired;
+	void notifyComponent();
+	
 private:
 };
 

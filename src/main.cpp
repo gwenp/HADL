@@ -58,5 +58,17 @@ int main(int argc, char const *argv[])
 	//c.sendNotificationTo("sortieCompo");
 
 
+//	cn.addRoleProvided("entreeConnec", new RoleProvided());
+//	cn.addRoleRequired("sortieConnec", new RoleRequired());
+//
+//	c.info();
+//	cn.info();
+//
+//	c.attachToConnector(&cn,"sortieCompo", "entreeConnec");
+//	cn.attachToComponent(&c,"sortieConnec", "entreeCompo");
+//
+//	c.sendNotificationTo("sortieCompo");
+//	cn.sendNotificationTo("sortieConnec");
+
 	return 0;
 }
