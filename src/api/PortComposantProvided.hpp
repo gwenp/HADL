@@ -10,8 +10,8 @@ class PortComposantProvided : public PortComposant
 {
 public:
 	std::string getType(){ return "provided"; };
-private:
 	RoleRequired* _rolerequired;
+private:
 };
 
 #endif /* PORTCOMPOSANTPROVIDED_HPP */

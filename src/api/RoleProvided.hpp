@@ -12,7 +12,6 @@ public:
 	std::string getType(){ return "provided"; };
 	
 private: 
-	PortComposantRequired* _portRequired;
 };
 
 #endif /* ROLEPROVIDED_HPP */

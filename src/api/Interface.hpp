@@ -6,8 +6,6 @@
 class Interface
 {
 public:
-	Interface();
-	~Interface();
 
 	virtual std::string getType() = 0;
 };

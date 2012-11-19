@@ -28,5 +28,18 @@ int main(int argc, char const *argv[])
 	Component c;
 	Configuration cfg;
 	Connector cn;
+
+	c.addPortRequired("sortieCompo", new PortComposantRequired());
+	c.addPortProvided("entreeCompo", new PortComposantProvided());
+
+	cn.addRoleProvided("entreeConnec", new RoleProvided());
+	cn.addRoleRequired("sortieConnec", new RoleRequired());
+
+	c.info();
+	cn.info();
+
+	c.attachToConnector(&cn,"sortieCompo", "entreeConnec");
+	cn.attachToComponent(&c,"sortieConnec", "entreeCompo");
+
 	return 0;
 }
