@@ -22,26 +22,41 @@
 #include "api/ServiceProvided.hpp"
 #include "api/ServiceRequired.hpp"
 
+#include "Client.hpp"
+#include "Server.hpp"
+#include "CS_Connector.hpp"
 
 int main(int argc, char const *argv[])
 {
-	Component c;
-	Configuration cfg;
-	Connector cn;
 
-	c.addPortRequired("sortieCompo", new PortComposantRequired());
-	c.addPortProvided("entreeCompo", new PortComposantProvided());
+	if ( argc > 1 ) {
 
-	cn.addRoleProvided("entreeConnec", new RoleProvided());
-	cn.addRoleRequired("sortieConnec", new RoleRequired());
+		Client* client = new Client();
+		Server* server = new Server();
 
-	c.info();
-	cn.info();
+		CS_Connector* connector = new CS_Connector();
 
-	c.attachToConnector(&cn,"sortieCompo", "entreeConnec");
-	cn.attachToComponent(&c,"sortieConnec", "entreeCompo");
+		return 0;
+	}
 
-	c.sendNotificationTo("sortieCompo");
+	//Component c;
+	//Configuration cfg;
+	//Connector cn;
+//
+//	//c.addPortRequired("sortieCompo", new PortComposantRequired());
+//	//c.addPortProvided("entreeCompo", new PortComposantProvided());
+//
+//	//cn.addRoleProvided("entreeConnec", new RoleProvided());
+//	//cn.addRoleRequired("sortieConnec", new RoleRequired());
+//
+//	//c.info();
+//	//cn.info();
+//
+//	//c.attachToConnector(&cn,"sortieCompo", "entreeConnec");
+//	//cn.attachToComponent(&c,"sortieConnec", "entreeCompo");
+//
+	//c.sendNotificationTo("sortieCompo");
+
 
 	return 0;
 }
