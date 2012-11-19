@@ -42,6 +42,7 @@ int main(int argc, char const *argv[])
 	cn.attachToComponent(&c,"sortieConnec", "entreeCompo");
 
 	c.sendNotificationTo("sortieCompo");
+	cn.sendNotificationTo("sortieConnec");
 
 	return 0;
 }

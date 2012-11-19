@@ -34,11 +34,16 @@ void Connector::info()
 
 void Connector::on_notify(RoleProvided* port)
 {
-	std::cout << "notification received!" <<std::endl;
+	std::cout << "Connector notification received!" <<std::endl;
 }
 
 void Connector::attachToComponent(Component* c, std::string roleName, std::string portName)
 {
 	PortComposantProvided* port = c->_portsProvided[portName];
 	_rolesRequired[roleName]->_portProvided = port;
+}
+
+void Connector::sendNotificationTo(std::string roleRequired)
+{
+	_rolesRequired[roleRequired]->propagateNotificationToPort();
 }

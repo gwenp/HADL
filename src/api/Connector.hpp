@@ -24,6 +24,8 @@ public:
 
 	void attachToComponent(Component* c, std::string roleName, std::string portName);
 
+	void sendNotificationTo(std::string roleRequired); //this should be protected in the future
+
 	std::map<std::string, RoleProvided*> _rolesProvided;
 	std::map<std::string, RoleRequired*> _rolesRequired;
 private:

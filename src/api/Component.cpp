@@ -41,7 +41,10 @@ void Component::attachToConnector(Connector* c, std::string portName, std::strin
 
 void Component::sendNotificationTo(std::string portRequired)
 {
-	std::cout << "Component::sendNotificationTo" <<std::endl;
-	
 	_portsRequired[portRequired]->propagateNotificationToRole();
+}
+
+void Component::on_notify(PortComposantProvided* port)
+{
+	std::cout << "Component notification received!" <<std::endl;
 }
