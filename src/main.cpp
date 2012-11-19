@@ -30,19 +30,28 @@ int main(int argc, char const *argv[])
 	Connector cn;
 
 	c.addPortRequired("sortieCompo", new PortComposantRequired());
+	c.addPortRequired("sortieCompoToNULL", new PortComposantRequired());
 	c.addPortProvided("entreeCompo", new PortComposantProvided());
 
 	cn.addRoleProvided("entreeConnec", new RoleProvided());
 	cn.addRoleRequired("sortieConnec", new RoleRequired());
+	cn.addRoleRequired("sortieConnecToNULL", new RoleRequired());
 
 	c.info();
 	cn.info();
+
+	c.setParentConfiguration(&cfg);
+	cn.setParentConfiguration(&cfg);
+
+	cfg.addPortRequired("entreeConfig", new PortConfigRequired);
 
 	c.attachToConnector(&cn,"sortieCompo", "entreeConnec");
 	cn.attachToComponent(&c,"sortieConnec", "entreeCompo");
 
 	c.sendNotificationTo("sortieCompo");
+	c.sendNotificationTo("sortieCompoToNULL");
 	cn.sendNotificationTo("sortieConnec");
+	cn.sendNotificationTo("sortieConnecToNULL");
 
 	return 0;
 }

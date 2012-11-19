@@ -71,8 +71,31 @@ hadl-Configuration.o: src/api/Configuration.cpp src/api/Configuration.hpp \
  /usr/include/x86_64-linux-gnu/bits/unistd.h \
  /usr/include/c++/4.6/x86_64-linux-gnu/./bits/atomic_word.h \
  /usr/include/c++/4.6/initializer_list \
- /usr/include/c++/4.6/bits/basic_string.tcc /usr/include/c++/4.6/map \
- /usr/include/c++/4.6/bits/stl_tree.h /usr/include/c++/4.6/bits/stl_map.h \
+ /usr/include/c++/4.6/bits/basic_string.tcc \
+ src/api/PortConfigRequired.hpp src/api/PortConfig.hpp \
+ src/api/PortComposantRequired.hpp src/api/PortComposant.hpp \
+ src/api/InterfaceComposant.hpp /usr/include/c++/4.6/iostream \
+ /usr/include/c++/4.6/ostream /usr/include/c++/4.6/ios \
+ /usr/include/c++/4.6/bits/ios_base.h \
+ /usr/include/c++/4.6/bits/locale_classes.h \
+ /usr/include/c++/4.6/bits/locale_classes.tcc \
+ /usr/include/c++/4.6/streambuf /usr/include/c++/4.6/bits/streambuf.tcc \
+ /usr/include/c++/4.6/bits/basic_ios.h \
+ /usr/include/c++/4.6/bits/locale_facets.h /usr/include/c++/4.6/cwctype \
+ /usr/include/wctype.h \
+ /usr/include/c++/4.6/x86_64-linux-gnu/./bits/ctype_base.h \
+ /usr/include/c++/4.6/bits/streambuf_iterator.h \
+ /usr/include/c++/4.6/x86_64-linux-gnu/./bits/ctype_inline.h \
+ /usr/include/c++/4.6/bits/locale_facets.tcc \
+ /usr/include/c++/4.6/bits/basic_ios.tcc \
+ /usr/include/c++/4.6/bits/ostream.tcc /usr/include/c++/4.6/istream \
+ /usr/include/c++/4.6/bits/istream.tcc src/api/PortConfigProvided.hpp \
+ src/api/PortComposantProvided.hpp src/api/RoleRequired.hpp \
+ src/api/Role.hpp src/api/InterfaceConnector.hpp \
+ src/api/RoleConfigProvided.hpp src/api/RoleConfig.hpp \
+ src/api/RoleProvided.hpp src/api/RoleConfigRequired.hpp \
+ /usr/include/c++/4.6/map /usr/include/c++/4.6/bits/stl_tree.h \
+ /usr/include/c++/4.6/bits/stl_map.h \
  /usr/include/c++/4.6/bits/stl_multimap.h /usr/include/c++/4.6/list \
  /usr/include/c++/4.6/bits/stl_list.h /usr/include/c++/4.6/bits/list.tcc
 
@@ -265,6 +288,74 @@ src/api/Interface.hpp:
 /usr/include/c++/4.6/initializer_list:
 
 /usr/include/c++/4.6/bits/basic_string.tcc:
+
+src/api/PortConfigRequired.hpp:
+
+src/api/PortConfig.hpp:
+
+src/api/PortComposantRequired.hpp:
+
+src/api/PortComposant.hpp:
+
+src/api/InterfaceComposant.hpp:
+
+/usr/include/c++/4.6/iostream:
+
+/usr/include/c++/4.6/ostream:
+
+/usr/include/c++/4.6/ios:
+
+/usr/include/c++/4.6/bits/ios_base.h:
+
+/usr/include/c++/4.6/bits/locale_classes.h:
+
+/usr/include/c++/4.6/bits/locale_classes.tcc:
+
+/usr/include/c++/4.6/streambuf:
+
+/usr/include/c++/4.6/bits/streambuf.tcc:
+
+/usr/include/c++/4.6/bits/basic_ios.h:
+
+/usr/include/c++/4.6/bits/locale_facets.h:
+
+/usr/include/c++/4.6/cwctype:
+
+/usr/include/wctype.h:
+
+/usr/include/c++/4.6/x86_64-linux-gnu/./bits/ctype_base.h:
+
+/usr/include/c++/4.6/bits/streambuf_iterator.h:
+
+/usr/include/c++/4.6/x86_64-linux-gnu/./bits/ctype_inline.h:
+
+/usr/include/c++/4.6/bits/locale_facets.tcc:
+
+/usr/include/c++/4.6/bits/basic_ios.tcc:
+
+/usr/include/c++/4.6/bits/ostream.tcc:
+
+/usr/include/c++/4.6/istream:
+
+/usr/include/c++/4.6/bits/istream.tcc:
+
+src/api/PortConfigProvided.hpp:
+
+src/api/PortComposantProvided.hpp:
+
+src/api/RoleRequired.hpp:
+
+src/api/Role.hpp:
+
+src/api/InterfaceConnector.hpp:
+
+src/api/RoleConfigProvided.hpp:
+
+src/api/RoleConfig.hpp:
+
+src/api/RoleProvided.hpp:
+
+src/api/RoleConfigRequired.hpp:
 
 /usr/include/c++/4.6/map:
 

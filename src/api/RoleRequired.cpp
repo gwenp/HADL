@@ -4,5 +4,10 @@
 
 void RoleRequired::propagateNotificationToPort()
 {
-	_portProvided->notifyComponent();
+	if(_portProvided != NULL)
+	{
+		_portProvided->notifyComponent();
+	}
+	else
+		std::cout << "[ERROR] No Component attached to the role" <<std::endl;
 }

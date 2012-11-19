@@ -4,6 +4,7 @@
 #include "Role.hpp"
 
 #include <string>
+#include <iostream>
 
 class PortComposantProvided;
 

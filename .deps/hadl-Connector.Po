@@ -71,11 +71,8 @@ hadl-Connector.o: src/api/Connector.cpp src/api/Connector.hpp \
  /usr/include/x86_64-linux-gnu/bits/unistd.h \
  /usr/include/c++/4.6/x86_64-linux-gnu/./bits/atomic_word.h \
  /usr/include/c++/4.6/initializer_list \
- /usr/include/c++/4.6/bits/basic_string.tcc /usr/include/c++/4.6/map \
- /usr/include/c++/4.6/bits/stl_tree.h /usr/include/c++/4.6/bits/stl_map.h \
- /usr/include/c++/4.6/bits/stl_multimap.h /usr/include/c++/4.6/list \
- /usr/include/c++/4.6/bits/stl_list.h /usr/include/c++/4.6/bits/list.tcc \
- src/api/InterfaceConnector.hpp src/api/RoleProvided.hpp src/api/Role.hpp \
+ /usr/include/c++/4.6/bits/basic_string.tcc \
+ src/api/PortConfigRequired.hpp src/api/PortConfig.hpp \
  src/api/PortComposantRequired.hpp src/api/PortComposant.hpp \
  src/api/InterfaceComposant.hpp /usr/include/c++/4.6/iostream \
  /usr/include/c++/4.6/ostream /usr/include/c++/4.6/ios \
@@ -92,8 +89,16 @@ hadl-Connector.o: src/api/Connector.cpp src/api/Connector.hpp \
  /usr/include/c++/4.6/bits/locale_facets.tcc \
  /usr/include/c++/4.6/bits/basic_ios.tcc \
  /usr/include/c++/4.6/bits/ostream.tcc /usr/include/c++/4.6/istream \
- /usr/include/c++/4.6/bits/istream.tcc src/api/RoleRequired.hpp \
- src/api/Component.hpp src/api/PortComposantProvided.hpp
+ /usr/include/c++/4.6/bits/istream.tcc src/api/PortConfigProvided.hpp \
+ src/api/PortComposantProvided.hpp src/api/RoleRequired.hpp \
+ src/api/Role.hpp src/api/InterfaceConnector.hpp \
+ src/api/RoleConfigProvided.hpp src/api/RoleConfig.hpp \
+ src/api/RoleProvided.hpp src/api/RoleConfigRequired.hpp \
+ /usr/include/c++/4.6/map /usr/include/c++/4.6/bits/stl_tree.h \
+ /usr/include/c++/4.6/bits/stl_map.h \
+ /usr/include/c++/4.6/bits/stl_multimap.h /usr/include/c++/4.6/list \
+ /usr/include/c++/4.6/bits/stl_list.h /usr/include/c++/4.6/bits/list.tcc \
+ src/api/Component.hpp
 
 src/api/Connector.hpp:
 
@@ -287,25 +292,9 @@ src/api/Interface.hpp:
 
 /usr/include/c++/4.6/bits/basic_string.tcc:
 
-/usr/include/c++/4.6/map:
+src/api/PortConfigRequired.hpp:
 
-/usr/include/c++/4.6/bits/stl_tree.h:
-
-/usr/include/c++/4.6/bits/stl_map.h:
-
-/usr/include/c++/4.6/bits/stl_multimap.h:
-
-/usr/include/c++/4.6/list:
-
-/usr/include/c++/4.6/bits/stl_list.h:
-
-/usr/include/c++/4.6/bits/list.tcc:
-
-src/api/InterfaceConnector.hpp:
-
-src/api/RoleProvided.hpp:
-
-src/api/Role.hpp:
+src/api/PortConfig.hpp:
 
 src/api/PortComposantRequired.hpp:
 
@@ -353,8 +342,36 @@ src/api/InterfaceComposant.hpp:
 
 /usr/include/c++/4.6/bits/istream.tcc:
 
-src/api/RoleRequired.hpp:
-
-src/api/Component.hpp:
+src/api/PortConfigProvided.hpp:
 
 src/api/PortComposantProvided.hpp:
+
+src/api/RoleRequired.hpp:
+
+src/api/Role.hpp:
+
+src/api/InterfaceConnector.hpp:
+
+src/api/RoleConfigProvided.hpp:
+
+src/api/RoleConfig.hpp:
+
+src/api/RoleProvided.hpp:
+
+src/api/RoleConfigRequired.hpp:
+
+/usr/include/c++/4.6/map:
+
+/usr/include/c++/4.6/bits/stl_tree.h:
+
+/usr/include/c++/4.6/bits/stl_map.h:
+
+/usr/include/c++/4.6/bits/stl_multimap.h:
+
+/usr/include/c++/4.6/list:
+
+/usr/include/c++/4.6/bits/stl_list.h:
+
+/usr/include/c++/4.6/bits/list.tcc:
+
+src/api/Component.hpp:

@@ -90,11 +90,14 @@ hadl-RoleProvided.o: src/api/RoleProvided.cpp src/api/RoleProvided.hpp \
  /usr/include/x86_64-linux-gnu/sys/sysmacros.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h src/api/Element.hpp \
  src/api/Configuration.hpp src/api/InterfaceConfiguration.hpp \
+ src/api/PortConfigRequired.hpp src/api/PortConfig.hpp \
+ src/api/PortConfigProvided.hpp src/api/PortComposantProvided.hpp \
+ src/api/RoleRequired.hpp src/api/RoleConfigProvided.hpp \
+ src/api/RoleConfig.hpp src/api/RoleConfigRequired.hpp \
  /usr/include/c++/4.6/map /usr/include/c++/4.6/bits/stl_tree.h \
  /usr/include/c++/4.6/bits/stl_map.h \
  /usr/include/c++/4.6/bits/stl_multimap.h /usr/include/c++/4.6/list \
- /usr/include/c++/4.6/bits/stl_list.h /usr/include/c++/4.6/bits/list.tcc \
- src/api/RoleRequired.hpp
+ /usr/include/c++/4.6/bits/stl_list.h /usr/include/c++/4.6/bits/list.tcc
 
 src/api/RoleProvided.hpp:
 
@@ -340,6 +343,22 @@ src/api/Configuration.hpp:
 
 src/api/InterfaceConfiguration.hpp:
 
+src/api/PortConfigRequired.hpp:
+
+src/api/PortConfig.hpp:
+
+src/api/PortConfigProvided.hpp:
+
+src/api/PortComposantProvided.hpp:
+
+src/api/RoleRequired.hpp:
+
+src/api/RoleConfigProvided.hpp:
+
+src/api/RoleConfig.hpp:
+
+src/api/RoleConfigRequired.hpp:
+
 /usr/include/c++/4.6/map:
 
 /usr/include/c++/4.6/bits/stl_tree.h:
@@ -353,5 +372,3 @@ src/api/InterfaceConfiguration.hpp:
 /usr/include/c++/4.6/bits/stl_list.h:
 
 /usr/include/c++/4.6/bits/list.tcc:
-
-src/api/RoleRequired.hpp:

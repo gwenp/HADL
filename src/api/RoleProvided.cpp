@@ -4,7 +4,5 @@
 
 void RoleProvided::notifyConnector()
 {
-	std::cout << "RoleProvided::notifyConnector" <<std::endl;
-	
 	getConnector()->on_notify(this);
 }

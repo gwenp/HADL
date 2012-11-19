@@ -5,6 +5,11 @@
 
 void PortComposantRequired::propagateNotificationToRole()
 {
-	std::cout << "PortComposantRequired::propagateNotificationToRole" <<std::endl;
-	_providedRole->notifyConnector();
+	if(_providedRole != NULL)
+	{
+		_providedRole->notifyConnector();		
+	}
+	else
+		std::cout << "[ERROR] No Connector attached to the port" <<std::endl;
+
 }

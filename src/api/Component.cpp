@@ -35,8 +35,12 @@ void Component::info()
 
 void Component::attachToConnector(Connector* c, std::string portName, std::string roleName)
 {
-	_portsRequired[portName]->_providedRole = c->_rolesProvided[roleName];
-	// _providedRole
+	if(getParentConfiguration() == c->getParentConfiguration())
+	{
+		_portsRequired[portName]->_providedRole = c->_rolesProvided[roleName];
+	}
+	else
+		std::cout << "[ERROR] : The Connector and the Component does not have the same parent Configuration!" <<std::endl;
 }
 
 void Component::sendNotificationTo(std::string portRequired)
