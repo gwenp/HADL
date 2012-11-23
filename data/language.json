@@ -1,0 +1,39 @@
+{[
+	'ApplicationServer' : [
+			{
+				'type' : 'composant',
+				'name' : 'CServer',
+				'configuration' :{ /*pptés*/ }
+				'RequiredPorts' : [ 'port1', 'port2' ...],
+				'ProvidedPorts' : [ 'port3', 'port4' ...]
+
+			},
+			{
+				'type' : 'composant',
+				'name' : 'CDatabase',
+				'parentConfiguration' : 'CServer'
+				'RequiredPorts' : [ 'port1', 'port2' ...],
+				'ProvidedPorts' : [ 'port3', 'port4' ...]
+
+			},
+			{
+				'type' : 'connector',
+				'name' : 'CServer',
+				'RequiredRoles' : [ 'port1', 'port2' ...],
+				'ProvidedRoles' : [ 'port3', 'port4' ...]
+
+			},
+
+			]
+		]
+	},
+	'ApplicationClient' : [
+			{
+				'type' : 'composant',
+				'name' : 'CClient',
+				'RequiredPorts' : [ 'port1', 'port2' ...],
+				'ProvidedPorts' : [ 'port3', 'port4' ...]
+			}
+		]
+	}
+]}
