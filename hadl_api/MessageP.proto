@@ -1,0 +1,9 @@
+message MessageP {
+	
+	required string sender = 1;
+	required string receiver = 2;
+ 
+	required int32 code = 3;
+
+	repeated string argument = 4;
+}

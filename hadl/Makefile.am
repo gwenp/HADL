@@ -1,7 +1,7 @@
 bin_PROGRAMS = hadl
 
-hadl_LDADD = $(LIBJSONCPP_LIBS) $(LIBSIGC_LIBS) $(LIBHADL_LIBS)
-hadl_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS) $(LIBHADL_CFLAGS) -lhadl
+hadl_LDADD = $(LIBJSONCPP_LIBS) $(LIBSIGC_LIBS) $(LIBHADL_LIBS) $(PROTOBUF_LIBS)
+hadl_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS) $(LIBHADL_CFLAGS) $(PROTOBUF_CFLAGS)
 
 sc = src/server_configuration
 server_config_files = $(sc)/CM_DB_Connector.cpp $(sc)/CM_DB_Connector.hpp \

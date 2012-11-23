@@ -17,7 +17,7 @@ AC_PROG_CC
 
 # Checks for libraries.
 PKG_CHECK_MODULES([LIBHADL],[libhadl])
-
+PKG_CHECK_MODULES([PROTOBUF],[protobuf])
 # Checks for header files.
 
 # Checks for typedefs, structures, and compiler characteristics.

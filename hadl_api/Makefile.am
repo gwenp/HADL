@@ -5,7 +5,7 @@ libhadl_la_LIBADD = $(LIBJSONCPP_LIBS) $(LIBSIGC_LIBS)
 libhadl_la_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS)
 
 library_includedir=$(includedir)/HADL
-library_include_HEADERS = src/*.hpp
+library_include_HEADERS = src/*.hpp src/*.h
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libhadl.pc
@@ -33,4 +33,5 @@ libhadl_la_SOURCES = src/PortConfigProvided.cpp src/PortConfigProvided.hpp \
 				src/ServiceProvided.cpp src/ServiceProvided.hpp \
 				src/PortComposantRequired.cpp src/PortComposantRequired.hpp \
 				src/ServiceRequired.cpp src/ServiceRequired.hpp \
-				src/PortConfig.cpp src/PortConfih.hpp
+				src/PortConfig.cpp src/PortConfih.hpp \
+				src/MessageP.pb.cc src/MessageP.pb.h
