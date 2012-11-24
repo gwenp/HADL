@@ -1,5 +1,10 @@
 #include "LanguageManager.hpp"
 
+void LanguageManager::parseJSON(std::string jsonUrl)
+{
+	JsonParser::parse(this, jsonUrl, "Server");
+}
+
 void LanguageManager::registerComponentFactory(std::string name, ComponentFactory* factory)
 {
 	_componentFactories[name] = factory;
@@ -52,3 +57,7 @@ void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std:
 	_connectors[connectorName]->addRoleProvided(roleName, new RoleProvided());
 }
 
+void LanguageManager::setConnectorListenFrom(std::string connectorName, int realPortName)
+{
+	_connectors[connectorName]->listen_from(realPortName);
+}

@@ -1,39 +1,25 @@
-{[
-	'ApplicationServer' : [
-			{
-				'type' : 'composant',
-				'name' : 'CServer',
-				'configuration' :{ /*pptés*/ }
-				'RequiredPorts' : [ 'port1', 'port2' ...],
-				'ProvidedPorts' : [ 'port3', 'port4' ...]
-
-			},
-			{
-				'type' : 'composant',
-				'name' : 'CDatabase',
-				'parentConfiguration' : 'CServer'
-				'RequiredPorts' : [ 'port1', 'port2' ...],
-				'ProvidedPorts' : [ 'port3', 'port4' ...]
-
-			},
-			{
-				'type' : 'connector',
-				'name' : 'CServer',
-				'RequiredRoles' : [ 'port1', 'port2' ...],
-				'ProvidedRoles' : [ 'port3', 'port4' ...]
-
-			},
-
-			]
+{
+	"applications":
+	[
+	{
+		"name" : "Client",
+		"elements" : [
+		{
+			"type" : "Component",
+			"name" : "Client"
+		}
 		]
+
 	},
-	'ApplicationClient' : [
-			{
-				'type' : 'composant',
-				'name' : 'CClient',
-				'RequiredPorts' : [ 'port1', 'port2' ...],
-				'ProvidedPorts' : [ 'port3', 'port4' ...]
-			}
-		]
+	{
+		"name" : "Server",
+		"elements" : [	
+		{
+			"type" : "Component",
+			"name" : "Server",
+			"elements" : [
+			]
+		}]
 	}
-]}
+	]
+}

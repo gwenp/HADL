@@ -16,6 +16,7 @@ $(sc)/ServerConfiguration.cpp $(sc)/ServerConfiguration.hpp
 
 hadl_SOURCES = main.cpp \
 				 src/language_tools/LanguageManager.cpp src/language_tools/LanguageManager.hpp \
+				 src/language_tools/JsonParser/JsonParser.cpp src/language_tools/JsonParser/JsonParser.hpp \
 				 src/language_tools/ComponentFactory.cpp src/language_tools/ComponentFactory.hpp \
 				 src/language_tools/ConnectorFactory.cpp src/language_tools/ConnectorFactory.hpp \
 				 src/factories/ClientComponentFactory.cpp src/factories/ClientComponentFactory.hpp \

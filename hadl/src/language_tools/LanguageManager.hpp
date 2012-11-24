@@ -4,11 +4,14 @@
 #include <functional>
 #include <HADL/Component.hpp>
 #include <HADL/Connector.hpp>
+#include "JsonParser/JsonParser.hpp"
 #include "ComponentFactory.hpp"
 #include "ConnectorFactory.hpp"
 
 class LanguageManager {
 public:
+	void parseJSON(std::string jsonUrl);
+
 	void registerComponentFactory(std::string name, ComponentFactory* factory);
 	Component* makeComponent(std::string name);
 
@@ -23,6 +26,8 @@ public:
 
 	void addRequiredRoleToConnector(std::string connectorName, std::string roleName);
 	void addProvidedRoleToConnector(std::string connectorName, std::string roleName);
+
+	void setConnectorListenFrom(std::string name, int realPortName);
 
 private:
 	std::map<std::string, ComponentFactory*> _componentFactories;
