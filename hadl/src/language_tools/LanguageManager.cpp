@@ -12,6 +12,7 @@ void LanguageManager::registerComponentFactory(std::string name, ComponentFactor
 
 Component* LanguageManager::makeComponent(std::string name)
 {
+	std::cout << "[LanguageManager] makeComponent : "<< name << std::endl;
 	_components[name] = _componentFactories[name]->make();
 	return _components[name];
 }
@@ -23,6 +24,8 @@ void LanguageManager::registerConnectorFactory(std::string name, ConnectorFactor
 
 Connector* LanguageManager::makeConnector(std::string name)
 {
+	std::cout << "[LanguageManager] makeConnector : "<< name << std::endl;
+
 	_connectors[name] = _connectorFactories[name]->make();
 	return _connectors[name];
 }
@@ -39,21 +42,25 @@ Connector* LanguageManager::getConnector(std::string name)
 
 void LanguageManager::addRequiredPortToComponent(std::string componentName, std::string portName)
 {
+	std::cout << "[LanguageManager] addPortRequired : "<< portName << " to Component : " << componentName << std::endl;
 	_components[componentName]->addPortRequired(portName, new PortComposantRequired());
 }
 
 void LanguageManager::addProvidedPortToComponent(std::string componentName, std::string portName)
 {
+	std::cout << "[LanguageManager] addPortProvided : "<< portName << " to Component : " << componentName << std::endl;
 	_components[componentName]->addPortProvided(portName, new PortComposantProvided());
 }
 
 void LanguageManager::addRequiredRoleToConnector(std::string connectorName, std::string roleName)
 {
+	std::cout << "[LanguageManager] addRoleRequired : "<< roleName << " to Connector : " << connectorName << std::endl;
 	_connectors[connectorName]->addRoleRequired(roleName, new RoleRequired());
 }
 
 void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std::string roleName)
 {
+	std::cout << "[LanguageManager] addRoleProvided : "<< roleName << " to Connector : " << connectorName << std::endl;
 	_connectors[connectorName]->addRoleProvided(roleName, new RoleProvided());
 }
 

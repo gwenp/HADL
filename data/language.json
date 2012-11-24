@@ -17,8 +17,8 @@
 		{
 			"type" : "Component",
 			"name" : "Server",
-			"elements" : [
-			]
+			"PortsRequired" : ["portServer1", "portServer2"],
+			"PortsProvided" : ["portProvidedServer1"]
 		}]
 	}
 	]
