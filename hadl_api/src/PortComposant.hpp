@@ -2,13 +2,14 @@
 #define PORTCOMPOSANT_HPP
 
 #include "InterfaceComposant.hpp"
+#include "MessageP.pb.h"
 
 class Component;
 
 class PortComposant : public InterfaceComposant
 {
 public:
-	void setComponent(Component* c){ _component=c; };
+	void setComponent( Component* c ){ _component = c; };
 	Component* getComponent(){ return _component; };
 private:
 	Component* _component;

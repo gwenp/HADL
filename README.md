@@ -1,4 +1,0 @@
-HADL
-====
-
-Student project

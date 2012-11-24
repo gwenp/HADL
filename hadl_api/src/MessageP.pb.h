@@ -32,6 +32,28 @@ void protobuf_ShutdownFile_MessageP_2eproto();
 
 class MessageP;
 
+enum MessageP_MessageType {
+  MessageP_MessageType_REQUEST = 0,
+  MessageP_MessageType_RESPONSE = 1,
+  MessageP_MessageType_DISCOVER = 2,
+  MessageP_MessageType_INFO = 3,
+  MessageP_MessageType_DISCONNECT = 4
+};
+bool MessageP_MessageType_IsValid(int value);
+const MessageP_MessageType MessageP_MessageType_MessageType_MIN = MessageP_MessageType_REQUEST;
+const MessageP_MessageType MessageP_MessageType_MessageType_MAX = MessageP_MessageType_DISCONNECT;
+const int MessageP_MessageType_MessageType_ARRAYSIZE = MessageP_MessageType_MessageType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* MessageP_MessageType_descriptor();
+inline const ::std::string& MessageP_MessageType_Name(MessageP_MessageType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    MessageP_MessageType_descriptor(), value);
+}
+inline bool MessageP_MessageType_Parse(
+    const ::std::string& name, MessageP_MessageType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<MessageP_MessageType>(
+    MessageP_MessageType_descriptor(), name, value);
+}
 // ===================================================================
 
 class MessageP : public ::google::protobuf::Message {
@@ -86,12 +108,46 @@ class MessageP : public ::google::protobuf::Message {
   
   // nested types ----------------------------------------------------
   
+  typedef MessageP_MessageType MessageType;
+  static const MessageType REQUEST = MessageP_MessageType_REQUEST;
+  static const MessageType RESPONSE = MessageP_MessageType_RESPONSE;
+  static const MessageType DISCOVER = MessageP_MessageType_DISCOVER;
+  static const MessageType INFO = MessageP_MessageType_INFO;
+  static const MessageType DISCONNECT = MessageP_MessageType_DISCONNECT;
+  static inline bool MessageType_IsValid(int value) {
+    return MessageP_MessageType_IsValid(value);
+  }
+  static const MessageType MessageType_MIN =
+    MessageP_MessageType_MessageType_MIN;
+  static const MessageType MessageType_MAX =
+    MessageP_MessageType_MessageType_MAX;
+  static const int MessageType_ARRAYSIZE =
+    MessageP_MessageType_MessageType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  MessageType_descriptor() {
+    return MessageP_MessageType_descriptor();
+  }
+  static inline const ::std::string& MessageType_Name(MessageType value) {
+    return MessageP_MessageType_Name(value);
+  }
+  static inline bool MessageType_Parse(const ::std::string& name,
+      MessageType* value) {
+    return MessageP_MessageType_Parse(name, value);
+  }
+  
   // accessors -------------------------------------------------------
   
-  // required string sender = 1;
+  // required .MessageP.MessageType type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::MessageP_MessageType type() const;
+  inline void set_type(::MessageP_MessageType value);
+  
+  // required string sender = 2;
   inline bool has_sender() const;
   inline void clear_sender();
-  static const int kSenderFieldNumber = 1;
+  static const int kSenderFieldNumber = 2;
   inline const ::std::string& sender() const;
   inline void set_sender(const ::std::string& value);
   inline void set_sender(const char* value);
@@ -99,10 +155,10 @@ class MessageP : public ::google::protobuf::Message {
   inline ::std::string* mutable_sender();
   inline ::std::string* release_sender();
   
-  // required string receiver = 2;
+  // required string receiver = 3;
   inline bool has_receiver() const;
   inline void clear_receiver();
-  static const int kReceiverFieldNumber = 2;
+  static const int kReceiverFieldNumber = 3;
   inline const ::std::string& receiver() const;
   inline void set_receiver(const ::std::string& value);
   inline void set_receiver(const char* value);
@@ -110,17 +166,17 @@ class MessageP : public ::google::protobuf::Message {
   inline ::std::string* mutable_receiver();
   inline ::std::string* release_receiver();
   
-  // required int32 code = 3;
+  // optional int32 code = 4;
   inline bool has_code() const;
   inline void clear_code();
-  static const int kCodeFieldNumber = 3;
+  static const int kCodeFieldNumber = 4;
   inline ::google::protobuf::int32 code() const;
   inline void set_code(::google::protobuf::int32 value);
   
-  // repeated string argument = 4;
+  // repeated string argument = 5;
   inline int argument_size() const;
   inline void clear_argument();
-  static const int kArgumentFieldNumber = 4;
+  static const int kArgumentFieldNumber = 5;
   inline const ::std::string& argument(int index) const;
   inline ::std::string* mutable_argument(int index);
   inline void set_argument(int index, const ::std::string& value);
@@ -135,6 +191,8 @@ class MessageP : public ::google::protobuf::Message {
   
   // @@protoc_insertion_point(class_scope:MessageP)
  private:
+  inline void set_has_type();
+  inline void clear_has_type();
   inline void set_has_sender();
   inline void clear_has_sender();
   inline void set_has_receiver();
@@ -145,12 +203,13 @@ class MessageP : public ::google::protobuf::Message {
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
   ::std::string* sender_;
+  int type_;
+  ::google::protobuf::int32 code_;
   ::std::string* receiver_;
   ::google::protobuf::RepeatedPtrField< ::std::string> argument_;
-  ::google::protobuf::int32 code_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
   
   friend void  protobuf_AddDesc_MessageP_2eproto();
   friend void protobuf_AssignDesc_MessageP_2eproto();
@@ -166,15 +225,38 @@ class MessageP : public ::google::protobuf::Message {
 
 // MessageP
 
-// required string sender = 1;
-inline bool MessageP::has_sender() const {
+// required .MessageP.MessageType type = 1;
+inline bool MessageP::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MessageP::set_has_sender() {
+inline void MessageP::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MessageP::clear_has_sender() {
+inline void MessageP::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
+}
+inline void MessageP::clear_type() {
+  type_ = 0;
+  clear_has_type();
+}
+inline ::MessageP_MessageType MessageP::type() const {
+  return static_cast< ::MessageP_MessageType >(type_);
+}
+inline void MessageP::set_type(::MessageP_MessageType value) {
+  GOOGLE_DCHECK(::MessageP_MessageType_IsValid(value));
+  set_has_type();
+  type_ = value;
+}
+
+// required string sender = 2;
+inline bool MessageP::has_sender() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MessageP::set_has_sender() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MessageP::clear_has_sender() {
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void MessageP::clear_sender() {
   if (sender_ != &::google::protobuf::internal::kEmptyString) {
@@ -224,15 +306,15 @@ inline ::std::string* MessageP::release_sender() {
   }
 }
 
-// required string receiver = 2;
+// required string receiver = 3;
 inline bool MessageP::has_receiver() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void MessageP::set_has_receiver() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void MessageP::clear_has_receiver() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void MessageP::clear_receiver() {
   if (receiver_ != &::google::protobuf::internal::kEmptyString) {
@@ -282,15 +364,15 @@ inline ::std::string* MessageP::release_receiver() {
   }
 }
 
-// required int32 code = 3;
+// optional int32 code = 4;
 inline bool MessageP::has_code() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void MessageP::set_has_code() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void MessageP::clear_has_code() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void MessageP::clear_code() {
   code_ = 0;
@@ -304,7 +386,7 @@ inline void MessageP::set_code(::google::protobuf::int32 value) {
   code_ = value;
 }
 
-// repeated string argument = 4;
+// repeated string argument = 5;
 inline int MessageP::argument_size() const {
   return argument_.size();
 }
@@ -355,6 +437,10 @@ MessageP::mutable_argument() {
 namespace google {
 namespace protobuf {
 
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::MessageP_MessageType>() {
+  return ::MessageP_MessageType_descriptor();
+}
 
 }  // namespace google
 }  // namespace protobuf

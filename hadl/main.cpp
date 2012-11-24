@@ -22,15 +22,18 @@
 #include "HADL/ServiceProvided.hpp"
 #include "HADL/ServiceRequired.hpp"
 
+#include <HADL/MessageP.pb.h>
+
 #include "src/Client.hpp"
 #include "src/Server.hpp"
 #include "src/CS_Connector.hpp"
 #include "src/PortRequiredCS.hpp"
 #include "src/PortProvidedCS.hpp"
 
+#include <fstream>
+#include <ostream>
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const* argv[]) {
 
 
 	if ( argc > 1 ) {
@@ -49,8 +52,39 @@ int main(int argc, char const *argv[])
 
 		CS_Connector* connector = new CS_Connector();
 
+		if ( !strcmp(argv[1],"server") ) {
+			connector->addRoleRequired("dqd", new RoleRequired());
+			connector->launch_monitoring_routines();
+		}
+		else {
+			connector->addRoleProvided("TestP1", new RoleProvided());
+			connector->addRoleProvided("TestP2", new RoleProvided());
+			connector->connect();
+		}
+
 	}
 
+	/*
+	MessageP* msg = new MessageP();
+	msg->set_code(404);
+	msg->add_argument("Trololol est");
+	msg->add_argument("aaaa");
+	msg->set_sender("Maison");
+	msg->set_receiver("Bleue");
+	std::cout << msg << std::endl;
+
+	std::string str;
+	msg->SerializeToString(&str);
+
+
+	std::cout << str << std::endl;
+
+
+	MessageP* msg2 = new MessageP();
+	msg2->ParseFromString(str);
+
+	std::cout << msg2->argument(0) << std::endl;
+	*/
 	//c.addPortRequired("sortieCompo", new PortComposantRequired());
 	//c.addPortRequired("sortieCompoToNULL", new PortComposantRequired());
 	//c.addPortProvided("entreeCompo", new PortComposantProvided());

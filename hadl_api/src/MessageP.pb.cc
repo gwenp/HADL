@@ -18,6 +18,7 @@ namespace {
 const ::google::protobuf::Descriptor* MessageP_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MessageP_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* MessageP_MessageType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -29,7 +30,8 @@ void protobuf_AssignDesc_MessageP_2eproto() {
       "MessageP.proto");
   GOOGLE_CHECK(file != NULL);
   MessageP_descriptor_ = file->message_type(0);
-  static const int MessageP_offsets_[4] = {
+  static const int MessageP_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, sender_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, receiver_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, code_),
@@ -46,6 +48,7 @@ void protobuf_AssignDesc_MessageP_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MessageP));
+  MessageP_MessageType_descriptor_ = MessageP_descriptor_->enum_type(0);
 }
 
 namespace {
@@ -76,9 +79,12 @@ void protobuf_AddDesc_MessageP_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\016MessageP.proto\"L\n\010MessageP\022\016\n\006sender\030\001"
-    " \002(\t\022\020\n\010receiver\030\002 \002(\t\022\014\n\004code\030\003 \002(\005\022\020\n\010"
-    "argument\030\004 \003(\t", 94);
+    "\n\016MessageP.proto\"\303\001\n\010MessageP\022#\n\004type\030\001 "
+    "\002(\0162\025.MessageP.MessageType\022\016\n\006sender\030\002 \002"
+    "(\t\022\020\n\010receiver\030\003 \002(\t\022\014\n\004code\030\004 \001(\005\022\020\n\010ar"
+    "gument\030\005 \003(\t\"P\n\013MessageType\022\013\n\007REQUEST\020\000"
+    "\022\014\n\010RESPONSE\020\001\022\014\n\010DISCOVER\020\002\022\010\n\004INFO\020\003\022\016"
+    "\n\nDISCONNECT\020\004", 214);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "MessageP.proto", &protobuf_RegisterTypes);
   MessageP::default_instance_ = new MessageP();
@@ -96,7 +102,35 @@ struct StaticDescriptorInitializer_MessageP_2eproto {
 
 // ===================================================================
 
+const ::google::protobuf::EnumDescriptor* MessageP_MessageType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return MessageP_MessageType_descriptor_;
+}
+bool MessageP_MessageType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
 #ifndef _MSC_VER
+const MessageP_MessageType MessageP::REQUEST;
+const MessageP_MessageType MessageP::RESPONSE;
+const MessageP_MessageType MessageP::DISCOVER;
+const MessageP_MessageType MessageP::INFO;
+const MessageP_MessageType MessageP::DISCONNECT;
+const MessageP_MessageType MessageP::MessageType_MIN;
+const MessageP_MessageType MessageP::MessageType_MAX;
+const int MessageP::MessageType_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int MessageP::kTypeFieldNumber;
 const int MessageP::kSenderFieldNumber;
 const int MessageP::kReceiverFieldNumber;
 const int MessageP::kCodeFieldNumber;
@@ -119,6 +153,7 @@ MessageP::MessageP(const MessageP& from)
 
 void MessageP::SharedCtor() {
   _cached_size_ = 0;
+  type_ = 0;
   sender_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   receiver_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   code_ = 0;
@@ -162,6 +197,7 @@ MessageP* MessageP::New() const {
 
 void MessageP::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    type_ = 0;
     if (has_sender()) {
       if (sender_ != &::google::protobuf::internal::kEmptyString) {
         sender_->clear();
@@ -185,10 +221,31 @@ bool MessageP::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string sender = 1;
+      // required .MessageP.MessageType type = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::MessageP_MessageType_IsValid(value)) {
+            set_type(static_cast< ::MessageP_MessageType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_sender;
+        break;
+      }
+      
+      // required string sender = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_sender:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_sender()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8String(
@@ -197,12 +254,12 @@ bool MessageP::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(18)) goto parse_receiver;
+        if (input->ExpectTag(26)) goto parse_receiver;
         break;
       }
       
-      // required string receiver = 2;
-      case 2: {
+      // required string receiver = 3;
+      case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_receiver:
@@ -214,12 +271,12 @@ bool MessageP::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_code;
+        if (input->ExpectTag(32)) goto parse_code;
         break;
       }
       
-      // required int32 code = 3;
-      case 3: {
+      // optional int32 code = 4;
+      case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_code:
@@ -230,12 +287,12 @@ bool MessageP::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_argument;
+        if (input->ExpectTag(42)) goto parse_argument;
         break;
       }
       
-      // repeated string argument = 4;
-      case 4: {
+      // repeated string argument = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_argument:
@@ -247,7 +304,7 @@ bool MessageP::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(34)) goto parse_argument;
+        if (input->ExpectTag(42)) goto parse_argument;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -270,36 +327,42 @@ bool MessageP::MergePartialFromCodedStream(
 
 void MessageP::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required string sender = 1;
+  // required .MessageP.MessageType type = 1;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->type(), output);
+  }
+  
+  // required string sender = 2;
   if (has_sender()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->sender().data(), this->sender().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      1, this->sender(), output);
+      2, this->sender(), output);
   }
   
-  // required string receiver = 2;
+  // required string receiver = 3;
   if (has_receiver()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->receiver().data(), this->receiver().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      2, this->receiver(), output);
+      3, this->receiver(), output);
   }
   
-  // required int32 code = 3;
+  // optional int32 code = 4;
   if (has_code()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->code(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->code(), output);
   }
   
-  // repeated string argument = 4;
+  // repeated string argument = 5;
   for (int i = 0; i < this->argument_size(); i++) {
   ::google::protobuf::internal::WireFormat::VerifyUTF8String(
     this->argument(i).data(), this->argument(i).length(),
     ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      4, this->argument(i), output);
+      5, this->argument(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -310,38 +373,44 @@ void MessageP::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* MessageP::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required string sender = 1;
+  // required .MessageP.MessageType type = 1;
+  if (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->type(), target);
+  }
+  
+  // required string sender = 2;
   if (has_sender()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->sender().data(), this->sender().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->sender(), target);
+        2, this->sender(), target);
   }
   
-  // required string receiver = 2;
+  // required string receiver = 3;
   if (has_receiver()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->receiver().data(), this->receiver().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->receiver(), target);
+        3, this->receiver(), target);
   }
   
-  // required int32 code = 3;
+  // optional int32 code = 4;
   if (has_code()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->code(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->code(), target);
   }
   
-  // repeated string argument = 4;
+  // repeated string argument = 5;
   for (int i = 0; i < this->argument_size(); i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->argument(i).data(), this->argument(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(4, this->argument(i), target);
+      WriteStringToArray(5, this->argument(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -355,21 +424,27 @@ int MessageP::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string sender = 1;
+    // required .MessageP.MessageType type = 1;
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+    }
+    
+    // required string sender = 2;
     if (has_sender()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->sender());
     }
     
-    // required string receiver = 2;
+    // required string receiver = 3;
     if (has_receiver()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->receiver());
     }
     
-    // required int32 code = 3;
+    // optional int32 code = 4;
     if (has_code()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -377,7 +452,7 @@ int MessageP::ByteSize() const {
     }
     
   }
-  // repeated string argument = 4;
+  // repeated string argument = 5;
   total_size += 1 * this->argument_size();
   for (int i = 0; i < this->argument_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -411,6 +486,9 @@ void MessageP::MergeFrom(const MessageP& from) {
   GOOGLE_CHECK_NE(&from, this);
   argument_.MergeFrom(from.argument_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_type()) {
+      set_type(from.type());
+    }
     if (from.has_sender()) {
       set_sender(from.sender());
     }
@@ -444,6 +522,7 @@ bool MessageP::IsInitialized() const {
 
 void MessageP::Swap(MessageP* other) {
   if (other != this) {
+    std::swap(type_, other->type_);
     std::swap(sender_, other->sender_);
     std::swap(receiver_, other->receiver_);
     std::swap(code_, other->code_);

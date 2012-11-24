@@ -1,9 +1,19 @@
 message MessageP {
 	
-	required string sender = 1;
-	required string receiver = 2;
- 
-	required int32 code = 3;
+	enum MessageType {
+		REQUEST = 0;
+		RESPONSE = 1;
+		DISCOVER = 2;
+		INFO = 3;
+		DISCONNECT = 4;
+	}
 
-	repeated string argument = 4;
+	required MessageType type = 1;
+
+	required string sender = 2;
+	required string receiver = 3;
+ 
+	optional int32 code = 4;
+
+	repeated string argument = 5;
 }

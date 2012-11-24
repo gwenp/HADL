@@ -3,9 +3,16 @@
 
 #include "Interface.hpp"
 
+
+#include <map>
+
 class InterfaceConnector : public Interface
 {
 public:
+
+
+protected:
+
 
 };
 
