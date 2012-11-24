@@ -48,9 +48,16 @@ void Connector::attachToComponent(Component* c, std::string roleName, std::strin
 		std::cout << "[ERROR] : The Connector and the Component does not have the same parent Configuration!" <<std::endl;
 }
 
-void Connector::sendNotificationTo(std::string roleRequired)
-{
-	_rolesRequired[roleRequired]->propagateNotificationToPort();
+void Connector::sendNotificationTo( std::string roleRequired, MessageP& msg ) {
+
+	if ( _rolesRequired.find( roleRequired ) != _rolesRequired.end() ) {
+		_rolesRequired[roleRequired]->propagateNotificationToPort();
+	}
+	else if ( _rolesRequired_connections.find( roleRequired ) != _rolesRequired_connections.end() ) {
+		//this->send_message(_rolesRequired_connections[roleRequired],msg);
+	}
+
+
 }
 
 
@@ -58,8 +65,6 @@ void Connector::sendNotificationTo(std::string roleRequired)
 
 
 void debug_message( MessageP& msg ) {
-	
-	std::cout << "New message ! --> " << std::endl;
 
 	std::cout << "From : " << msg.sender() << std::endl;
 	std::cout << "To : " << msg.receiver() << std::endl;
@@ -77,22 +82,74 @@ void debug_message( MessageP& msg ) {
 
 }
 
-MessageP Connector::wait_for_message( SOCKET sock ) {
+void Connector::wait_for_messages( SOCKET sock ) {
 
-	MessageP msg;
 
 	char str[8192];
-	int size = receive_data( sock, str );
-	if ( size > 0 ) {
-		std::cout << "Propagated " << sizeof(str) << " bytes\n";
-		std::string cpp_string(str,size);
-		msg.ParseFromString( cpp_string );
+	int nb_bytes = receive_data( sock, str );
+
+	if ( nb_bytes < 0 ) {
+		std::cout << "Communication error\n";
+
+		exit(-1);
 	}
 
-	return msg;
+	std::cout << "Propagated " << sizeof(str) << " bytes\n";
+	_rcv_messages_buffer.append(str,nb_bytes);
+
+ 	/* While there is data to read	*/
+	while ( _rcv_messages_buffer.size() > 0 ) {
+
+		std::cout << nb_bytes << " bytes remaining ("<< _rcv_messages_buffer.size() << ")\n";
+
+		MessageP msg;
+
+		/* Try to interpret data as a message */
+		if ( msg.ParseFromString( _rcv_messages_buffer ) ) {
+
+			_messages_queue.push(msg);
+
+			int nb_bytes_consumed = msg.ByteSize();
+			std::cout << "Byte size ::: " << nb_bytes_consumed << std::endl; 
+
+			nb_bytes -= nb_bytes_consumed;
+			_rcv_messages_buffer.erase (0,nb_bytes_consumed);
+
+		}
+		/* There is no enought data to interpret the MessageP */
+		else {
+			
+			int nb_bytes_consumed = msg.ByteSize();
+			std::cout << "Byte size ::: " << nb_bytes_consumed << std::endl; 
+
+
+			std::cout << "(Not complete, waiting for more data)\n";
+			return;
+		}
+
+	}
+
 }
 
-MessageP Connector::send_message( SOCKET sock, MessageP& msg ) {
+MessageP Connector::receive_message( SOCKET sock ) {
+
+	while ( _messages_queue.empty() ) {
+
+		std::cout << "Empty queue. Receiving through network" << std::endl;
+		this->wait_for_messages( sock );
+
+	}
+
+	std::cout << "(" << _messages_queue.size() << ") Poping message ...\n";
+
+	MessageP msg = _messages_queue.front();
+	_messages_queue.pop();
+
+	return msg;
+
+}
+
+MessageP Connector::send_message( SOCKET sock, MessageP& msg, bool needs_response ) {
 
 	msg.set_sender("Test1")	;
 
@@ -112,7 +169,12 @@ MessageP Connector::send_message( SOCKET sock, MessageP& msg ) {
 		std::cout << "Message sent\n";
 	}
 
-	return msg;
+	if ( needs_response ) {
+		return receive_message(sock);
+	}
+	else {
+		return msg;
+	}
 
 }
 
@@ -121,6 +183,8 @@ MessageP Connector::send_message( SOCKET sock, MessageP& msg ) {
 
 void Connector::connect() {
 	std::cout << "Connecting ..." << std::endl;
+
+	/* TODO */
 	SOCKET sock = this->connect_to("127.0.0.1",2345);
 
 	if ( sock == INVALID_SOCKET ) {
@@ -128,15 +192,20 @@ void Connector::connect() {
 		return;
 	}
 
-		MessageP disco_msg = generate_discovery_message();
-
-		this->send_message( sock, disco_msg );
-
-		monitoring_routine( sock );
+	this->monitoring_routine( sock );
 }
 
 
+void Connector::send_discoveries( SOCKET sock ) {
 
+	MessageP disco_msg_pd = generate_discovery_message( MessageP::PROVIDED );
+	this->send_message( sock, disco_msg_pd, false );
+
+	MessageP disco_msg_rq = generate_discovery_message( MessageP::REQUIRED );
+	this->send_message( sock, disco_msg_rq, false );
+
+
+}
 
 void* monitoring_routine_rebound( void* data ) {
 
@@ -161,20 +230,28 @@ SOCKET Connector::connect_to( std::string host, int port ) {
 
 void Connector::monitoring_routine( SOCKET sock ) {
 
+	/* Firstly, we send all directly reachable Roles */
+	this->send_discoveries( sock );
 
-	MessageP msg = wait_for_message(sock);
+	// TODO
+	while ( true ) {
 	
-	if ( msg.has_type() ) {
-		this->on_message_received( msg );
-		return;
+		MessageP msg = receive_message(sock);
+		
+		if ( msg.has_type() ) {
+			this->on_message_received( msg, sock );
+		}
+		else {
+			std::cout << "Bad message received (dropped)" << std::endl;
+		}
+
 	}
 
-	std::cout << "Bad message received (dropped)" << std::endl;
 }
 
-void Connector::launch_monitoring_routines() {
+void Connector::listen_from( int port ) {
 
-	connector_port_callback_t cp = { this, 2345, &monitoring_routine_rebound };
+	connector_port_callback_t cp = { this, port, &monitoring_routine_rebound };
 
 	std::cout << "Put port : " << cp.port << std::endl;
 
@@ -185,16 +262,29 @@ void Connector::launch_monitoring_routines() {
 	pthread_join(thread, NULL);
 }
 
-MessageP Connector::generate_discovery_message() {
+MessageP Connector::generate_discovery_message( MessageP::DiscoverType disco_type ) {
 
 	MessageP disco_msg;
 	disco_msg.set_type(MessageP::DISCOVER);
+	disco_msg.set_discover_type(disco_type);
 	disco_msg.set_receiver("");
 
-	std::map<std::string, RoleProvided*>::iterator iter;
-	for ( iter = _rolesProvided.begin(); iter != _rolesProvided.end(); iter++ ) {
-		disco_msg.add_argument( (*iter).first );
+	std::map<std::string, Role*> roles;
+
+	if ( disco_type == MessageP::REQUIRED ) {
+		std::map<std::string, RoleRequired*>::iterator iter;
+		for ( iter = _rolesRequired.begin(); iter != _rolesRequired.end(); iter++ ) {
+			disco_msg.add_argument( (*iter).first );
+		}	
 	}
+	else {
+		std::map<std::string, RoleProvided*>::iterator iter;
+		for ( iter = _rolesProvided.begin(); iter != _rolesProvided.end(); iter++ ) {
+			disco_msg.add_argument( (*iter).first );
+		}	
+	}
+
+
 
 	return disco_msg;
 
@@ -203,19 +293,74 @@ MessageP Connector::generate_discovery_message() {
 
 void Connector::interpret_discovery_message( MessageP msg, SOCKET sock ) {
 
-	for( int i=0; i<msg.argument_size(); i++ ) {
-		std::string role = msg.argument(i);
-		_socket_connections[role] = sock;
-		_socket_connections_reverse[sock] = role;
+	if ( msg.discover_type() == MessageP::REQUIRED ) {
+
+		for( int i=0; i<msg.argument_size(); i++ ) {
+			std::string role = msg.argument(i);
+			_rolesRequired_connections[role] = sock;
+			_rolesRequired_connections_reverse[sock] = role;
+		}
+
 	}
+	else {
+
+		for( int i=0; i<msg.argument_size(); i++ ) {
+			std::string role = msg.argument(i);
+			_rolesProvided_connections[role] = sock;
+			_rolesProvided_connections_reverse[sock] = role;
+		}
+
+	}
+
+	std::cout << "ROLES LIST UPDATED !\n";
 
 }
 
 
-void Connector::on_message_received( MessageP& msg ) {
+void Connector::on_message_received( MessageP& msg, SOCKET sock ) {
+
+	std::cout << "New message ! --> " << std::endl;
 
 	debug_message(msg);
 
+	switch( msg.type() ) {
+		case MessageP::DISCOVER:
+			this->interpret_discovery_message(msg, sock);
+			break;
+		default:
+			std::cout << "Message type not supported\n";
+			break;
+	}
 	// Switch/case here
+
+}
+
+MessageP Connector::propagate_message( MessageP msg ) {
+
+	/* Get sender ROLE */
+	const std::string& role_from = msg.sender();
+
+	/* Find associated ROLE */
+	if ( _roles_association.find( role_from ) != _roles_association.end() ) {
+
+		return this->send_message_to_role( msg, _roles_association[role_from] );
+	}
+
+	std::cout << "Cannot route message (unknown dest/action)\n";
+	/* TODO error message */
+	return msg; 
+}
+
+MessageP Connector::send_message_to_role( MessageP msg, const std::string& role ) {
+
+	if ( _rolesRequired.find( role ) != _rolesRequired.end() ) {
+		/* Direct sending */
+		return _rolesRequired[role]->propagate_message( msg );
+	}
+	else if ( _rolesRequired_connections.find( role ) != _rolesRequired_connections.end() ) {
+		/* Network sending */
+		return this->send_message(_rolesRequired_connections[role],msg);
+	}
+
 
 }

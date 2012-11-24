@@ -54,6 +54,25 @@ inline bool MessageP_MessageType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<MessageP_MessageType>(
     MessageP_MessageType_descriptor(), name, value);
 }
+enum MessageP_DiscoverType {
+  MessageP_DiscoverType_PROVIDED = 0,
+  MessageP_DiscoverType_REQUIRED = 1
+};
+bool MessageP_DiscoverType_IsValid(int value);
+const MessageP_DiscoverType MessageP_DiscoverType_DiscoverType_MIN = MessageP_DiscoverType_PROVIDED;
+const MessageP_DiscoverType MessageP_DiscoverType_DiscoverType_MAX = MessageP_DiscoverType_REQUIRED;
+const int MessageP_DiscoverType_DiscoverType_ARRAYSIZE = MessageP_DiscoverType_DiscoverType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* MessageP_DiscoverType_descriptor();
+inline const ::std::string& MessageP_DiscoverType_Name(MessageP_DiscoverType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    MessageP_DiscoverType_descriptor(), value);
+}
+inline bool MessageP_DiscoverType_Parse(
+    const ::std::string& name, MessageP_DiscoverType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<MessageP_DiscoverType>(
+    MessageP_DiscoverType_descriptor(), name, value);
+}
 // ===================================================================
 
 class MessageP : public ::google::protobuf::Message {
@@ -135,6 +154,30 @@ class MessageP : public ::google::protobuf::Message {
     return MessageP_MessageType_Parse(name, value);
   }
   
+  typedef MessageP_DiscoverType DiscoverType;
+  static const DiscoverType PROVIDED = MessageP_DiscoverType_PROVIDED;
+  static const DiscoverType REQUIRED = MessageP_DiscoverType_REQUIRED;
+  static inline bool DiscoverType_IsValid(int value) {
+    return MessageP_DiscoverType_IsValid(value);
+  }
+  static const DiscoverType DiscoverType_MIN =
+    MessageP_DiscoverType_DiscoverType_MIN;
+  static const DiscoverType DiscoverType_MAX =
+    MessageP_DiscoverType_DiscoverType_MAX;
+  static const int DiscoverType_ARRAYSIZE =
+    MessageP_DiscoverType_DiscoverType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor*
+  DiscoverType_descriptor() {
+    return MessageP_DiscoverType_descriptor();
+  }
+  static inline const ::std::string& DiscoverType_Name(DiscoverType value) {
+    return MessageP_DiscoverType_Name(value);
+  }
+  static inline bool DiscoverType_Parse(const ::std::string& name,
+      DiscoverType* value) {
+    return MessageP_DiscoverType_Parse(name, value);
+  }
+  
   // accessors -------------------------------------------------------
   
   // required .MessageP.MessageType type = 1;
@@ -189,6 +232,13 @@ class MessageP : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& argument() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_argument();
   
+  // optional .MessageP.DiscoverType discover_type = 6;
+  inline bool has_discover_type() const;
+  inline void clear_discover_type();
+  static const int kDiscoverTypeFieldNumber = 6;
+  inline ::MessageP_DiscoverType discover_type() const;
+  inline void set_discover_type(::MessageP_DiscoverType value);
+  
   // @@protoc_insertion_point(class_scope:MessageP)
  private:
   inline void set_has_type();
@@ -199,6 +249,8 @@ class MessageP : public ::google::protobuf::Message {
   inline void clear_has_receiver();
   inline void set_has_code();
   inline void clear_has_code();
+  inline void set_has_discover_type();
+  inline void clear_has_discover_type();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
@@ -207,9 +259,10 @@ class MessageP : public ::google::protobuf::Message {
   ::google::protobuf::int32 code_;
   ::std::string* receiver_;
   ::google::protobuf::RepeatedPtrField< ::std::string> argument_;
+  int discover_type_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
   
   friend void  protobuf_AddDesc_MessageP_2eproto();
   friend void protobuf_AssignDesc_MessageP_2eproto();
@@ -430,6 +483,29 @@ MessageP::mutable_argument() {
   return &argument_;
 }
 
+// optional .MessageP.DiscoverType discover_type = 6;
+inline bool MessageP::has_discover_type() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void MessageP::set_has_discover_type() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void MessageP::clear_has_discover_type() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void MessageP::clear_discover_type() {
+  discover_type_ = 0;
+  clear_has_discover_type();
+}
+inline ::MessageP_DiscoverType MessageP::discover_type() const {
+  return static_cast< ::MessageP_DiscoverType >(discover_type_);
+}
+inline void MessageP::set_discover_type(::MessageP_DiscoverType value) {
+  GOOGLE_DCHECK(::MessageP_DiscoverType_IsValid(value));
+  set_has_discover_type();
+  discover_type_ = value;
+}
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -440,6 +516,10 @@ namespace protobuf {
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::MessageP_MessageType>() {
   return ::MessageP_MessageType_descriptor();
+}
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::MessageP_DiscoverType>() {
+  return ::MessageP_DiscoverType_descriptor();
 }
 
 }  // namespace google

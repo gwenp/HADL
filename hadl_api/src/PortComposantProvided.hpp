@@ -11,6 +11,8 @@ class PortComposantProvided : public PortComposant
 public:
 	std::string getType(){ return "provided"; };
 	void notifyComponent();
+
+	MessageP receive_message( MessageP msg );
 	
 private:
 };

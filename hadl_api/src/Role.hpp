@@ -11,7 +11,7 @@ public:
 	void setConnector(Connector* c){ _connector=c; };
 	Connector* getConnector(){ return _connector; };
 
-private:
+protected:
 	Connector* _connector;
 };
 

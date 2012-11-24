@@ -8,6 +8,11 @@ message MessageP {
 		DISCONNECT = 4;
 	}
 
+	enum DiscoverType {
+		PROVIDED = 0;
+		REQUIRED = 1;
+	}
+
 	required MessageType type = 1;
 
 	required string sender = 2;
@@ -16,4 +21,6 @@ message MessageP {
 	optional int32 code = 4;
 
 	repeated string argument = 5;
+
+	optional DiscoverType discover_type = 6;
 }

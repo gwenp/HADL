@@ -54,7 +54,7 @@ int main(int argc, char const* argv[]) {
 
 		if ( !strcmp(argv[1],"server") ) {
 			connector->addRoleRequired("dqd", new RoleRequired());
-			connector->launch_monitoring_routines();
+			connector->listen_from(2345);
 		}
 		else {
 			connector->addRoleProvided("TestP1", new RoleProvided());

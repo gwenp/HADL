@@ -1,6 +1,7 @@
 #ifndef H_NETWORK_H
 	#define H_NETWORK_H
 
+	#include <signal.h>
 
 	#ifdef WIN32
 
@@ -65,5 +66,8 @@
 
 	int receive_data( SOCKET sock, char* buffer );
 	int send_data( SOCKET sock, char* buffer, int size );
+
+
+	void init_exit_signals();
 
 #endif

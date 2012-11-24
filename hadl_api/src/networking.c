@@ -2,15 +2,41 @@
 
 //#include "InterfaceConnector.hpp"
 
+void onSigTerm() {
+	printf("Graceful exit\n");
+
+}
+
+void init_exit_signals() {
+	#ifdef WIN32
+		signal( SIGINT, onSigTerm);
+		signal( SIGTERM, onSigTerm);
+	#elif defined (linux)
+		struct sigaction act;
+
+		act.sa_flags = SA_SIGINFO;
+		act.sa_handler = onSigTerm;      /* fonction à lancer */
+
+		sigemptyset(&act.sa_mask);        /* rien à masquer */
+
+		sigaction(SIGINT, &act, NULL);    /* fin contrôle-C */
+		sigaction(SIGTERM, &act, NULL);   /* arrêt */
+	#endif
+}
+
 int receive_data( SOCKET sock, char* buffer ) {
 
 	int recv_size;
-	if ( ( recv_size = recv(sock, buffer, 4096, 0) ) < 0 )  {
+	if ( ( recv_size = recv(sock, buffer, 4096, 0) ) <= 0 )  {
 
+		//printf("Socket Error. Closing\n");
+		shutdown(sock,SHUT_RDWR);
 		return -2;
 
 	}
 	
+	printf(" -- received : %d bytes\n",recv_size);
+
 	return recv_size;
 
 }
@@ -24,6 +50,8 @@ int send_data( SOCKET sock, char* buffer, int size ) {
 		return -2;
 
 	}
+
+	printf(" -- sent : %d bytes\n",sent_size);
 
 	return sent_size;
 
