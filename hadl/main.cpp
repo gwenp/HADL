@@ -29,20 +29,33 @@
 #include "src/CS_Connector.hpp"
 #include "src/PortRequiredCS.hpp"
 #include "src/PortProvidedCS.hpp"
+#include "src/language_tools/LanguageManager.hpp"
+#include "src/factories/ClientComponentFactory.hpp"
+#include "src/factories/ServerComponentFactory.hpp"
+#include "src/factories/CS_ConnectorFactory.hpp"
 
 #include <fstream>
 #include <ostream>
 
 int main(int argc, char const* argv[]) {
 
+	LanguageManager l;
+	l.registerComponentFactory("Client", new ClientComponentFactory());
+	l.registerComponentFactory("Server", new ServerComponentFactory());
+
+	l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
+
+	Client* client = (Client*) l.makeComponent("Client");
+	Server* server = (Server*) l.makeComponent("Server");
+
+	CS_Connector* connector = (CS_Connector*) l.makeConnector("CS_Connector");
+	connector->addRoleRequired("dqd", new RoleRequired());
 
 	if ( argc > 1 ) {
 
 		PortRequiredCS* pr = new PortRequiredCS();
 		PortProvidedCS* pp = new PortProvidedCS();
 
-		Client* client = new Client();
-		Server* server = new Server();
 
 		client->addPortRequired( "PortRequisCS", pr );
 		server->addPortProvided( "PortFourniCS", pp );

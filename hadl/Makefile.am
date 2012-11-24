@@ -15,6 +15,12 @@ $(sc)/ServerConfiguration.cpp $(sc)/ServerConfiguration.hpp
 
 
 hadl_SOURCES = main.cpp \
+				 src/language_tools/LanguageManager.cpp src/language_tools/LanguageManager.hpp \
+				 src/language_tools/ComponentFactory.cpp src/language_tools/ComponentFactory.hpp \
+				 src/language_tools/ConnectorFactory.cpp src/language_tools/ConnectorFactory.hpp \
+				 src/factories/ClientComponentFactory.cpp src/factories/ClientComponentFactory.hpp \
+				 src/factories/ServerComponentFactory.cpp src/factories/ServerComponentFactory.hpp \
+				 src/factories/CS_ConnectorFactory.cpp src/factories/CS_ConnectorFactory.hpp \
 				 src/Client.cpp src/Client.hpp \
  				 src/Server.cpp src/Server.hpp \
  				 src/CS_Connector.cpp src/CS_Connector.hpp \
