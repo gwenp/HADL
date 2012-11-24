@@ -48,22 +48,23 @@ int main(int argc, char const* argv[]) {
 	Client* client = (Client*) l.makeComponent("Client");
 	Server* server = (Server*) l.makeComponent("Server");
 
+
 	CS_Connector* connector = (CS_Connector*) l.makeConnector("CS_Connector");
-	connector->addRoleRequired("dqd", new RoleRequired());
+	
+	l.addRequiredPortToComponent("Client", "PortRequisCS");
+	l.addProvidedPortToComponent("Server", "PortFourniCS");
+	
+	l.addRequiredRoleToConnector("CS_Connector", "dqd");
+	l.addProvidedRoleToConnector("CS_Connector", "TestP1");
+	
 
 	if ( argc > 1 ) {
 
-		PortRequiredCS* pr = new PortRequiredCS();
-		PortProvidedCS* pp = new PortProvidedCS();
 
 
-		client->addPortRequired( "PortRequisCS", pr );
-		server->addPortProvided( "PortFourniCS", pp );
 
 		client->info();
 		server->info();
-
-		CS_Connector* connector = new CS_Connector();
 
 		if ( !strcmp(argv[1],"server") ) {
 			connector->addRoleRequired("dqd", new RoleRequired());
