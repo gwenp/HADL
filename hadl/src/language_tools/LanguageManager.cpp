@@ -63,8 +63,3 @@ void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std:
 	std::cout << "[LanguageManager] addRoleProvided : "<< roleName << " to Connector : " << connectorName << std::endl;
 	_connectors[connectorName]->addRoleProvided(roleName, new RoleProvided());
 }
-
-void LanguageManager::setConnectorListenFrom(std::string connectorName, int realPortName)
-{
-	_connectors[connectorName]->listen_from(realPortName);
-}

@@ -27,8 +27,6 @@ public:
 	void addRequiredRoleToConnector(std::string connectorName, std::string roleName);
 	void addProvidedRoleToConnector(std::string connectorName, std::string roleName);
 
-	void setConnectorListenFrom(std::string name, int realPortName);
-
 private:
 	std::map<std::string, ComponentFactory*> _componentFactories;
 	std::map<std::string, ConnectorFactory*> _connectorFactories;

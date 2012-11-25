@@ -10,9 +10,15 @@
 			"name" : "Client"
 		},
 		{
-			"type" : "Component",
-			"factory" : "Server",
-			"name" : "ServerLocal"
+			"type" : "Connector",
+			"factory" : "CS_Connector",
+			"name" : "connectorClient",
+			"properties" : {
+				"mode" : "client",
+				"host" : "string",
+				"port" : "string",
+			},
+			"RolesProvided" : ["roleProvided_CSconnector"]
 		}
 		]
 	},
@@ -25,7 +31,19 @@
 			"factory" : "Server",
 			"PortsRequired" : ["portServer1", "portServer2"],
 			"PortsProvided" : ["portProvidedServer1"]
-		}]
+		},
+		{
+			"type" : "Connector",
+			"factory" : "CS_Connector",
+			"name" : "connectorClient",
+			"properties" : {
+				"mode" : "client",
+				"host" : "string",
+				"port" : "string",
+			},
+			"RolesRequired" : ["roleRequired_CSconnector"]
+		}
+		]
 	}
 	]
 }
