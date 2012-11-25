@@ -61,83 +61,29 @@ int main(int argc, char const* argv[]) {
 //
 	l.parseJSON("../data/language.json");
 	
-	// l.addRequiredPortToComponent("Client", "PortRequisCS");
-	// l.addProvidedPortToComponent("Server", "PortFourniCS");
-	
-	// l.addRequiredRoleToConnector("CS_Connector", "dqd");
-	// l.addProvidedRoleToConnector("CS_Connector", "TestP1");
-	
+
 	if ( argc > 1 ) {
 
-		// client->info();
-		// server->info();
 
 		if ( !strcmp(argv[1],"server") ) {
-			// l.setConnectorListenFrom("CS_Connector", 2345);
-			Server* srv = (Server*) l.getComponent("Server");
-			// Server* srv = new Server();
-			PortComposantProvided* port = l.getPortProvided("portProvidedServer1");
-			// port->set_callback(&Component::callback_method);
-			port->setComponent(srv);
-			srv->addPortProvided( "testReq", port );
-			srv->onInit();
 
-			MessageP msg;
-			msg.add_argument("trolilol");
-			port->receive_message(msg);
+			Server* srv = (Server*) l.getComponent("Server");
+			srv->onInit();
+			CS_Connector* c = (CS_Connector*) l.getConnector("CS_Connector");
+			c->onInit();
+
 		}
 		else {
-			//Client* client = (Client*) l.getComponent("Client");
+			
 			Client* client = new Client();
 			client->onInit();
-			// connector->addRoleProvided("TestP1", new RoleProvided());
-			// connector->addRoleProvided("TestP2", new RoleProvided());
-			// connector->connect();
+			CS_Connector* c = (CS_Connector*) l.getConnector("CS_Connector");
+			c->onInit();
+
 		}
 
 	}
 
-	/*
-	MessageP* msg = new MessageP();
-	msg->set_code(404);
-	msg->add_argument("Trololol est");
-	msg->add_argument("aaaa");
-	msg->set_sender("Maison");
-	msg->set_receiver("Bleue");
-	std::cout << msg << std::endl;
 
-	std::string str;
-	msg->SerializeToString(&str);
-
-
-	std::cout << str << std::endl;
-
-
-	MessageP* msg2 = new MessageP();
-	msg2->ParseFromString(str);
-
-	std::cout << msg2->argument(0) << std::endl;
-	*/
-	//c.addPortRequired("sortieCompo", new PortComposantRequired());
-	//c.addPortRequired("sortieCompoToNULL", new PortComposantRequired());
-	//c.addPortProvided("entreeCompo", new PortComposantProvided());
-//
-//	//cn.addRoleProvided("entreeConnec", new RoleProvided());
-//	//cn.addRoleRequired("sortieConnec", new RoleRequired());
-//	//cn.addRoleRequired("sortieConnecToNULL", new RoleRequired());
-//
-//	//c.setParentConfiguration(&cfg);
-//	//cn.setParentConfiguration(&cfg);
-//
-//	//cfg.addPortRequired("entreeConfig", new PortConfigRequired);
-//
-//	//c.attachToConnector(&cn,"sortieCompo", "entreeConnec");
-//	//cn.attachToComponent(&c,"sortieConnec", "entreeCompo");
-//
-//	//c.sendNotificationTo("sortieCompo");
-//	//c.sendNotificationTo("sortieCompoToNULL");
-//	//cn.sendNotificationTo("sortieConnec");
-//	//cn.sendNotificationTo("sortieConnecToNULL");
-//
 	return 0;
 }
