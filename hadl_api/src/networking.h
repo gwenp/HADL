@@ -58,14 +58,20 @@
 	} connector_port_callback_t;
 
 
+	typedef struct delimited_data {
+		int32_t length;
+		char* data;
+	} delimited_data_t;
 
+	/* Debug */
+	void hexdump(void *mem, unsigned int len);
 
 	void* wait_for_clients( void* data );
 	SOCKET connect_to_server( const char* server_name, int port ) ;
 	int disconnect() ;
 
 	int receive_data( SOCKET sock, char* buffer );
-	int send_data( SOCKET sock, char* buffer, int size );
+	int send_data( SOCKET sock, const char* buffer, int32_t size );
 
 
 	void init_exit_signals();

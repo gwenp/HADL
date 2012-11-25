@@ -209,17 +209,17 @@ class MessageP : public ::google::protobuf::Message {
   inline ::std::string* mutable_receiver();
   inline ::std::string* release_receiver();
   
-  // optional int32 code = 4;
-  inline bool has_code() const;
-  inline void clear_code();
-  static const int kCodeFieldNumber = 4;
-  inline ::google::protobuf::int32 code() const;
-  inline void set_code(::google::protobuf::int32 value);
+  // optional .MessageP.DiscoverType discover_type = 5;
+  inline bool has_discover_type() const;
+  inline void clear_discover_type();
+  static const int kDiscoverTypeFieldNumber = 5;
+  inline ::MessageP_DiscoverType discover_type() const;
+  inline void set_discover_type(::MessageP_DiscoverType value);
   
-  // repeated string argument = 5;
+  // repeated string argument = 6;
   inline int argument_size() const;
   inline void clear_argument();
-  static const int kArgumentFieldNumber = 5;
+  static const int kArgumentFieldNumber = 6;
   inline const ::std::string& argument(int index) const;
   inline ::std::string* mutable_argument(int index);
   inline void set_argument(int index, const ::std::string& value);
@@ -232,13 +232,6 @@ class MessageP : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& argument() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_argument();
   
-  // optional .MessageP.DiscoverType discover_type = 6;
-  inline bool has_discover_type() const;
-  inline void clear_discover_type();
-  static const int kDiscoverTypeFieldNumber = 6;
-  inline ::MessageP_DiscoverType discover_type() const;
-  inline void set_discover_type(::MessageP_DiscoverType value);
-  
   // @@protoc_insertion_point(class_scope:MessageP)
  private:
   inline void set_has_type();
@@ -247,8 +240,6 @@ class MessageP : public ::google::protobuf::Message {
   inline void clear_has_sender();
   inline void set_has_receiver();
   inline void clear_has_receiver();
-  inline void set_has_code();
-  inline void clear_has_code();
   inline void set_has_discover_type();
   inline void clear_has_discover_type();
   
@@ -256,13 +247,12 @@ class MessageP : public ::google::protobuf::Message {
   
   ::std::string* sender_;
   int type_;
-  ::google::protobuf::int32 code_;
+  int discover_type_;
   ::std::string* receiver_;
   ::google::protobuf::RepeatedPtrField< ::std::string> argument_;
-  int discover_type_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
   
   friend void  protobuf_AddDesc_MessageP_2eproto();
   friend void protobuf_AssignDesc_MessageP_2eproto();
@@ -417,29 +407,30 @@ inline ::std::string* MessageP::release_receiver() {
   }
 }
 
-// optional int32 code = 4;
-inline bool MessageP::has_code() const {
+// optional .MessageP.DiscoverType discover_type = 5;
+inline bool MessageP::has_discover_type() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void MessageP::set_has_code() {
+inline void MessageP::set_has_discover_type() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void MessageP::clear_has_code() {
+inline void MessageP::clear_has_discover_type() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void MessageP::clear_code() {
-  code_ = 0;
-  clear_has_code();
+inline void MessageP::clear_discover_type() {
+  discover_type_ = 0;
+  clear_has_discover_type();
 }
-inline ::google::protobuf::int32 MessageP::code() const {
-  return code_;
+inline ::MessageP_DiscoverType MessageP::discover_type() const {
+  return static_cast< ::MessageP_DiscoverType >(discover_type_);
 }
-inline void MessageP::set_code(::google::protobuf::int32 value) {
-  set_has_code();
-  code_ = value;
+inline void MessageP::set_discover_type(::MessageP_DiscoverType value) {
+  GOOGLE_DCHECK(::MessageP_DiscoverType_IsValid(value));
+  set_has_discover_type();
+  discover_type_ = value;
 }
 
-// repeated string argument = 5;
+// repeated string argument = 6;
 inline int MessageP::argument_size() const {
   return argument_.size();
 }
@@ -481,29 +472,6 @@ MessageP::argument() const {
 inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 MessageP::mutable_argument() {
   return &argument_;
-}
-
-// optional .MessageP.DiscoverType discover_type = 6;
-inline bool MessageP::has_discover_type() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void MessageP::set_has_discover_type() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void MessageP::clear_has_discover_type() {
-  _has_bits_[0] &= ~0x00000020u;
-}
-inline void MessageP::clear_discover_type() {
-  discover_type_ = 0;
-  clear_has_discover_type();
-}
-inline ::MessageP_DiscoverType MessageP::discover_type() const {
-  return static_cast< ::MessageP_DiscoverType >(discover_type_);
-}
-inline void MessageP::set_discover_type(::MessageP_DiscoverType value) {
-  GOOGLE_DCHECK(::MessageP_DiscoverType_IsValid(value));
-  set_has_discover_type();
-  discover_type_ = value;
 }
 
 

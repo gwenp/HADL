@@ -54,93 +54,26 @@ void Connector::sendNotificationTo( std::string roleRequired, MessageP& msg ) {
 		_rolesRequired[roleRequired]->propagateNotificationToPort();
 	}
 	else if ( _rolesRequired_connections.find( roleRequired ) != _rolesRequired_connections.end() ) {
-		//this->send_message(_rolesRequired_connections[roleRequired],msg);
+		//this->send_message_ntk(_rolesRequired_connections[roleRequired],msg);
 	}
 
 
 }
 
 
-/* Bad side */
+/* Other side */
 
 
-void debug_message( MessageP& msg ) {
-
-	std::cout << "From : " << msg.sender() << std::endl;
-	std::cout << "To : " << msg.receiver() << std::endl;
-	std::cout << "Type : " << msg.type() << std::endl;
-
-	int size = msg.argument_size();
-	if ( size > 0 ) {
-		std::cout << "Arguments (" << size <<  ") : " << std::endl;
-
-		for ( int i=0; i<size; i++ ) {
-			std::cout << " - " << msg.argument(i) << std::endl;
-		}
-
-	}
-
-}
-
-void Connector::wait_for_messages( SOCKET sock ) {
 
 
-	char str[8192];
-	int nb_bytes = receive_data( sock, str );
-
-	if ( nb_bytes < 0 ) {
-		std::cout << "Communication error\n";
-
-		exit(-1);
-	}
-
-	std::cout << "Propagated " << sizeof(str) << " bytes\n";
-	_rcv_messages_buffer.append(str,nb_bytes);
-
- 	/* While there is data to read	*/
-	while ( _rcv_messages_buffer.size() > 0 ) {
-
-		std::cout << nb_bytes << " bytes remaining ("<< _rcv_messages_buffer.size() << ")\n";
-
-		MessageP msg;
-
-		/* Try to interpret data as a message */
-		if ( msg.ParseFromString( _rcv_messages_buffer ) ) {
-
-			_messages_queue.push(msg);
-
-			int nb_bytes_consumed = msg.ByteSize();
-			std::cout << "Byte size ::: " << nb_bytes_consumed << std::endl; 
-
-			nb_bytes -= nb_bytes_consumed;
-			_rcv_messages_buffer.erase (0,nb_bytes_consumed);
-
-		}
-		/* There is no enought data to interpret the MessageP */
-		else {
-			
-			int nb_bytes_consumed = msg.ByteSize();
-			std::cout << "Byte size ::: " << nb_bytes_consumed << std::endl; 
-
-
-			std::cout << "(Not complete, waiting for more data)\n";
-			return;
-		}
-
-	}
-
-}
-
-MessageP Connector::receive_message( SOCKET sock ) {
+MessageP Connector::receive_message_ntk( SOCKET sock ) {
 
 	while ( _messages_queue.empty() ) {
 
 		std::cout << "Empty queue. Receiving through network" << std::endl;
-		this->wait_for_messages( sock );
+		this->wait_for_messages_ntk( sock );
 
 	}
-
-	std::cout << "(" << _messages_queue.size() << ") Poping message ...\n";
 
 	MessageP msg = _messages_queue.front();
 	_messages_queue.pop();
@@ -149,7 +82,7 @@ MessageP Connector::receive_message( SOCKET sock ) {
 
 }
 
-MessageP Connector::send_message( SOCKET sock, MessageP& msg, bool needs_response ) {
+MessageP Connector::send_message_ntk( SOCKET sock, MessageP& msg, bool needs_response ) {
 
 	msg.set_sender("Test1")	;
 
@@ -161,16 +94,12 @@ MessageP Connector::send_message( SOCKET sock, MessageP& msg, bool needs_respons
 
 	int size = cpp_string.size();
 
-	char* cstr = new char[size+1];
-	cstr[size] = 0;
-	memcpy( cstr, cpp_string.data(), size );
-
-	if ( send_data(sock,cstr,size) > 0 ) {
+	if ( send_data(sock,cpp_string.data(),size) > 0 ) {
 		std::cout << "Message sent\n";
 	}
 
 	if ( needs_response ) {
-		return receive_message(sock);
+		return receive_message_ntk(sock);
 	}
 	else {
 		return msg;
@@ -196,13 +125,13 @@ void Connector::connect() {
 }
 
 
-void Connector::send_discoveries( SOCKET sock ) {
+void Connector::send_discoveries_ntk( SOCKET sock ) {
 
 	MessageP disco_msg_pd = generate_discovery_message( MessageP::PROVIDED );
-	this->send_message( sock, disco_msg_pd, false );
+	this->send_message_ntk( sock, disco_msg_pd, false );
 
 	MessageP disco_msg_rq = generate_discovery_message( MessageP::REQUIRED );
-	this->send_message( sock, disco_msg_rq, false );
+	this->send_message_ntk( sock, disco_msg_rq, false );
 
 
 }
@@ -231,15 +160,15 @@ SOCKET Connector::connect_to( std::string host, int port ) {
 void Connector::monitoring_routine( SOCKET sock ) {
 
 	/* Firstly, we send all directly reachable Roles */
-	this->send_discoveries( sock );
+	this->send_discoveries_ntk( sock );
 
 	// TODO
 	while ( true ) {
 	
-		MessageP msg = receive_message(sock);
+		MessageP msg = receive_message_ntk(sock);
 		
 		if ( msg.has_type() ) {
-			this->on_message_received( msg, sock );
+			this->on_message_received_ntk( msg, sock );
 		}
 		else {
 			std::cout << "Bad message received (dropped)" << std::endl;
@@ -267,7 +196,7 @@ MessageP Connector::generate_discovery_message( MessageP::DiscoverType disco_typ
 	MessageP disco_msg;
 	disco_msg.set_type(MessageP::DISCOVER);
 	disco_msg.set_discover_type(disco_type);
-	disco_msg.set_receiver("");
+	disco_msg.set_receiver("[any]");
 
 	std::map<std::string, Role*> roles;
 
@@ -317,7 +246,7 @@ void Connector::interpret_discovery_message( MessageP msg, SOCKET sock ) {
 }
 
 
-void Connector::on_message_received( MessageP& msg, SOCKET sock ) {
+void Connector::on_message_received_ntk( MessageP& msg, SOCKET sock ) {
 
 	std::cout << "New message ! --> " << std::endl;
 
@@ -359,8 +288,133 @@ MessageP Connector::send_message_to_role( MessageP msg, const std::string& role 
 	}
 	else if ( _rolesRequired_connections.find( role ) != _rolesRequired_connections.end() ) {
 		/* Network sending */
-		return this->send_message(_rolesRequired_connections[role],msg);
+		return this->send_message_ntk(_rolesRequired_connections[role],msg);
 	}
+
+
+}
+
+void Connector::wait_for_messages_ntk( SOCKET sock ) {
+
+
+	char* buffer = NULL;
+	char* buffer_tmp = (char*) malloc(4096);
+
+	int current_offset = 0;
+
+	delimited_data_t message_data = { -1, NULL };
+
+	int recv_size;
+	int buffer_size = 0;
+
+	int remaining_data = -1;
+
+	do {
+
+		/* If no data, read from network */
+		if ( buffer_size == 0 ) {
+
+			if ( ( recv_size = receive_data(sock, buffer_tmp) ) < 0 )  {
+
+				std::cout << "Communication error\n";
+				exit(-1);
+
+			}
+
+		}
+		else {
+			recv_size = buffer_size;
+		}
+
+		/* If message data beginning */ 
+		if ( current_offset == 0 ) {
+
+			if ( recv_size < sizeof(int32_t) ) {
+				std::cout << "Not enough\n";
+				exit(1);
+			}
+
+			int32_t util_size;
+			memcpy(&util_size,buffer_tmp,sizeof(int32_t));
+
+			//std::cout << "Incoming message of size " << util_size << std::endl;
+
+			message_data.length = util_size;
+			message_data.data = (char*) malloc( message_data.length );
+
+			buffer_size = recv_size - sizeof(int32_t);
+			buffer = (char*) malloc(buffer_size);
+			memcpy(buffer,&buffer_tmp[sizeof(int32_t)],buffer_size);
+			
+		}
+		/* If message data is already loading */
+		else {
+			buffer_size = recv_size;
+			buffer = (char*) malloc(buffer_size);
+			memcpy(buffer,buffer_tmp,recv_size);
+		}
+
+		remaining_data = message_data.length - current_offset;
+
+		int size_to_copy = remaining_data;
+		if ( message_data.length > buffer_size ) {
+			size_to_copy = buffer_size;
+		}
+
+		memcpy(&message_data.data[current_offset],buffer,size_to_copy);
+		current_offset += size_to_copy;
+		buffer_size -= size_to_copy;
+
+		/* If remaining data in buffer */
+		if ( buffer_size != 0 ) {
+			memcpy(buffer_tmp,&buffer[size_to_copy],buffer_size);
+		}
+
+		//std::cout << "Buffer size after reading : " << buffer_size << std::endl;
+
+
+		remaining_data = message_data.length - current_offset;
+
+		/* If message data successfully loaded */
+		if ( remaining_data == 0 ) {
+
+			current_offset = 0;
+
+			MessageP msg;
+			std::string cpp_string( message_data.data, message_data.length );
+			message_data = { 0, NULL }; // Reset
+			
+			if ( msg.ParseFromString(cpp_string) ) {
+				/* Add to message queue */
+				_messages_queue.push(msg);
+			}
+
+		}
+
+	} while( remaining_data != 0 || buffer_size != 0 );
+
+}
+
+
+void Connector::debug_message( MessageP& msg ) {
+
+	std::cout << "<------------------------" << std::endl;
+
+	std::cout << "From : " << msg.sender() << std::endl;
+	std::cout << "To : " << msg.receiver() << std::endl;
+	std::cout << "Type : " << msg.type() << std::endl;
+
+	int size = msg.argument_size();
+	if ( size > 0 ) {
+		std::cout << "Arguments (" << size <<  ") : " << std::endl;
+
+		for ( int i=0; i<size; i++ ) {
+			std::cout << " - " << msg.argument(i) << std::endl;
+		}
+
+	}
+
+	std::cout << "------------------------>" << std::endl;
 
 
 }

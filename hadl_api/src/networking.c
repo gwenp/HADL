@@ -7,6 +7,55 @@ void onSigTerm() {
 
 }
 
+#ifndef HEXDUMP_COLS
+#define HEXDUMP_COLS 8
+#endif
+ 
+void hexdump(void *mem, unsigned int len)
+{
+        unsigned int i, j;
+        
+        for(i = 0; i < len + ((len % HEXDUMP_COLS) ? (HEXDUMP_COLS - len % HEXDUMP_COLS) : 0); i++)
+        {
+                /* print offset */
+                if(i % HEXDUMP_COLS == 0)
+                {
+                        printf("0x%06x: ", i);
+                }
+ 
+                /* print hex data */
+                if(i < len)
+                {
+                        printf("%02x ", 0xFF & ((char*)mem)[i]);
+                }
+                else /* end of block, just aligning for ASCII dump */
+                {
+                        printf("   ");
+                }
+                
+                /* print ASCII dump */
+                if(i % HEXDUMP_COLS == (HEXDUMP_COLS - 1))
+                {
+                        for(j = i - (HEXDUMP_COLS - 1); j <= i; j++)
+                        {
+                                if(j >= len) /* end of block, not really printing */
+                                {
+                                        putchar(' ');
+                                }
+                                else if(isprint(((char*)mem)[j])) /* printable char */
+                                {
+                                        putchar(0xFF & ((char*)mem)[j]);        
+                                }
+                                else /* other char */
+                                {
+                                        putchar('.');
+                                }
+                        }
+                        putchar('\n');
+                }
+        }
+}
+
 void init_exit_signals() {
 	#ifdef WIN32
 		signal( SIGINT, onSigTerm);
@@ -29,29 +78,41 @@ int receive_data( SOCKET sock, char* buffer ) {
 	int recv_size;
 	if ( ( recv_size = recv(sock, buffer, 4096, 0) ) <= 0 )  {
 
-		//printf("Socket Error. Closing\n");
+		printf("Socket Error. Closing\n");
 		shutdown(sock,SHUT_RDWR);
 		return -2;
 
 	}
 	
-	printf(" -- received : %d bytes\n",recv_size);
+	//printf(" -- received : %d bytes\n",recv_size);
+	//printf(" ---- RAW\n");
+	//hexdump(buffer,recv_size);
 
 	return recv_size;
 
 }
 
 
-int send_data( SOCKET sock, char* buffer, int size ) {
+int send_data( SOCKET sock, const char* buffer, int32_t size ) {
+
+	int size_to_send = size+sizeof(size);
+	char* delimited_buffer = (char*) malloc(size_to_send);
+
+	memcpy(delimited_buffer,&size,sizeof(size));
+	memcpy(&delimited_buffer[sizeof(size)],buffer,size);
 
 	int sent_size;
-	if ( ( sent_size = send(sock, buffer, size , 0) ) < 0 )  {
+	if ( ( sent_size = send(sock, delimited_buffer, size_to_send , 0) ) < 0 )  {
 
 		return -2;
 
 	}
 
-	printf(" -- sent : %d bytes\n",sent_size);
+	//printf(" -- sent : %d bytes with %d utils (%s)\n",sent_size,size);
+	//printf("=======================\n");
+	//hexdump(buffer,sent_size);
+	//printf(" ------ RAW\n");
+	//hexdump(delimited_buffer,sent_size);
 
 	return sent_size;
 

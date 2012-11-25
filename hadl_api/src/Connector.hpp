@@ -65,18 +65,17 @@ private:
 
 	SOCKET connect_to( std::string host, int port ); // Connect
 
-	void wait_for_messages( SOCKET sock );
+	void wait_for_messages_ntk( SOCKET sock );
 
-	MessageP receive_message( SOCKET sock );
-	MessageP send_message( SOCKET sock, MessageP& msg, bool needs_response = true );
+	MessageP receive_message_ntk( SOCKET sock );
+	MessageP send_message_ntk( SOCKET sock, MessageP& msg, bool needs_response = true );
 
-	void on_message_received( MessageP& msg, SOCKET sock = INVALID_SOCKET );
+	void on_message_received_ntk( MessageP& msg, SOCKET sock = INVALID_SOCKET );
 
-	void send_discoveries( SOCKET sock );
-	/** END NETWORKING **/
+	void send_discoveries_ntk( SOCKET sock );
 
-
-	MessageP send_message_to_role( MessageP msg, const std::string& role );
+	/* For debuging */
+	void debug_message( MessageP& msg );
 
 	// Temp ? Can be used to store Roles
 	std::map<std::string, SOCKET> _rolesProvided_connections;
@@ -85,14 +84,18 @@ private:
 	std::map<std::string, SOCKET> _rolesRequired_connections;
 	std::map<SOCKET,std::string> _rolesRequired_connections_reverse;
 
+
 	/* Used for receiving messages */
 	std::queue<MessageP> _messages_queue;
 	std::string _rcv_messages_buffer;
 
+	/** END NETWORKING **/
+
+	MessageP send_message_to_role( MessageP msg, const std::string& role );
 
 	/* How to know to which ROle a message should be sent */
 	std::map<std::string,std::string> _roles_association;
-
+	char* _databuf;
 };
 
 #endif /* CONNECTOR_HPP */

@@ -31,13 +31,12 @@ void protobuf_AssignDesc_MessageP_2eproto() {
       "MessageP.proto");
   GOOGLE_CHECK(file != NULL);
   MessageP_descriptor_ = file->message_type(0);
-  static const int MessageP_offsets_[6] = {
+  static const int MessageP_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, sender_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, receiver_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, code_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, argument_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, discover_type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MessageP, argument_),
   };
   MessageP_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -82,14 +81,14 @@ void protobuf_AddDesc_MessageP_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\016MessageP.proto\"\236\002\n\010MessageP\022#\n\004type\030\001 "
+    "\n\016MessageP.proto\"\220\002\n\010MessageP\022#\n\004type\030\001 "
     "\002(\0162\025.MessageP.MessageType\022\016\n\006sender\030\002 \002"
-    "(\t\022\020\n\010receiver\030\003 \002(\t\022\014\n\004code\030\004 \001(\005\022\020\n\010ar"
-    "gument\030\005 \003(\t\022-\n\rdiscover_type\030\006 \001(\0162\026.Me"
-    "ssageP.DiscoverType\"P\n\013MessageType\022\013\n\007RE"
-    "QUEST\020\000\022\014\n\010RESPONSE\020\001\022\014\n\010DISCOVER\020\002\022\010\n\004I"
-    "NFO\020\003\022\016\n\nDISCONNECT\020\004\"*\n\014DiscoverType\022\014\n"
-    "\010PROVIDED\020\000\022\014\n\010REQUIRED\020\001", 305);
+    "(\t\022\020\n\010receiver\030\003 \002(\t\022-\n\rdiscover_type\030\005 "
+    "\001(\0162\026.MessageP.DiscoverType\022\020\n\010argument\030"
+    "\006 \003(\t\"P\n\013MessageType\022\013\n\007REQUEST\020\000\022\014\n\010RES"
+    "PONSE\020\001\022\014\n\010DISCOVER\020\002\022\010\n\004INFO\020\003\022\016\n\nDISCO"
+    "NNECT\020\004\"*\n\014DiscoverType\022\014\n\010PROVIDED\020\000\022\014\n"
+    "\010REQUIRED\020\001", 291);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "MessageP.proto", &protobuf_RegisterTypes);
   MessageP::default_instance_ = new MessageP();
@@ -159,9 +158,8 @@ const int MessageP::DiscoverType_ARRAYSIZE;
 const int MessageP::kTypeFieldNumber;
 const int MessageP::kSenderFieldNumber;
 const int MessageP::kReceiverFieldNumber;
-const int MessageP::kCodeFieldNumber;
-const int MessageP::kArgumentFieldNumber;
 const int MessageP::kDiscoverTypeFieldNumber;
+const int MessageP::kArgumentFieldNumber;
 #endif  // !_MSC_VER
 
 MessageP::MessageP()
@@ -183,7 +181,6 @@ void MessageP::SharedCtor() {
   type_ = 0;
   sender_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   receiver_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  code_ = 0;
   discover_type_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -236,7 +233,6 @@ void MessageP::Clear() {
         receiver_->clear();
       }
     }
-    code_ = 0;
     discover_type_ = 0;
   }
   argument_.Clear();
@@ -300,28 +296,33 @@ bool MessageP::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_code;
+        if (input->ExpectTag(40)) goto parse_discover_type;
         break;
       }
       
-      // optional int32 code = 4;
-      case 4: {
+      // optional .MessageP.DiscoverType discover_type = 5;
+      case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_code:
+         parse_discover_type:
+          int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &code_)));
-          set_has_code();
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::MessageP_DiscoverType_IsValid(value)) {
+            set_discover_type(static_cast< ::MessageP_DiscoverType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(5, value);
+          }
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(42)) goto parse_argument;
+        if (input->ExpectTag(50)) goto parse_argument;
         break;
       }
       
-      // repeated string argument = 5;
-      case 5: {
+      // repeated string argument = 6;
+      case 6: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_argument:
@@ -333,28 +334,7 @@ bool MessageP::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(42)) goto parse_argument;
-        if (input->ExpectTag(48)) goto parse_discover_type;
-        break;
-      }
-      
-      // optional .MessageP.DiscoverType discover_type = 6;
-      case 6: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_discover_type:
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::MessageP_DiscoverType_IsValid(value)) {
-            set_discover_type(static_cast< ::MessageP_DiscoverType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(6, value);
-          }
-        } else {
-          goto handle_uninterpreted;
-        }
+        if (input->ExpectTag(50)) goto parse_argument;
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -401,24 +381,19 @@ void MessageP::SerializeWithCachedSizes(
       3, this->receiver(), output);
   }
   
-  // optional int32 code = 4;
-  if (has_code()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->code(), output);
+  // optional .MessageP.DiscoverType discover_type = 5;
+  if (has_discover_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      5, this->discover_type(), output);
   }
   
-  // repeated string argument = 5;
+  // repeated string argument = 6;
   for (int i = 0; i < this->argument_size(); i++) {
   ::google::protobuf::internal::WireFormat::VerifyUTF8String(
     this->argument(i).data(), this->argument(i).length(),
     ::google::protobuf::internal::WireFormat::SERIALIZE);
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      5, this->argument(i), output);
-  }
-  
-  // optional .MessageP.DiscoverType discover_type = 6;
-  if (has_discover_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      6, this->discover_type(), output);
+      6, this->argument(i), output);
   }
   
   if (!unknown_fields().empty()) {
@@ -455,24 +430,19 @@ void MessageP::SerializeWithCachedSizes(
         3, this->receiver(), target);
   }
   
-  // optional int32 code = 4;
-  if (has_code()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->code(), target);
+  // optional .MessageP.DiscoverType discover_type = 5;
+  if (has_discover_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      5, this->discover_type(), target);
   }
   
-  // repeated string argument = 5;
+  // repeated string argument = 6;
   for (int i = 0; i < this->argument_size(); i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8String(
       this->argument(i).data(), this->argument(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE);
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(5, this->argument(i), target);
-  }
-  
-  // optional .MessageP.DiscoverType discover_type = 6;
-  if (has_discover_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      6, this->discover_type(), target);
+      WriteStringToArray(6, this->argument(i), target);
   }
   
   if (!unknown_fields().empty()) {
@@ -506,21 +476,14 @@ int MessageP::ByteSize() const {
           this->receiver());
     }
     
-    // optional int32 code = 4;
-    if (has_code()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->code());
-    }
-    
-    // optional .MessageP.DiscoverType discover_type = 6;
+    // optional .MessageP.DiscoverType discover_type = 5;
     if (has_discover_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->discover_type());
     }
     
   }
-  // repeated string argument = 5;
+  // repeated string argument = 6;
   total_size += 1 * this->argument_size();
   for (int i = 0; i < this->argument_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -563,9 +526,6 @@ void MessageP::MergeFrom(const MessageP& from) {
     if (from.has_receiver()) {
       set_receiver(from.receiver());
     }
-    if (from.has_code()) {
-      set_code(from.code());
-    }
     if (from.has_discover_type()) {
       set_discover_type(from.discover_type());
     }
@@ -596,9 +556,8 @@ void MessageP::Swap(MessageP* other) {
     std::swap(type_, other->type_);
     std::swap(sender_, other->sender_);
     std::swap(receiver_, other->receiver_);
-    std::swap(code_, other->code_);
-    argument_.Swap(&other->argument_);
     std::swap(discover_type_, other->discover_type_);
+    argument_.Swap(&other->argument_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

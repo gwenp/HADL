@@ -18,9 +18,10 @@ message MessageP {
 	required string sender = 2;
 	required string receiver = 3;
  
-	optional int32 code = 4;
+	// optional int32 code = 4;
 
-	repeated string argument = 5;
+	optional DiscoverType discover_type = 5;
 
-	optional DiscoverType discover_type = 6;
+	repeated string argument = 6;
+
 }
