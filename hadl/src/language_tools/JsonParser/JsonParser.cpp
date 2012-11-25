@@ -85,6 +85,14 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 				JsonParser::parseElement(l, elements[index]);
 				l->addElementToConfiguration(elements[index]["name"].asString(), elements[index]["type"].asString(), attachedConfiguration.get("name", "").asString());
 			}
+
+			const Json::Value elements = attachedConfiguration["bindings"];
+			for ( int index = 0; index < elements.size(); ++index )
+			{
+				JsonParser::parseBinding(l, elements[index]);
+			}
+
+
 		}
 
 	}
@@ -137,4 +145,9 @@ void JsonParser::parseProperies(LanguageManager* l, std::string elementName, std
 void JsonParser::parseAttachment(LanguageManager* l, Json::Value attachment)
 {
 	l->makeAttachment(attachment["fromType"].asString(), attachment["fromName"].asString(), attachment["toType"].asString(), attachment["toName"].asString());
+}
+
+void JsonParser::parseBinding(LanguageManager* l, std::string configName, Json::Value binding)
+{
+	l->addBinding(configName, binding["bindingName"], binding["type"], binding["destinationName"] );
 }
