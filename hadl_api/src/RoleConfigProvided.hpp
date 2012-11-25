@@ -11,6 +11,7 @@ class RoleConfigProvided : public RoleConfig
 public:
 	std::string getType(){ return "provided"; };
 
+	void bindTo( RoleProvided* roleProvided );
 private:
 	RoleProvided* _bindingProvided;
 };

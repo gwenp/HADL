@@ -24,6 +24,7 @@ public:
 	void addRoleRequired(std::string name, RoleConfigRequired* role);
 
 	void linkElement(ConnectableElement* element, bool _internal);
+
 private:
 	std::list<Element*> _elements;
 	std::map<std::string, PortConfigRequired*> _portsRequired;

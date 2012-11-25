@@ -10,6 +10,9 @@ class PortConfigRequired : public PortConfig
 {
 public:
 	std::string getType(){ return "required"; };
+
+	void bindTo( PortComposantRequired* portRequired );
+
 private:
 	PortComposantRequired* _bindingRequired;
 };

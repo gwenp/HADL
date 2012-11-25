@@ -10,7 +10,8 @@ class RoleConfigRequired : public RoleConfig
 {
 public:
 	std::string getType(){ return "required"; };
-
+	
+	void bindTo( RoleRequired* roleRequired );
 private:
 	RoleRequired* _bindingRequired;
 };

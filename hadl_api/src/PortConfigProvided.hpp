@@ -10,6 +10,8 @@ class PortConfigProvided : public PortConfig
 {
 public:
 	std::string getType(){ return "provided"; };
+
+	void bindTo( PortComposantProvided* portProvided );
 	
 private:
 	PortComposantProvided* _bindingProvided;
