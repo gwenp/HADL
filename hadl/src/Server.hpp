@@ -13,9 +13,11 @@ public:
 	Server();
 	~Server();
 
+	str_v testm( str_v args );
 	void onInit();
-	virtual std::vector<std::string> callback_method( PortComposantProvided* provided_port, std::vector<std::string>& args );
+	str_v on_message( PortComposantProvided* provided_port, str_v args );
 
+	void dbg_mt(PortComposantProvided* p );
 	/* data */
 private:
 

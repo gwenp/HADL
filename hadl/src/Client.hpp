@@ -16,8 +16,8 @@ public:
 
 	void onInit();
 
-	virtual std::vector<std::string> callback_method( PortComposantProvided* provided_port, std::vector<std::string>& args );
-	std::vector<std::string> test_method(std::vector<std::string> args);
+	str_v on_message( PortComposantProvided* provided_port, str_v args );
+	str_v test_method( str_v args);
 
 };
 

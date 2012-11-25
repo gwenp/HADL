@@ -8,11 +8,15 @@ void Component::addPortRequired(std::string name, PortComposantRequired* port)
 	_portsRequired.insert(std::pair<std::string, PortComposantRequired*>(name, port));
 }
 
-void Component::addPortProvided(std::string name, PortComposantProvided* port)
+void Component::addPortProvided(std::string name, PortComposantProvided* port,  std::string method_index)
 {
 	port->setComponent(this);
-	port->set_callback(&Component::callback_method);
+	//port->set_callback(&Component::callback_method_rb);
 	_portsProvided.insert(std::pair<std::string, PortComposantProvided*>(name, port));
+	
+	if ( !method_index.empty() ) {
+		_portsRequired_methodNames[name] = method_index;
+	}
 }
 
 void Component::info()
@@ -54,11 +58,11 @@ void Component::on_notify(PortComposantProvided* port)
 	std::cout << "Component notification received!" <<std::endl;
 }
 
-
 std::vector<std::string> Component::stub_method( std::vector<std::string> args ) {
 	std::cout << "Stub method called\n";
 }
 
-std::vector<std::string> Component::callback_method( PortComposantProvided* provided_port, std::vector<std::string> args ) {
+std::vector<std::string> Component::on_message( PortComposantProvided* provided_port, std::vector<std::string> args ) {
 	std::cout << "Parent callback\n";
 }
+

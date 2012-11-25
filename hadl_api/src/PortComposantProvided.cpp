@@ -2,12 +2,13 @@
 
 #include "Component.hpp"
 
+/*
 PortComposantProvided::PortComposantProvided( ComponentMethod component_method ) {
 	
 	_component_method = component_method;
 
 }
-
+*/
 void PortComposantProvided::notifyComponent()
 {
 	getComponent()->on_notify(this);
@@ -19,7 +20,7 @@ MessageP PortComposantProvided::receive_message( MessageP msg ) {
 
 	MessageP reponse_message;
 
-	if ( _component != NULL && _component_method != NULL ) {
+	if ( _component != NULL ) {
 
 		std::vector<std::string> args;
 		for ( int i=0; i<msg.argument_size(); i++ ) {
@@ -27,7 +28,7 @@ MessageP PortComposantProvided::receive_message( MessageP msg ) {
 		}
 
 		std::vector<std::string> response_args;
-		response_args = (_component->*_component_method) (this,args);
+		response_args = _component->on_message(this,args);
 
 		for ( int i=0; i<response_args.size(); i++ ) {
 			reponse_message.add_argument( response_args.at(i) );
