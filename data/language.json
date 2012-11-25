@@ -46,17 +46,18 @@
 				"elements" : [
 				{
 					"type" : "Component",
-					"factory" : "Server",
-					"name" : "Database"
+					"factory" : "Database",
+					"name" : "Database",
+					"PortsProvided" : ["PortRequired_DB_TO_SM","PortRequired_DB_TO_CM"]
 				},
 				{
 					"type" : "Component",
-					"factory" : "Server",
+					"factory" : "SecurityManager",
 					"name" : "SecurityManager"
 				},
 				{
 					"type" : "Component",
-					"factory" : "Server",
+					"factory" : "ConnectionManager",
 					"name" : "LoginManager"
 				}
 				]
