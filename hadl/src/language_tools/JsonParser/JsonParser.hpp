@@ -1,0 +1,20 @@
+#ifndef JSONPARSER_HPP
+#define JSONPARSER_HPP
+
+#include "../LanguageManager.hpp"
+
+#include <fstream>
+// #include <jsoncpp/json/json.h>
+#include "libjsoncpp/json.h"
+
+class LanguageManager;
+
+class JsonParser {
+public:
+	static void parse(LanguageManager* l, std::string fileUrl, std::string applicationContext);
+private:
+	static void parseApplication(LanguageManager* l, Json::Value app);
+	static void parseElement(LanguageManager* l, Json::Value element);
+};
+
+#endif
