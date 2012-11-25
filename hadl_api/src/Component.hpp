@@ -29,7 +29,11 @@ public:
 
 	void attachToConnector(Connector* c, std::string portName, std::string roleName);
 	void sendNotificationTo(std::string portRequired);
+	
+	// DOUBLON
 	void on_notify(PortComposantProvided* port);
+
+	virtual std::vector<std::string> on_message( PortComposantProvided* provided_port, std::vector<std::string> args );
 
 	std::map<std::string, PortComposantRequired*> _portsRequired;
 	std::map<std::string, PortComposantProvided*> _portsProvided;
@@ -40,8 +44,8 @@ public:
 protected:
 	// TO remove
 	//MethodsIndex _methods_index;
+	//std::vector<std::string> callback_method_rb( PortComposantProvided* provided_port, std::vector<std::string> args );
 
-	virtual std::vector<std::string> callback_method( PortComposantProvided* provided_port, std::vector<std::string> args );
 private:
 	Configuration* _linkedConfiguration;
 };

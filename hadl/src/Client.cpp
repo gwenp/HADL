@@ -24,6 +24,6 @@ void Client::onInit() {
 	std::cout << "Init Client" << std::endl;
 }
 
-std::vector<std::string> Client::callback_method( PortComposantProvided* provided_port, std::vector<std::string>& args ) {
+std::vector<std::string> Client::on_message( PortComposantProvided* provided_port, std::vector<std::string> args ) {
 	std::cout << "Server callback (epic win)" << std::endl;
 }

@@ -12,13 +12,14 @@ class PortComposantProvided : public PortComposant
 {
 public:
 
-	PortComposantProvided( ComponentMethod component_method = NULL );
+	//PortComposantProvided( ComponentMethod component_method = NULL );
 
 	// TEMP
+	/*
 	void set_callback( ComponentMethod component_method ) {
 		_component_method = component_method;
 	}
-
+	*/
 	std::string getType(){ return "provided"; };
 	void notifyComponent();
 
@@ -26,7 +27,7 @@ public:
 	
 protected:
 
-	ComponentMethod _component_method;
+	//ComponentMethod _component_method;
 
 };
 
