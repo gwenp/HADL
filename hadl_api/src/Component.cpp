@@ -58,3 +58,7 @@ void Component::on_notify(PortComposantProvided* port)
 std::vector<std::string> Component::stub_method( std::vector<std::string> args ) {
 	std::cout << "Stub method called\n";
 }
+
+std::vector<std::string> Component::callback_method( PortComposantProvided* provided_port, std::vector<std::string> args ) {
+	std::cout << "Parent callback\n";
+}

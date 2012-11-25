@@ -14,7 +14,7 @@ public:
 	Client();
 	~Client();
 
-	virtual void onInit();
+	void onInit();
 
 	virtual std::vector<std::string> callback_method( PortComposantProvided* provided_port, std::vector<std::string>& args );
 	std::vector<std::string> test_method(std::vector<std::string> args);

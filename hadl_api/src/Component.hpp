@@ -41,9 +41,7 @@ protected:
 	// TO remove
 	//MethodsIndex _methods_index;
 
-	virtual std::vector<std::string> callback_method( PortComposantProvided* provided_port, std::vector<std::string> args ) {
-		std::cout << "Parent callback\n";
-	}
+	virtual std::vector<std::string> callback_method( PortComposantProvided* provided_port, std::vector<std::string> args );
 private:
 	Configuration* _linkedConfiguration;
 };

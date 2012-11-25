@@ -13,7 +13,7 @@ public:
 	Server();
 	~Server();
 
-	virtual void onInit();
+	void onInit();
 	virtual std::vector<std::string> callback_method( PortComposantProvided* provided_port, std::vector<std::string>& args );
 
 	/* data */

@@ -12,11 +12,14 @@ Server::~Server() {
 void Server::onInit() {
 	//_methods_index["test"] = &Client::test_method;
 	//_methods["test"] = &Component::stub_method;
-
+	std::cout << "Init Server" << std::endl;
 }
 
 
 std::vector<std::string> Server::callback_method( PortComposantProvided* provided_port, std::vector<std::string>& args ) {
+
+	std::cout << "Server Callback" << std::endl;
+
 
 	std::vector<std::string> response;
 

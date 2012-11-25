@@ -21,6 +21,7 @@ void Client::onInit() {
 	//_methods_index["test"] = &Client::test_method;
 	//_methods_index["test"] = &Component::stub_method;
 
+	std::cout << "Init Client" << std::endl;
 }
 
 std::vector<std::string> Client::callback_method( PortComposantProvided* provided_port, std::vector<std::string>& args ) {
