@@ -37,3 +37,7 @@ std::vector<std::string> Server::on_message( PortComposantProvided* provided_por
 	return response;
 
 }
+
+void Server::dbg_mt( PortComposantProvided* p ) {
+	_methods[p] = &Server::testm;
+}

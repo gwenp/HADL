@@ -23,7 +23,7 @@ class Component : public ConnectableElement
 {
 public:
 	void addPortRequired(std::string name, PortComposantRequired* port);
-	void addPortProvided(std::string name, PortComposantProvided* port);
+	void addPortProvided(std::string name, PortComposantProvided* port, std::string method_index = "");
 
 	void info();
 
@@ -39,12 +39,14 @@ public:
 	std::map<std::string, PortComposantProvided*> _portsProvided;
 
 	//std::map< std::string, a_fun >;
-	std::vector<std::string> stub_method( std::vector<std::string> args );
+	str_v stub_method( str_v args );
 
 protected:
 	// TO remove
 	//MethodsIndex _methods_index;
 	//std::vector<std::string> callback_method_rb( PortComposantProvided* provided_port, std::vector<std::string> args );
+
+	std::map<std::string,std::string> _portsRequired_methodNames;
 
 private:
 	Configuration* _linkedConfiguration;

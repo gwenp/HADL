@@ -11,7 +11,7 @@ Client::~Client() {
 }
 
 
-std::vector<std::string> Client::test_method(std::vector<std::string> args) {
+str_v Client::test_method( str_v args) {
 
 	std::cout << "Test method called automatically" << std::endl;
 
@@ -24,6 +24,6 @@ void Client::onInit() {
 	std::cout << "Init Client" << std::endl;
 }
 
-std::vector<std::string> Client::on_message( PortComposantProvided* provided_port, std::vector<std::string> args ) {
+str_v Client::on_message( PortComposantProvided* provided_port, str_v args ) {
 	std::cout << "Server callback (epic win)" << std::endl;
 }

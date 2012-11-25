@@ -80,6 +80,7 @@ int main(int argc, char const* argv[]) {
 			// port->set_callback(&Component::callback_method);
 			port->setComponent(srv);
 			srv->addPortProvided( "testReq", port );
+			srv->dbg_mt(port);
 			srv->onInit();
 
 			MessageP msg;
