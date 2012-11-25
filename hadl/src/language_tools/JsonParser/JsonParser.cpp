@@ -114,7 +114,7 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 			for ( int index = 0; index < rolesProvided.size(); ++index )
 			{
 				Json::Value roleProvided = rolesProvided[index];
-				l->addProvidedRoleToConnector(name, roleProvided["name"].asString(),roleProvided["toMethod"].asString());
+				l->addProvidedRoleToConnector(name, roleProvided["name"].asString(),roleProvided["toRole"].asString());
 			}
 
 			const Json::Value properties = elt["properties"];

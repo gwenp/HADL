@@ -72,7 +72,7 @@
 					"factory" : "Default",
 					"name" : "CM_to_SM",
 					"RolesProvided" : [
-										{ "name" : "roleProvidedLoginSecurity", "toMethod" : "TODO" }
+										{ "name" : "roleProvidedLoginSecurity", "toRole" : "roleRequiredLoginSecurity" }
 									  ],
 					"RolesRequired" : [ "roleRequiredLoginSecurity" ]
 				},
@@ -81,7 +81,7 @@
 					"factory" : "Default",
 					"name" : "CM_to_DB",
 					"RolesProvided" : [
-										{ "name" : "roleProvidedRequest", "toMethod" : "TODO" }
+										{ "name" : "roleProvidedRequest", "toRole" : "roleRequiredRequest" }
 									  ],
 					"RolesRequired" : [ "roleRequiredRequest" ]
 				},
@@ -90,7 +90,7 @@
 					"factory" : "Default",
 					"name" : "SM_to_DB",
 					"RolesProvided" : [
-										{ "name" : "roleProvidedLoginQuery", "toMethod" : "TODO" }
+										{ "name" : "roleProvidedLoginQuery", "toRole" : "roleRequiredLoginQuery" }
 									  ],
 					"RolesRequired" : [ "roleRequiredLoginQuery" ]
 				}
