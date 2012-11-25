@@ -48,15 +48,15 @@
 					"factory" : "Database",
 					"name" : "Database",
 					"PortsProvided" : [
-										{ "name" : "portRequiredRequest", "toMethod" : "getAbilitiesOfUser"},
-										{ "name" : "portRequiredLoginSecurity", "toMethod" : "getPasswordOfUser"}
+										{ "name" : "portProvidedRequest", "toMethod" : "getAbilitiesOfUser"},
+										{ "name" : "portProvidedLoginSecurity", "toMethod" : "getPasswordOfUser"}
 									  ]
 				},
 				{
 					"type" : "Component",
 					"factory" : "SecurityManager",
 					"name" : "SecurityManager",
-					"PortsRequired" : ["portRequiredAuthentication"],
+					"PortsRequired" : ["portRequiredLoginSecurity"],
 					"PortsProvided" : [{ "name" : "portProvidedAuthentication", "toMethod" : "isUserAbleTo" }]
 				},
 				{
@@ -71,9 +71,9 @@
 					"factory" : "Default",
 					"name" : "CM_to_SM",
 					"RolesProvided" : [
-										{ "name" : "roleProvidedLoginSecurity", "toRole" : "roleRequiredLoginSecurity" }
+										{ "name" : "roleProvidedAuthentication", "toRole" : "roleRequiredAuthentication" }
 									  ],
-					"RolesRequired" : [ "roleRequiredLoginSecurity" ]
+					"RolesRequired" : [ "roleRequiredAuthentication" ]
 				},
 				{
 					"type" : "Connector",
@@ -89,9 +89,9 @@
 					"factory" : "Default",
 					"name" : "SM_to_DB",
 					"RolesProvided" : [
-										{ "name" : "roleProvidedLoginQuery", "toRole" : "roleRequiredLoginQuery" }
+										{ "name" : "roleProvidedLoginSecurity", "toRole" : "roleRequiredLoginSecurity" }
 									  ],
-					"RolesRequired" : [ "roleRequiredLoginQuery" ]
+					"RolesRequired" : [ "roleRequiredLoginSecurity" ]
 				}
 				],
 				"bindings" : [
@@ -130,9 +130,39 @@
 			},
 			{
 				"fromType" : "Port",
-				"fromName" : "portClient",
+				"fromName" : "portRequiredRequest",
 				"toType"   : "Role",
-				"toName"   : "roleProvided_CSconnector" 
+				"toName"   : "roleProvidedRequest" 
+			},
+			{
+				"fromType" : "Role",
+				"fromName" : "roleRequiredRequest",
+				"toType"   : "Port",
+				"toName"   : "portProvidedRequest" 
+			},
+			{
+				"fromType" : "Port",
+				"fromName" : "portRequiredAuthentication",
+				"toType"   : "Role",
+				"toName"   : "roleProvidedAuthentication" 
+			},
+			{
+				"fromType" : "Role",
+				"fromName" : "roleRequiredAuthentication",
+				"toType"   : "Port",
+				"toName"   : "portProvidedAuthentication" 
+			},
+			{
+				"fromType" : "Port",
+				"fromName" : "portRequiredLoginSecurity",
+				"toType"   : "Role",
+				"toName"   : "roleProvidedLoginSecurity" 
+			},
+			{
+				"fromType" : "Role",
+				"fromName" : "roleRequiredLoginSecurity",
+				"toType"   : "Port",
+				"toName"   : "portProvidedLoginSecurity" 
 			}
 		]
 	}
