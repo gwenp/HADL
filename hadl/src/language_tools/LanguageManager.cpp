@@ -69,3 +69,11 @@ void LanguageManager::addPropertyToElement(Element* e, std::string key, std::str
 	std::cout << "[LanguageManager] addPropertyToElement : "<< key << "  : " << value << std::endl;
 	e->setProperty(key, value);
 }
+
+void LanguageManager::attachConfigurationToComponent(std::string componentName, std::string configurationName)
+{
+	std::cout << "[LanguageManager] attachConfigurationToComponent : "<< componentName << "  : " << configurationName << std::endl;
+	
+	_configurations[configurationName] = new Configuration();
+	_components[componentName]->linkConfiguration(_configurations[configurationName], false);
+}

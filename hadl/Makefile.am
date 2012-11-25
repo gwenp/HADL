@@ -15,6 +15,7 @@ $(sc)/ServerConfiguration.cpp $(sc)/ServerConfiguration.hpp
 
 
 hadl_SOURCES = main.cpp \
+				 src/Utils/Dbg.cpp src/Utils/Dbg.hpp \
 				 src/language_tools/JsonParser/libjsoncpp/json_batchallocator.h \
 				 src/language_tools/JsonParser/libjsoncpp/json_reader.cpp \
 				 src/language_tools/JsonParser/libjsoncpp/json_valueiterator.inl \

@@ -4,6 +4,7 @@
 #include <functional>
 #include <HADL/Component.hpp>
 #include <HADL/Connector.hpp>
+#include <HADL/Configuration.hpp>
 #include "JsonParser/JsonParser.hpp"
 #include "ComponentFactory.hpp"
 #include "ConnectorFactory.hpp"
@@ -29,12 +30,15 @@ public:
 
 	void addPropertyToElement(Element* e, std::string key, std::string value);
 
+	void attachConfigurationToComponent(std::string componentName, std::string configurationName);
+
 private:
 	std::map<std::string, ComponentFactory*> _componentFactories;
 	std::map<std::string, ConnectorFactory*> _connectorFactories;
 
 	std::map<std::string, Connector*> _connectors;
 	std::map<std::string, Component*> _components;
+	std::map<std::string, Configuration*> _configurations;
 };
 
 #endif

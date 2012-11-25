@@ -35,10 +35,14 @@
 #include "src/factories/ServerComponentFactory.hpp"
 #include "src/factories/CS_ConnectorFactory.hpp"
 
+#include "src/Utils/Dbg.hpp"
+
 #include <fstream>
 #include <ostream>
 
 int main(int argc, char const* argv[]) {
+
+	Dbg::init("config/debug.conf");
 
 	LanguageManager l;
 

@@ -30,7 +30,12 @@
 			"name" : "Server",
 			"factory" : "Server",
 			"PortsRequired" : ["portServer1", "portServer2"],
-			"PortsProvided" : ["portProvidedServer1"]
+			"PortsProvided" : ["portProvidedServer1"],
+
+			"attachedConfiguration" : {
+				"name" : "configServer",
+				"elements" : []
+			}
 		},
 		{
 			"type" : "Connector",
@@ -41,12 +46,7 @@
 				"host" : "string",
 				"port" : "string"
 			},
-			"RolesRequired" : ["roleRequired_CSconnector"],
-
-			"attachedConfiguration" : {
-				"name" : "configServer",
-				"elements" : []
-			}
+			"RolesRequired" : ["roleRequired_CSconnector"]
 		}
 		]
 	}

@@ -12,7 +12,7 @@ void JsonParser::parse(LanguageManager* l,std::string fileUrl, std::string appli
 
 	if ( !parsingSuccessful )
 	{
-		std::cout  	<< "Failed to parse configuration\n"
+		Dbg::out("json")  	<< "Failed to parse configuration\n"
 					<< reader.getFormattedErrorMessages();
 		return;
 	}
@@ -26,7 +26,7 @@ void JsonParser::parse(LanguageManager* l,std::string fileUrl, std::string appli
 
 void JsonParser::parseApplication(LanguageManager* l, Json::Value app)
 {
-	std::cout << "[JSON] application : " << app.get("name", "").asString() << std::endl;
+	Dbg::out("json") << "[JSON] application : " << app.get("name", "").asString() << std::endl;
 	
 	const Json::Value elements = app["elements"];
 	for ( int index = 0; index < elements.size(); ++index )
@@ -37,7 +37,7 @@ void JsonParser::parseApplication(LanguageManager* l, Json::Value app)
 
 void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 {
-	std::cout << "[JSON] application : " << elt.get("name", "").asString() << "; type: " << elt.get("type", "").asString() << std::endl;
+	Dbg::out("json") << "[JSON] element : " << elt.get("name", "").asString() << "; type: " << elt.get("type", "").asString() << std::endl;
 	std::string type = elt.get("type", "").asString();
 	std::string name = elt.get("name", "").asString();
 	std::string factory = elt.get("factory", "").asString();
@@ -60,6 +60,18 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 
 		const Json::Value properties = elt["properties"];
 		JsonParser::parseProperies(l, name, type, properties);
+
+		const Json::Value attachedConfiguration = elt["attachedConfiguration"];
+		if(attachedConfiguration.empty())
+		{
+			Dbg::out("json") << "\t[JSON] no attachedConfiguration for : " << name << std::endl;
+		}
+		else
+		{
+			Dbg::out("json") << "\t[JSON] Parsing configuration of : " << name << std::endl;
+			JsonParser::parseElement(l, attachedConfiguration);
+		}
+
 	}
 	else
 	{
