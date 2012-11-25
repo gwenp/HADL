@@ -40,7 +40,8 @@ public:
 
 	/* Other side */
 
-	MessageP propagate_message( MessageP msg );
+	MessageP on_message_from_provided_role( RoleProvided* from, MessageP msg );
+	MessageP propagate_message( MessageP msg, const std::string& role );
 
 
 
@@ -54,7 +55,7 @@ protected:
 	Configuration* _linkedConfiguration;
 
 	/* How to know to which ROle a message should be sent */
-	std::map<std::string,std::string> _roles_association;
+	std::map<RoleProvided*,std::string> _roles_association;
 };
 
 #endif /* CONNECTOR_HPP */

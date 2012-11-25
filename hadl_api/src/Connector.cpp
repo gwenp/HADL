@@ -6,7 +6,7 @@ void Connector::addRoleProvided(std::string name, RoleProvided* role, std::strin
 {
 	role->setConnector(this);
 	_rolesProvided.insert(std::pair<std::string, RoleProvided*>(name, role));
-	_roles_association[name] = linkedRole;
+	_roles_association[role] = linkedRole;
 }
 
 void Connector::addRoleRequired(std::string name, RoleRequired* role)
@@ -52,37 +52,37 @@ void Connector::attachToComponent(Component* c, std::string roleName, std::strin
 
 /* Other side */
 
-
-
-
-MessageP Connector::propagate_message( MessageP msg ) {
+MessageP Connector::on_message_from_provided_role( RoleProvided* from, MessageP msg ) {
 
 	/* Get sender ROLE */
-	//const std::string& role_to = msg.receiver();
-	const std::string& role_from = msg.sender();
-	//const std::string& role_to = _roles_association[msg.sender()];
 
-	if ( _roles_association.find(role_from) != _roles_association.end() ) {
-		return this->glue_message_propagation( msg, _roles_association[role_from] );
+	if ( _roles_association.find(from) != _roles_association.end() ) {
+		return this->propagate_message( msg, _roles_association[from] );
 	}
 	else {
-		std::cout << "Error : No linked role for '" << role_from << "'" << std::endl;
+		std::cout << "Error : No linked role for '" << "a role" << "'" << std::endl;
 	}
+
 }
 
-MessageP Connector::glue_message_propagation( MessageP msg, const std::string& role ) {
 
+MessageP Connector::propagate_message( MessageP msg, const std::string& role ) {
+
+	msg.set_receiver(role);
+	/* Get sender ROLE */
 	if ( _rolesRequired.find( role ) != _rolesRequired.end() ) {
 		/* Direct sending */
 		return _rolesRequired[role]->propagate_message( msg );
 	}
+	else {
+		return glue_message_propagation(msg,role);
+	}
+
+}
+
+MessageP Connector::glue_message_propagation( MessageP msg, const std::string& role ) {
 
 	std::cout << "Cannot route message (unknown dest/action)\n";
-	/*
-	else if ( _rolesRequired_connections.find( role ) != _rolesRequired_connections.end() ) {
-		return this->send_message_ntk(_rolesRequired_connections[role],msg);
-	}
-	*/
 
 }
 
