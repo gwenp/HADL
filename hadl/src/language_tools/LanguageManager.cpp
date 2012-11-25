@@ -140,9 +140,9 @@ void LanguageManager::makeAttachment(std::string fromType, std::string fromName,
 
 void LanguageManager::addBinding(std::string configName, std::string bindingName, std::string type, std::string destName)
 {
-	if(type == "toPortProvided")
+	if(type == "toPortRequired")
 	{
-		Dbg::out("LanguageManager") << "[LanguageManager] addBinding : "<< configName << "  : " << bindingName << std::endl;
+		Dbg::out("LanguageManager") << "[LanguageManager] !!!!! addBinding : "<< configName << "  : " << bindingName << std::endl;
 		_portsConfigRequired[bindingName] =  new PortConfigRequired();
 		_portsConfigRequired[bindingName]->bindTo(_portsRequired[destName]);
 		_configurations[configName]->addPortProvided(bindingName, new PortConfigProvided());

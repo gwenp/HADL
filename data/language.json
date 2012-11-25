@@ -19,7 +19,7 @@
 				"host" : "string",
 				"port" : "string"
 			},
-			"RolesProvided" : [{"name" : "roleProvided_CSconnector", "toMethod" : "TODO" }]
+			"RolesProvided" : [{"name" : "roleProvided_CSconnector", "toRole" : "roleRequired_CSconnector" }]
 		}
 		],
 		"attachments" : [
@@ -38,8 +38,7 @@
 			"type" : "Component",
 			"name" : "Server",
 			"factory" : "Server",
-			"PortsRequired" : ["portServer1", "portServer2"],
-			"PortsProvided" : [{"name" : "portProvidedServer1", "toMethod" : ""}],
+			"PortsProvided" : [{"name" : "portProvidedReceptionServer", "toMethod" : "receive"}],
 
 			"attachedConfiguration" : {
 				"name" : "configServer",
@@ -95,14 +94,18 @@
 					"RolesRequired" : [ "roleRequiredLoginQuery" ]
 				}
 				],
-				"attachments" : [
+				"bindings" : [
 					{
-						"fromType" : "Port",
-						"fromName" : "portClient",
-						"toType"   : "Role",
-						"toName"   : "roleProvided_CSconnector" 
+						"bindingName" : "toInnerServerAuthentication",
+						"type" : "toPortRequired",
+						"destinationName" : "portRequiredAuthentication"
+					},
+					{
+						"bindingName" : "toInnerServerAuthentication",
+						"type" : "toPortRequired",
+						"destinationName" : "portRequiredRequest"
 					}
-				]
+				] 
 			}
 		},
 		{
@@ -116,6 +119,21 @@
 			},
 			"RolesRequired" : ["roleRequired_CSconnector"]
 		}
+		],
+
+		"attachments" : [
+			{
+				"fromType" : "Role",
+				"fromName" : "roleRequired_CSconnector",
+				"toType"   : "Port",
+				"toName"   : "portProvidedReceptionServer" 
+			},
+			{
+				"fromType" : "Port",
+				"fromName" : "portClient",
+				"toType"   : "Role",
+				"toName"   : "roleProvided_CSconnector" 
+			}
 		]
 	}
 	]
