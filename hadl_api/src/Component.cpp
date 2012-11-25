@@ -11,6 +11,7 @@ void Component::addPortRequired(std::string name, PortComposantRequired* port)
 void Component::addPortProvided(std::string name, PortComposantProvided* port)
 {
 	port->setComponent(this);
+	port->set_callback(&Component::callback_method);
 	_portsProvided.insert(std::pair<std::string, PortComposantProvided*>(name, port));
 }
 
@@ -51,4 +52,9 @@ void Component::sendNotificationTo(std::string portRequired)
 void Component::on_notify(PortComposantProvided* port)
 {
 	std::cout << "Component notification received!" <<std::endl;
+}
+
+
+std::vector<std::string> Component::stub_method( std::vector<std::string> args ) {
+	std::cout << "Stub method called\n";
 }

@@ -7,6 +7,7 @@
 #include <string>
 #include <iostream>
 
+//template<typename component = Component>
 class RoleProvided : public Role
 {
 public:

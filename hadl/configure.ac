@@ -14,6 +14,7 @@ AC_PROG_MAKE_SET
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
+AM_PROG_CC_C_O
 
 # Checks for libraries.
 PKG_CHECK_MODULES([LIBHADL],[libhadl])

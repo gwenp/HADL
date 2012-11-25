@@ -33,8 +33,6 @@ hadl_SOURCES = main.cpp \
 				 src/Client.cpp src/Client.hpp \
  				 src/Server.cpp src/Server.hpp \
  				 src/CS_Connector.cpp src/CS_Connector.hpp \
- 				 src/PortRequiedCS.hpp \
- 				 src/PortProvidedCS.hpp \
  				 $(server_config_files) \
  				 src/networking.c src/networking.h
 

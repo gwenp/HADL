@@ -27,9 +27,6 @@ private:
 
  	/** BEGIN NETWORKING **/
 
-
-
-
 	MessageP generate_discovery_message( MessageP::DiscoverType disco_type );
 	void interpret_discovery_message( MessageP msg, SOCKET sock );
 

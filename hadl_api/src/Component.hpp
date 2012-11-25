@@ -12,7 +12,12 @@
 #include <map>
 #include <string>
 
+#include "Common.hpp"
 class Connector;
+
+typedef std::map<std::string, ComponentMethod> MethodsIndex;
+//typedef std::map<PortComposantProvided*, ComponentMethod> MethodsIndex;
+
 
 class Component : public ConnectableElement
 {
@@ -29,6 +34,16 @@ public:
 	std::map<std::string, PortComposantRequired*> _portsRequired;
 	std::map<std::string, PortComposantProvided*> _portsProvided;
 
+	//std::map< std::string, a_fun >;
+	std::vector<std::string> stub_method( std::vector<std::string> args );
+
+protected:
+	// TO remove
+	//MethodsIndex _methods_index;
+
+	virtual std::vector<std::string> callback_method( PortComposantProvided* provided_port, std::vector<std::string> args ) {
+		std::cout << "Parent callback\n";
+	}
 private:
 	Configuration* _linkedConfiguration;
 };

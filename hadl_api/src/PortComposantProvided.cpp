@@ -2,9 +2,11 @@
 
 #include "Component.hpp"
 
-//PortComposantProvided::PortComposantProvided( (Component::*my_memfunc_ptr)(std::vector<std::string>) ) {
-//	
-//}
+PortComposantProvided::PortComposantProvided( ComponentMethod component_method ) {
+	
+	_component_method = component_method;
+
+}
 
 void PortComposantProvided::notifyComponent()
 {
@@ -13,10 +15,25 @@ void PortComposantProvided::notifyComponent()
 
 MessageP PortComposantProvided::receive_message( MessageP msg ) {
 
-	// DO WORK
 	/* Ici lancer la methode associee au composant */
 
-	// return _composant->ma_mem_fun(msg);
+	MessageP reponse_message;
+
+	if ( _component != NULL && _component_method != NULL ) {
+
+		std::vector<std::string> args;
+		for ( int i=0; i<msg.argument_size(); i++ ) {
+			args.push_back( msg.argument(i) );
+		}
+
+		std::vector<std::string> response_args;
+		response_args = (_component->*_component_method) (this,args);
+
+		for ( int i=0; i<response_args.size(); i++ ) {
+			reponse_message.add_argument( response_args.at(i) );
+		}
+
+	}
 
 	/* STUB */
 	MessageP msgr;

@@ -6,18 +6,28 @@
 
 #include <string>
 
+#include "Common.hpp"
+
 class PortComposantProvided : public PortComposant
 {
 public:
 
-	//PortComposantProvided( (Component::*my_memfunc_ptr)(std::vector<std::string>) );
+	PortComposantProvided( ComponentMethod component_method = NULL );
+
+	// TEMP
+	void set_callback( ComponentMethod component_method ) {
+		_component_method = component_method;
+	}
 
 	std::string getType(){ return "provided"; };
 	void notifyComponent();
 
 	MessageP receive_message( MessageP msg );
 	
-private:
+protected:
+
+	ComponentMethod _component_method;
+
 };
 
 #endif /* PORTCOMPOSANTPROVIDED_HPP */
