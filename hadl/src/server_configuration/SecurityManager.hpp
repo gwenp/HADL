@@ -1,6 +1,8 @@
 #ifndef _H_SecurityManager_H_
 #define _H_SecurityManager_H_
 
+#include <HADL/Component.hpp>
+
 class SecurityManager : public Component
 {
 public:

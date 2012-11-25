@@ -25,6 +25,8 @@ public:
 
 	void linkElement(ConnectableElement* element, bool _internal);
 
+	void addElement(ConnectableElement* elt);
+
 private:
 	std::list<Element*> _elements;
 	std::map<std::string, PortConfigRequired*> _portsRequired;

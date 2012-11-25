@@ -12,7 +12,7 @@ void JsonParser::parse(LanguageManager* l,std::string fileUrl, std::string appli
 
 	if ( !parsingSuccessful )
 	{
-		std::cout  	<< "Failed to parse configuration\n"
+		Dbg::out("json")  	<< "Failed to parse configuration\n"
 					<< reader.getFormattedErrorMessages();
 		return;
 	}
@@ -26,18 +26,25 @@ void JsonParser::parse(LanguageManager* l,std::string fileUrl, std::string appli
 
 void JsonParser::parseApplication(LanguageManager* l, Json::Value app)
 {
-	std::cout << "[JSON] application : " << app.get("name", "").asString() << std::endl;
+	Dbg::out("json") << "[JSON] application : " << app.get("name", "").asString() << std::endl;
 	
 	const Json::Value elements = app["elements"];
 	for ( int index = 0; index < elements.size(); ++index )
 	{
 		JsonParser::parseElement(l, elements[index]);
-	}	
+	}
+	
+	const Json::Value attachments = app["attachments"];
+	for ( int index = 0; index < attachments.size(); ++index )
+	{
+		JsonParser::parseAttachment(l, attachments[index]);
+	}
+
 }
 
 void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 {
-	std::cout << "[JSON] application : " << elt.get("name", "").asString() << "; type: " << elt.get("type", "").asString() << std::endl;
+	Dbg::out("json") << "[JSON] element : " << elt.get("name", "").asString() << "; type: " << elt.get("type", "").asString() << std::endl;
 	std::string type = elt.get("type", "").asString();
 	std::string name = elt.get("name", "").asString();
 	std::string factory = elt.get("factory", "").asString();
@@ -60,6 +67,26 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 
 		const Json::Value properties = elt["properties"];
 		JsonParser::parseProperies(l, name, type, properties);
+
+		const Json::Value attachedConfiguration = elt["attachedConfiguration"];
+		if(attachedConfiguration.empty())
+		{
+			Dbg::out("json") << "[JSON] no attachedConfiguration for : " << name << std::endl;
+		}
+		else
+		{
+			Dbg::out("json") << "[JSON] Parsing configuration of : " << name << std::endl;
+			
+			l->attachConfigurationToComponent(name, attachedConfiguration.get("name", "").asString());
+			
+			const Json::Value elements = attachedConfiguration["elements"];
+			for ( int index = 0; index < elements.size(); ++index )
+			{
+				JsonParser::parseElement(l, elements[index]);
+				l->addElementToConfiguration(elements[index]["name"].asString(), elements[index]["type"].asString(), attachedConfiguration.get("name", "").asString());
+			}
+		}
+
 	}
 	else
 	{
@@ -105,4 +132,9 @@ void JsonParser::parseProperies(LanguageManager* l, std::string elementName, std
 	{
 		l->addPropertyToElement(e,(*it), properties.get((*it), "").asString());
 	}
+}
+
+void JsonParser::parseAttachment(LanguageManager* l, Json::Value attachment)
+{
+	l->makeAttachment(attachment["fromType"].asString(), attachment["fromName"].asString(), attachment["toType"].asString(), attachment["toName"].asString());
 }

@@ -2,12 +2,13 @@
 	"applications":
 	[
 	{
-		"name" : "Client",
+		"name" : "ClientApplication",
 		"elements" : [
 		{
 			"type" : "Component",
-			"factory" : "Server",
-			"name" : "Client"
+			"factory" : "Client",
+			"name" : "Client",
+			"PortsRequired" : ["portClient"]
 		},
 		{
 			"type" : "Connector",
@@ -20,17 +21,46 @@
 			},
 			"RolesProvided" : ["roleProvided_CSconnector"]
 		}
+		],
+		"attachments" : [
+			{
+				"fromType" : "Port",
+				"fromName" : "portClient",
+				"toType"   : "Role",
+				"toName"   : "roleProvided_CSconnector" 
+			}
 		]
 	},
 	{
-		"name" : "Server",
+		"name" : "ServerApplication",
 		"elements" : [	
 		{
 			"type" : "Component",
 			"name" : "Server",
 			"factory" : "Server",
 			"PortsRequired" : ["portServer1", "portServer2"],
-			"PortsProvided" : ["portProvidedServer1"]
+			"PortsProvided" : ["portProvidedServer1"],
+
+			"attachedConfiguration" : {
+				"name" : "configServer",
+				"elements" : [
+				{
+					"type" : "Component",
+					"factory" : "Server",
+					"name" : "Database"
+				},
+				{
+					"type" : "Component",
+					"factory" : "Server",
+					"name" : "SecurityManager"
+				},
+				{
+					"type" : "Component",
+					"factory" : "Server",
+					"name" : "LoginManager"
+				}
+				]
+			}
 		},
 		{
 			"type" : "Connector",
@@ -41,12 +71,7 @@
 				"host" : "string",
 				"port" : "string"
 			},
-			"RolesRequired" : ["roleRequired_CSconnector"],
-
-			"attachedConfiguration" : {
-				"name" : "configServer",
-				"elements" : []
-			}
+			"RolesRequired" : ["roleRequired_CSconnector"]
 		}
 		]
 	}

@@ -34,18 +34,30 @@
 #include "src/factories/ClientComponentFactory.hpp"
 #include "src/factories/ServerComponentFactory.hpp"
 #include "src/factories/CS_ConnectorFactory.hpp"
+#include "src/factories/DatabaseFactory.hpp"
+#include "src/factories/ConnectionManagerFactory.hpp"
+#include "src/factories/SecurityManagerFactory.hpp"
+#include "src/factories/DefaultConnectorFactory.hpp"
+
+#include "src/Utils/Dbg.hpp"
 
 #include <fstream>
 #include <ostream>
 
 int main(int argc, char const* argv[]) {
 
+	Dbg::init("config/debug.conf");
+
 	LanguageManager l;
 
 	l.registerComponentFactory("Client", new ClientComponentFactory());
 	l.registerComponentFactory("Server", new ServerComponentFactory());
+	l.registerComponentFactory("Database", new DatabaseFactory());
+	l.registerComponentFactory("ConnectionManager", new ConnectionManagerFactory());
+	l.registerComponentFactory("SecurityManager", new SecurityManagerFactory());
 
 	l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
+	l.registerConnectorFactory("Default", new DefaultConnectorFactory());
 
 	l.parseJSON("../data/language.json");
 	
