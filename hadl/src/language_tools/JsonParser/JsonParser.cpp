@@ -87,7 +87,7 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 			}
 
 			const Json::Value bindings = attachedConfiguration["bindings"];
-			for ( int index = 0; index < elements.size(); ++index )
+			for ( int index = 0; index < bindings.size(); ++index )
 			{
 				JsonParser::parseBinding(l, attachedConfiguration.get("name", "").asString(), bindings[index]);
 			}

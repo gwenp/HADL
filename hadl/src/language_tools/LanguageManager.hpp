@@ -57,6 +57,8 @@ private:
 
 	std::map<std::string, PortComposantProvided*> _portsProvided;
 	std::map<std::string, PortComposantRequired*> _portsRequired;
+
+	std::map<std::string, PortConfigRequired*> _portsConfigRequired;
 };
 
 #endif
