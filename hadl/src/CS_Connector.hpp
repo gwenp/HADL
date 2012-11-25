@@ -14,6 +14,7 @@ public:
 	CS_Connector();
 	~CS_Connector();
 
+	virtual void onInit();
 	/* Should be private ? */
 	void listen_from( int port );
 	void connect();

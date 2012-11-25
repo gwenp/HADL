@@ -1,14 +1,47 @@
 #include "CS_Connector.hpp"
 
-CS_CS_Connector::CS_Connector() {
+CS_Connector::CS_Connector() {
 
 }
 
-CS_CS_Connector::~CS_Connector() {
+CS_Connector::~CS_Connector() {
 
 }
 
-MessageP CS_CS_Connector::glue_message_propagation( MessageP msg, const std::string& role ) {
+virtual void CS_Connector::onInit() {
+
+	std::string& client_server = getProperty("mode");
+
+	if ( client_server.empty() {
+		std::cout << "Bad properties (mode)" << std::endl;
+		return;
+	}
+
+	int port = atoi( getProperty("port").c_str() );
+	if ( port <= 0 ) {
+		std::cout << "Bad properties (port)" << std::endl;
+		return;
+	}
+
+	if ( client_server == "server" ) {
+		this->listen_from(port);
+	}
+	else if ( client_server == "client" ) {
+
+		std::string& host = getProperty("host");
+
+		if ( host.empty() ) {
+			std::cout << "Bad properties (host)" << std::endl;
+			return;		
+		}
+
+		this->connect_to( host, port );
+
+	}
+
+}
+
+MessageP CS_Connector::glue_message_propagation( MessageP msg, const std::string& role ) {
 
 	if ( _rolesRequired.find( role ) != _rolesRequired.end() ) {
 		/* Direct sending */
@@ -169,7 +202,7 @@ MessageP CS_Connector::send_message_ntk( SOCKET sock, MessageP& msg, bool needs_
 
 
 
-
+/* TODO remove */
 void CS_Connector::connect() {
 	std::cout << "Connecting ..." << std::endl;
 

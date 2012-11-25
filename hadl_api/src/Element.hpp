@@ -11,9 +11,10 @@ public:
 	void setProperty( const std::string& key, const std::string& value );
 	std::string getProperty( const std::string& key );
 
+	virtual void onInit() {};
+
 protected:
 
-	virtual void onInit() {};
 	std::map<std::string,std::string> _properties;
 
 };
