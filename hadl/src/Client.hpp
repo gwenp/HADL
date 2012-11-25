@@ -3,11 +3,10 @@
 
 #include <HADL/Component.hpp>
 
-//typedef struct key_fun_s {
-//	std::string key;
-//	ComponentMethod method;
-//} key_fun_t;
+class Client;
 
+typedef std::vector<std::string> (Client::*ClientMethod)(std::vector<std::string>);
+typedef std::map<std::string, ClientMethod> ClientMethodsIndex;
 
 class Client : public Component {
 public:
@@ -18,6 +17,9 @@ public:
 
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
 	str_v test_method( str_v args);
+
+private:
+	ClientMethodsIndex _methods;
 
 };
 

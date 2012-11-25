@@ -46,7 +46,7 @@ protected:
 	//MethodsIndex _methods_index;
 	//std::vector<std::string> callback_method_rb( PortComposantProvided* provided_port, std::vector<std::string> args );
 
-	std::map<std::string,std::string> _portsRequired_methodNames;
+	std::map<PortComposantProvided*,std::string> _portsRequired_methodNames;
 
 private:
 	Configuration* _linkedConfiguration;

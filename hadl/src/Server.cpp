@@ -3,6 +3,9 @@
 Server::Server() {
 	//PortRequired* pr = new PortRequired();
 	//_methods["test"] = 
+
+	_methods["testm"] = &Server::testm;
+
 }
 
 Server::~Server() {
@@ -18,26 +21,26 @@ void Server::onInit() {
 	std::cout << "Init Server" << std::endl;
 }
 
-std::vector<std::string> Server::testm( std::vector<std::string> args ) {
+str_v Server::testm( std::vector<std::string> args ) {
 		std::cout << "Server Method" << std::endl;
 
 }
 
-std::vector<std::string> Server::on_message( PortComposantProvided* provided_port, std::vector<std::string> args ) {
+str_v Server::on_message( PortComposantProvided* provided_port, str_v args ) {
 
 	std::cout << "Server Callback" << std::endl;
 
 
-	std::vector<std::string> response;
+	str_v response;
 
-	if ( _methods.find(provided_port) != _methods.end() ) {
-		response = (this->*_methods[provided_port])(args);
+	if ( _portsRequired_methodNames.find(provided_port) != _portsRequired_methodNames.end() ) {
+		std::string& method_name = _portsRequired_methodNames[provided_port];
+	
+		if ( _methods.find(method_name) != _methods.end() ) {
+			response = (this->*_methods[method_name])(args);
+		}
 	}
 
 	return response;
 
-}
-
-void Server::dbg_mt( PortComposantProvided* p ) {
-	_methods[p] = &Server::testm;
 }
