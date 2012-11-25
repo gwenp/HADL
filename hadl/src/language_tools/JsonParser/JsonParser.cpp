@@ -57,6 +57,9 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 		{
 			l->addProvidedPortToComponent(name, portsProvided[index].asString());
 		}
+
+		const Json::Value properties = elt["properties"];
+		JsonParser::parseProperies(l, name, type, properties);
 	}
 	else
 	{
@@ -75,7 +78,31 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 			{
 				l->addProvidedRoleToConnector(name, rolesProvided[index].asString());
 			}
+
+			const Json::Value properties = elt["properties"];
+			JsonParser::parseProperies(l, name, type, properties);
 		}
 	}
 
+}
+
+void JsonParser::parseProperies(LanguageManager* l, std::string elementName, std::string elementType, Json::Value properties)
+{
+	Element* e;
+	if(elementType == "Component")
+	{
+		e = l->getComponent(elementName);
+	}
+	else
+	if(elementType == "Connector")
+	{
+		e = l->getConnector(elementName);
+	}
+
+	std::vector<std::string> propertieslist = properties.getMemberNames();
+
+	for (std::vector<std::string>::iterator it = propertieslist.begin(); it != propertieslist.end(); ++it)
+	{
+		l->addPropertyToElement(e,(*it), properties.get((*it), "").asString());
+	}
 }

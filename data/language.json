@@ -16,7 +16,7 @@
 			"properties" : {
 				"mode" : "client",
 				"host" : "string",
-				"port" : "string",
+				"port" : "string"
 			},
 			"RolesProvided" : ["roleProvided_CSconnector"]
 		}
@@ -39,9 +39,14 @@
 			"properties" : {
 				"mode" : "client",
 				"host" : "string",
-				"port" : "string",
+				"port" : "string"
 			},
-			"RolesRequired" : ["roleRequired_CSconnector"]
+			"RolesRequired" : ["roleRequired_CSconnector"],
+
+			"attachedConfiguration" : {
+				"name" : "configServer",
+				"elements" : []
+			}
 		}
 		]
 	}

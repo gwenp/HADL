@@ -63,3 +63,9 @@ void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std:
 	std::cout << "[LanguageManager] addRoleProvided : "<< roleName << " to Connector : " << connectorName << std::endl;
 	_connectors[connectorName]->addRoleProvided(roleName, new RoleProvided());
 }
+
+void LanguageManager::addPropertyToElement(Element* e, std::string key, std::string value)
+{
+	std::cout << "[LanguageManager] addPropertyToElement : "<< key << "  : " << value << std::endl;
+	e->setProperty(key, value);
+}

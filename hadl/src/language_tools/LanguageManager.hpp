@@ -27,6 +27,8 @@ public:
 	void addRequiredRoleToConnector(std::string connectorName, std::string roleName);
 	void addProvidedRoleToConnector(std::string connectorName, std::string roleName);
 
+	void addPropertyToElement(Element* e, std::string key, std::string value);
+
 private:
 	std::map<std::string, ComponentFactory*> _componentFactories;
 	std::map<std::string, ConnectorFactory*> _connectorFactories;
