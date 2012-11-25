@@ -13,10 +13,10 @@ public:
 	void parseJSON(std::string jsonUrl);
 
 	void registerComponentFactory(std::string name, ComponentFactory* factory);
-	Component* makeComponent(std::string name);
+	Component* makeComponent(std::string name, std::string factory);
 
 	void registerConnectorFactory(std::string name, ConnectorFactory* factory);
-	Connector* makeConnector(std::string name);
+	Connector* makeConnector(std::string name, std::string factory);
 
 	Component* getComponent(std::string name);
 	Connector* getConnector(std::string name);

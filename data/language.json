@@ -6,10 +6,15 @@
 		"elements" : [
 		{
 			"type" : "Component",
+			"factory" : "Server",
 			"name" : "Client"
+		},
+		{
+			"type" : "Component",
+			"factory" : "Server",
+			"name" : "ServerLocal"
 		}
 		]
-
 	},
 	{
 		"name" : "Server",
@@ -17,6 +22,7 @@
 		{
 			"type" : "Component",
 			"name" : "Server",
+			"factory" : "Server",
 			"PortsRequired" : ["portServer1", "portServer2"],
 			"PortsProvided" : ["portProvidedServer1"]
 		}]

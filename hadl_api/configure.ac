@@ -17,7 +17,6 @@ AC_PROG_CXX
 AC_PROG_CC
 
 # Checks for libraries.
-PKG_CHECK_MODULES([LIBJSONCPP], [jsoncpp])
 PKG_CHECK_MODULES([LIBSIGC], [sigc++-2.0])
 #PKG_CHECK_MODULES([LIBHADL],[libhadl])
 

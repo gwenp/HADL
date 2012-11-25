@@ -1,7 +1,7 @@
 bin_PROGRAMS = hadl
 
-hadl_LDADD = $(LIBJSONCPP_LIBS) $(LIBSIGC_LIBS) $(LIBHADL_LIBS) $(PROTOBUF_LIBS)
-hadl_CPPFLAGS = $(LIBJSONCPP_CFLAGS) $(LIBSIGC_CFLAGS) $(LIBHADL_CFLAGS) $(PROTOBUF_CFLAGS)
+hadl_LDADD = $(LIBSIGC_LIBS) $(LIBHADL_LIBS) $(PROTOBUF_LIBS)
+hadl_CPPFLAGS = $(LIBSIGC_CFLAGS) $(LIBHADL_CFLAGS) $(PROTOBUF_CFLAGS)
 
 sc = src/server_configuration
 server_config_files = $(sc)/CM_DB_Connector.cpp $(sc)/CM_DB_Connector.hpp \
@@ -15,6 +15,14 @@ $(sc)/ServerConfiguration.cpp $(sc)/ServerConfiguration.hpp
 
 
 hadl_SOURCES = main.cpp \
+				 src/language_tools/JsonParser/libjsoncpp/json_batchallocator.h \
+				 src/language_tools/JsonParser/libjsoncpp/json_reader.cpp \
+				 src/language_tools/JsonParser/libjsoncpp/json_valueiterator.inl \
+				 src/language_tools/JsonParser/libjsoncpp/json_internalarray.inl \
+				 src/language_tools/JsonParser/libjsoncpp/json_tool.h \
+				 src/language_tools/JsonParser/libjsoncpp/json_writer.cpp \
+				 src/language_tools/JsonParser/libjsoncpp/json_internalmap.inl \
+				 src/language_tools/JsonParser/libjsoncpp/json_value.cpp \
 				 src/language_tools/LanguageManager.cpp src/language_tools/LanguageManager.hpp \
 				 src/language_tools/JsonParser/JsonParser.cpp src/language_tools/JsonParser/JsonParser.hpp \
 				 src/language_tools/ComponentFactory.cpp src/language_tools/ComponentFactory.hpp \
@@ -28,3 +36,6 @@ hadl_SOURCES = main.cpp \
  				 src/PortRequiedCS.hpp \
  				 src/PortProvidedCS.hpp \
  				 $(server_config_files)
+
+
+

@@ -48,31 +48,25 @@ int main(int argc, char const* argv[]) {
 	l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
 
 	l.parseJSON("../data/language.json");
-
-	Client* client = (Client*) l.makeComponent("Client");
-	Server* server = (Server*) l.makeComponent("Server");
-
-
-	CS_Connector* connector = (CS_Connector*) l.makeConnector("CS_Connector");
 	
-	l.addRequiredPortToComponent("Client", "PortRequisCS");
-	l.addProvidedPortToComponent("Server", "PortFourniCS");
+	// l.addRequiredPortToComponent("Client", "PortRequisCS");
+	// l.addProvidedPortToComponent("Server", "PortFourniCS");
 	
-	l.addRequiredRoleToConnector("CS_Connector", "dqd");
-	l.addProvidedRoleToConnector("CS_Connector", "TestP1");
+	// l.addRequiredRoleToConnector("CS_Connector", "dqd");
+	// l.addProvidedRoleToConnector("CS_Connector", "TestP1");
 	
 	if ( argc > 1 ) {
 
-		client->info();
-		server->info();
+		// client->info();
+		// server->info();
 
 		if ( !strcmp(argv[1],"server") ) {
-			l.setConnectorListenFrom("CS_Connector", 2345);
+			// l.setConnectorListenFrom("CS_Connector", 2345);
 		}
 		else {
-			connector->addRoleProvided("TestP1", new RoleProvided());
-			connector->addRoleProvided("TestP2", new RoleProvided());
-			connector->connect();
+			// connector->addRoleProvided("TestP1", new RoleProvided());
+			// connector->addRoleProvided("TestP2", new RoleProvided());
+			// connector->connect();
 		}
 
 	}

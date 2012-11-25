@@ -10,10 +10,10 @@ void LanguageManager::registerComponentFactory(std::string name, ComponentFactor
 	_componentFactories[name] = factory;
 }
 
-Component* LanguageManager::makeComponent(std::string name)
+Component* LanguageManager::makeComponent(std::string name, std::string factory)
 {
-	std::cout << "[LanguageManager] makeComponent : "<< name << std::endl;
-	_components[name] = _componentFactories[name]->make();
+	std::cout << "[LanguageManager] makeComponent : "<< name << "; from factory : " << factory  << std::endl;
+	_components[name] = _componentFactories[factory]->make();
 	return _components[name];
 }
 
@@ -22,11 +22,11 @@ void LanguageManager::registerConnectorFactory(std::string name, ConnectorFactor
 	_connectorFactories[name] = factory;
 }
 
-Connector* LanguageManager::makeConnector(std::string name)
+Connector* LanguageManager::makeConnector(std::string name, std::string factory)
 {
-	std::cout << "[LanguageManager] makeConnector : "<< name << std::endl;
+	std::cout << "[LanguageManager] makeConnector : "<< name << "; from factory : " << factory << std::endl;
 
-	_connectors[name] = _connectorFactories[name]->make();
+	_connectors[name] = _connectorFactories[factory]->make();
 	return _connectors[name];
 }
 
