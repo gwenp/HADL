@@ -38,7 +38,17 @@
 				{
 					"type" : "Component",
 					"factory" : "Server",
-					"name" : "INTOCONFIGURATION"
+					"name" : "Database"
+				},
+				{
+					"type" : "Component",
+					"factory" : "Server",
+					"name" : "SecurityManager"
+				},
+				{
+					"type" : "Component",
+					"factory" : "Server",
+					"name" : "LoginManager"
 				}
 				]
 			}

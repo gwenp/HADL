@@ -76,6 +76,7 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 			for ( int index = 0; index < elements.size(); ++index )
 			{
 				JsonParser::parseElement(l, elements[index]);
+				l->addElementToConfiguration(elements[index]["name"].asString(), elements[index]["type"].asString(), attachedConfiguration.get("name", "").asString());
 			}
 		}
 

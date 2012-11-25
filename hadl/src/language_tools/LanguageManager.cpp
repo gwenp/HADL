@@ -73,7 +73,25 @@ void LanguageManager::addPropertyToElement(Element* e, std::string key, std::str
 void LanguageManager::attachConfigurationToComponent(std::string componentName, std::string configurationName)
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] attachConfigurationToComponent : "<< componentName << "  : " << configurationName << std::endl;
-	
+
 	_configurations[configurationName] = new Configuration();
 	_components[componentName]->linkConfiguration(_configurations[configurationName], false);
 }
+
+void LanguageManager::addElementToConfiguration(std::string elementName, std::string elementType, std::string configurationName)
+{
+	Dbg::out("LanguageManager") << "[LanguageManager] addElementToConfiguration : "<< elementName << "  : " << configurationName << std::endl;
+	
+	if(_configurations[configurationName] != NULL)
+		if(elementType == "Connector")
+		{
+			if(_connectors[elementName] != NULL)
+				_configurations[configurationName]->addElement(_connectors[elementName]);
+		}	
+		if(elementType == "Component")
+		{
+			if(_components[elementName] != NULL)
+				_configurations[configurationName]->addElement(_components[elementName]);
+		}
+}
+

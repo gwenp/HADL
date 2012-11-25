@@ -31,7 +31,7 @@ public:
 	void addPropertyToElement(Element* e, std::string key, std::string value);
 
 	void attachConfigurationToComponent(std::string componentName, std::string configurationName);
-
+	void addElementToConfiguration(std::string elementName, std::string elementType, std::string configurationName);
 private:
 	std::map<std::string, ComponentFactory*> _componentFactories;
 	std::map<std::string, ConnectorFactory*> _connectorFactories;
