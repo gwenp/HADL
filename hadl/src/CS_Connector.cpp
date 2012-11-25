@@ -8,11 +8,11 @@ CS_Connector::~CS_Connector() {
 
 }
 
-virtual void CS_Connector::onInit() {
+void CS_Connector::onInit() {
 
-	std::string& client_server = getProperty("mode");
+	const std::string& client_server = getProperty("mode");
 
-	if ( client_server.empty() {
+	if ( client_server.empty() ) {
 		std::cout << "Bad properties (mode)" << std::endl;
 		return;
 	}
@@ -28,7 +28,7 @@ virtual void CS_Connector::onInit() {
 	}
 	else if ( client_server == "client" ) {
 
-		std::string& host = getProperty("host");
+		const std::string& host = getProperty("host");
 
 		if ( host.empty() ) {
 			std::cout << "Bad properties (host)" << std::endl;
@@ -233,7 +233,7 @@ void* monitoring_routine_rebound( void* data ) {
 
 	connector_and_sock_t* cs = (connector_and_sock_t*) data;
 	SOCKET sock = cs->socket;
-	Connector* connector = (Connector*) cs->connector;
+	CS_Connector* connector = (CS_Connector*) cs->connector;
 
 
 	std::cout << "A client was connected ! Waiting for message\n";

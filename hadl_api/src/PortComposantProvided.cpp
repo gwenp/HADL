@@ -2,6 +2,10 @@
 
 #include "Component.hpp"
 
+//PortComposantProvided::PortComposantProvided( (Component::*my_memfunc_ptr)(std::vector<std::string>) ) {
+//	
+//}
+
 void PortComposantProvided::notifyComponent()
 {
 	getComponent()->on_notify(this);

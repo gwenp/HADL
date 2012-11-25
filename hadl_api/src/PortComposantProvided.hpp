@@ -9,6 +9,9 @@
 class PortComposantProvided : public PortComposant
 {
 public:
+
+	//PortComposantProvided( (Component::*my_memfunc_ptr)(std::vector<std::string>) );
+
 	std::string getType(){ return "provided"; };
 	void notifyComponent();
 
