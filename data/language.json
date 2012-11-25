@@ -34,7 +34,13 @@
 
 			"attachedConfiguration" : {
 				"name" : "configServer",
-				"elements" : []
+				"elements" : [
+				{
+					"type" : "Component",
+					"factory" : "Server",
+					"name" : "INTOCONFIGURATION"
+				}
+				]
 			}
 		},
 		{

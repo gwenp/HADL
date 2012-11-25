@@ -64,12 +64,19 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 		const Json::Value attachedConfiguration = elt["attachedConfiguration"];
 		if(attachedConfiguration.empty())
 		{
-			Dbg::out("json") << "\t[JSON] no attachedConfiguration for : " << name << std::endl;
+			Dbg::out("json") << "[JSON] no attachedConfiguration for : " << name << std::endl;
 		}
 		else
 		{
-			Dbg::out("json") << "\t[JSON] Parsing configuration of : " << name << std::endl;
-			JsonParser::parseElement(l, attachedConfiguration);
+			Dbg::out("json") << "[JSON] Parsing configuration of : " << name << std::endl;
+			
+			l->attachConfigurationToComponent(name, attachedConfiguration.get("name", "").asString());
+			
+			const Json::Value elements = attachedConfiguration["elements"];
+			for ( int index = 0; index < elements.size(); ++index )
+			{
+				JsonParser::parseElement(l, elements[index]);
+			}
 		}
 
 	}

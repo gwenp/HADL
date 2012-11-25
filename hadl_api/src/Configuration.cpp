@@ -32,3 +32,9 @@ void Configuration::linkElement(ConnectableElement* e, bool _internal = false)
 	if(!_internal && e != NULL)
 		e->linkConfiguration(this, true);
 }
+
+void Configuration::addElement(ConnectableElement* elt)
+{
+	_elements.push_back(elt);
+	elt->setParentConfiguration(this);
+}
