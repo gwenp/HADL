@@ -2,10 +2,11 @@
 
 #include "Component.hpp"
 
-void Connector::addRoleProvided(std::string name, RoleProvided* role)
+void Connector::addRoleProvided(std::string name, RoleProvided* role, std::string& linkedRole)
 {
 	role->setConnector(this);
 	_rolesProvided.insert(std::pair<std::string, RoleProvided*>(name, role));
+	_roles_association[name] = linkedRole;
 }
 
 void Connector::addRoleRequired(std::string name, RoleRequired* role)
@@ -48,18 +49,6 @@ void Connector::attachToComponent(Component* c, std::string roleName, std::strin
 		std::cout << "[ERROR] : The Connector and the Component does not have the same parent Configuration!" <<std::endl;
 }
 
-//void Connector::sendNotificationTo( std::string roleRequired, MessageP& msg ) {
-//
-//	if ( _rolesRequired.find( roleRequired ) != _rolesRequired.end() ) {
-//		_rolesRequired[roleRequired]->propagateNotificationToPort();
-//	}
-//	else if ( _rolesRequired_connections.find( roleRequired ) != _rolesRequired_connections.end() ) {
-//		//this->send_message_ntk(_rolesRequired_connections[roleRequired],msg);
-//	}
-//
-//
-//}
-
 
 /* Other side */
 
@@ -69,17 +58,16 @@ void Connector::attachToComponent(Component* c, std::string roleName, std::strin
 MessageP Connector::propagate_message( MessageP msg ) {
 
 	/* Get sender ROLE */
+	//const std::string& role_to = msg.receiver();
 	const std::string& role_from = msg.sender();
+	//const std::string& role_to = _roles_association[msg.sender()];
 
-	/* Find associated ROLE */
-	if ( _roles_association.find( role_from ) != _roles_association.end() ) {
-
+	if ( _roles_association.find(role_from) != _roles_association.end() ) {
 		return this->glue_message_propagation( msg, _roles_association[role_from] );
 	}
-
-	std::cout << "Cannot route message (unknown dest/action)\n";
-	/* TODO error message */
-	return msg; 
+	else {
+		std::cout << "Error : No linked role for '" << role_from << "'" << std::endl;
+	}
 }
 
 MessageP Connector::glue_message_propagation( MessageP msg, const std::string& role ) {
@@ -88,7 +76,8 @@ MessageP Connector::glue_message_propagation( MessageP msg, const std::string& r
 		/* Direct sending */
 		return _rolesRequired[role]->propagate_message( msg );
 	}
-	
+
+	std::cout << "Cannot route message (unknown dest/action)\n";
 	/*
 	else if ( _rolesRequired_connections.find( role ) != _rolesRequired_connections.end() ) {
 		return this->send_message_ntk(_rolesRequired_connections[role],msg);

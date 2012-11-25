@@ -23,7 +23,7 @@ class Connector : public ConnectableElement
 public:
 	//Connector() { _messages_queue = std::queue<MessageP>(); }
 
-	void addRoleProvided(std::string name, RoleProvided* roleProvided);
+	void addRoleProvided(std::string name, RoleProvided* roleProvided, std::string& linkedRole );
 	void addRoleRequired(std::string name, RoleRequired* roleRequired);
 
 	void info();
@@ -53,13 +53,8 @@ protected:
 
 	Configuration* _linkedConfiguration;
 
-	/* Other side */
-
-
-
 	/* How to know to which ROle a message should be sent */
 	std::map<std::string,std::string> _roles_association;
-	char* _databuf;
 };
 
 #endif /* CONNECTOR_HPP */

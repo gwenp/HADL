@@ -17,7 +17,7 @@ public:
 
 	MessageP propagate_message( MessageP msg );
 
-private: 
+private:
 };
 
 #endif /* ROLEPROVIDED_HPP */

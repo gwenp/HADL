@@ -12,6 +12,6 @@ MessageP RoleProvided::propagate_message( MessageP msg ) {
 	std::string _name = "provided_role_1";
 	
 	msg.set_sender(_name);
-	_connector->propagate_message( msg );
+	return _connector->propagate_message( msg );
 
 }

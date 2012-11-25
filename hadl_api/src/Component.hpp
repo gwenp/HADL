@@ -41,6 +41,18 @@ public:
 	//std::map< std::string, a_fun >;
 	str_v stub_method( str_v args );
 
+	static MessageP error_message( std::string& error ) {
+
+		MessageP msg;
+		msg.set_sender("");
+		msg.set_receiver("");
+		//msg.set_code(-1);
+		msg.add_argument("Error : " + error );
+
+		return msg;
+
+	}
+
 protected:
 	// TO remove
 	//MethodsIndex _methods_index;
@@ -51,5 +63,6 @@ protected:
 private:
 	Configuration* _linkedConfiguration;
 };
+
 
 #endif /* COMPONENT_HPP */
