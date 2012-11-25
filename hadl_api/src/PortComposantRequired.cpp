@@ -14,8 +14,12 @@ void PortComposantRequired::propagateNotificationToRole()
 
 }
 
-MessageP PortComposantRequired::send_message( MessageP msg ) {
+MessageP PortComposantRequired::send_message( str_v args ) {
 
+	MessageP msg;
+	for ( int i=0; i<args.size(); i++ ) {
+		msg.add_argument( args.at(i) );
+	}
 	return _providedRole->propagate_message( msg );
 
 }

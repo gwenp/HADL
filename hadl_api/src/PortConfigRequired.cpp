@@ -5,8 +5,8 @@ void PortConfigRequired::bindTo( PortComposantRequired* portRequired ) {
 	_bindingRequired = portRequired;
 }
 
-MessageP PortConfigRequired::send_message( MessageP msg ) {
+MessageP PortConfigRequired::send_message( str_v args ) {
 	if ( _bindingRequired != NULL ) {
-		return _bindingRequired->send_message(msg);
+		return _bindingRequired->send_message(args);
 	}
 }

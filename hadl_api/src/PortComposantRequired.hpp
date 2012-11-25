@@ -8,6 +8,8 @@
 
 #include "MessageP.pb.h"
 
+#include "Common.hpp"
+
 class RoleProvided;
 
 class PortComposantRequired : public PortComposant
@@ -18,7 +20,7 @@ public:
 	// Doublon
 	void propagateNotificationToRole();
 
-	MessageP send_message( MessageP msg );
+	MessageP send_message( str_v args );
 
 	RoleProvided* _providedRole;
 };

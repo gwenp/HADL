@@ -10,16 +10,27 @@ Client::~Client() {
 
 }
 
+void Client::send_a_request() {
 
-str_v Client::test_method( str_v args) {
+	if ( _portsRequired.find("portClient") != _portsRequired.end() ) {
+	
+		std::cout << "Sending to '" << "portClient" << "'\n";
 
-	std::cout << "Test method called automatically" << std::endl;
+		str_v args;
+		args.push_back("test_message");
+		args.push_back("test_message_arg2");
+		MessageP response = _portsRequired["portClient"]->send_message(args);
+		std::cout << "Sent\n";
+	}
+	else {
+		std::cout << "Port not found : " << "portClient" << std::endl;
+	}
 
 }
 
+
 void Client::onInit() {
-	//_methods_index["test"] = &Client::test_method;
-	//_methods_index["test"] = &Component::stub_method;
+
 
 	std::cout << "Init Client" << std::endl;
 }

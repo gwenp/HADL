@@ -54,9 +54,6 @@ public:
 	}
 
 protected:
-	// TO remove
-	//MethodsIndex _methods_index;
-	//std::vector<std::string> callback_method_rb( PortComposantProvided* provided_port, std::vector<std::string> args );
 
 	std::map<PortComposantProvided*,std::string> _portsRequired_methodNames;
 

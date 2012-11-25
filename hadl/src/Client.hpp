@@ -15,8 +15,9 @@ public:
 
 	void onInit();
 
+	void send_a_request();
+
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
-	str_v test_method( str_v args);
 
 private:
 	ClientMethodsIndex _methods;
