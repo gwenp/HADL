@@ -19,7 +19,7 @@
 				"host" : "string",
 				"port" : "string"
 			},
-			"RolesProvided" : ["roleProvided_CSconnector"]
+			"RolesProvided" : [{"name" : "roleProvided_CSconnector", "toMethod" : "TODO" }]
 		}
 		],
 		"attachments" : [
@@ -39,7 +39,7 @@
 			"name" : "Server",
 			"factory" : "Server",
 			"PortsRequired" : ["portServer1", "portServer2"],
-			"PortsProvided" : ["portProvidedServer1"],
+			"PortsProvided" : [{"name" : "portProvidedServer1", "toMethod" : ""}],
 
 			"attachedConfiguration" : {
 				"name" : "configServer",
@@ -48,18 +48,60 @@
 					"type" : "Component",
 					"factory" : "Database",
 					"name" : "Database",
-					"PortsProvided" : ["PortRequired_DB_TO_SM","PortRequired_DB_TO_CM"]
+					"PortsProvided" : [
+										{ "name" : "portRequiredRequest", "toMethod" : "getAbilitiesOfUser"},
+										{ "name" : "portRequiredLoginSecurity", "toMethod" : "getPasswordOfUser"}
+									  ]
 				},
 				{
 					"type" : "Component",
 					"factory" : "SecurityManager",
-					"name" : "SecurityManager"
+					"name" : "SecurityManager",
+					"PortsRequired" : ["portRequiredAuthentication"],
+					"PortsProvided" : [{ "name" : "portProvidedAuthentication", "toMethod" : "isUserAbleTo" }]
 				},
 				{
 					"type" : "Component",
 					"factory" : "ConnectionManager",
-					"name" : "LoginManager"
+					"name" : "LoginManager",
+
+					"PortsRequired" : ["portRequiredRequest","portRequiredAuthentication"]
+				},
+				{
+					"type" : "Connector",
+					"factory" : "Default",
+					"name" : "CM_to_SM",
+					"RolesProvided" : [
+										{ "name" : "roleProvidedLoginSecurity", "toMethod" : "TODO" }
+									  ],
+					"RolesRequired" : [ "roleRequiredLoginSecurity" ]
+				},
+				{
+					"type" : "Connector",
+					"factory" : "Default",
+					"name" : "CM_to_DB",
+					"RolesProvided" : [
+										{ "name" : "roleProvidedRequest", "toMethod" : "TODO" }
+									  ],
+					"RolesRequired" : [ "roleRequiredRequest" ]
+				},
+				{
+					"type" : "Connector",
+					"factory" : "Default",
+					"name" : "SM_to_DB",
+					"RolesProvided" : [
+										{ "name" : "roleProvidedLoginQuery", "toMethod" : "TODO" }
+									  ],
+					"RolesRequired" : [ "roleRequiredLoginQuery" ]
 				}
+				],
+				"attachments" : [
+					{
+						"fromType" : "Port",
+						"fromName" : "portClient",
+						"toType"   : "Role",
+						"toName"   : "roleProvided_CSconnector" 
+					}
 				]
 			}
 		},

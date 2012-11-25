@@ -62,7 +62,8 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 		const Json::Value portsProvided = elt["PortsProvided"];
 		for ( int index = 0; index < portsProvided.size(); ++index )
 		{
-			l->addProvidedPortToComponent(name, portsProvided[index]["name"].asString(),portsProvided[index]["toMethod"].asString());
+			Json::Value portProvided = portsProvided[index];
+			l->addProvidedPortToComponent(name, portProvided.get("name","").asString(),portProvided.get("toMethod","").asString());
 		}
 
 		const Json::Value properties = elt["properties"];
@@ -82,8 +83,9 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 			const Json::Value elements = attachedConfiguration["elements"];
 			for ( int index = 0; index < elements.size(); ++index )
 			{
+				Json::Value newElement = elements[index];
 				JsonParser::parseElement(l, elements[index]);
-				l->addElementToConfiguration(elements[index]["name"].asString(), elements[index]["type"].asString(), attachedConfiguration.get("name", "").asString());
+				l->addElementToConfiguration(newElement.get("name","").asString(), newElement.get("type","").asString(), attachedConfiguration.get("name", "").asString());
 			}
 
 			const Json::Value bindings = attachedConfiguration["bindings"];
@@ -111,7 +113,8 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 			const Json::Value rolesProvided = elt["RolesProvided"];
 			for ( int index = 0; index < rolesProvided.size(); ++index )
 			{
-				l->addProvidedRoleToConnector(name, rolesProvided[index]["name"].asString(),rolesProvided["toMethod"].asString());
+				Json::Value roleProvided = rolesProvided[index];
+				l->addProvidedRoleToConnector(name, roleProvided["name"].asString(),roleProvided["toMethod"].asString());
 			}
 
 			const Json::Value properties = elt["properties"];
