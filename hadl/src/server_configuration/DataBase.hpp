@@ -12,11 +12,17 @@ class DataBase : public Component {
 public:
 	DataBase();
 	~DataBase();
-	
+
+	str_v getPasswordOfUser( str_v args );
+	str_v getAbilitiesOfUser( str_v args );
+
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
 
 private:
 	DataBaseMethodsIndex _methods;
 	/* data */
+
+	std::map<std::string,std::string> _user_passwords;
+	std::map<std::string,str_v> _user_abilities;
 };
 #endif /* _H_DataBase_H_ */

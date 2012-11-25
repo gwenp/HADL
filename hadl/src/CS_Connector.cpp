@@ -350,7 +350,8 @@ void CS_Connector::on_message_received_ntk( MessageP& msg, SOCKET sock ) {
 			this->interpret_discovery_message(msg, sock);
 			break;
 		default:
-			this->propagate_message(msg);
+			MessageP msg_response = this->propagate_message(msg,msg.receiver());
+			this->send_message_ntk(sock, msg_response, false);
 			std::cout << "Message type not supported\n";
 			break;
 	}

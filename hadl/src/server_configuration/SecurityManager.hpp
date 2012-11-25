@@ -14,6 +14,9 @@ public:
 	SecurityManager();
 	~SecurityManager();
 
+
+	str_v isUserAbleTo( str_v args );
+
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
 
 private:

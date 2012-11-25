@@ -2,7 +2,7 @@
 
 SecurityManager::SecurityManager()
 {
-
+	_methods["isUserAbleTo"] = &SecurityManager::isUserAbleTo;
 }
 
 SecurityManager::~SecurityManager()
@@ -10,6 +10,24 @@ SecurityManager::~SecurityManager()
 	
 }
 
+str_v SecurityManager::isUserAbleTo( str_v args ) {
+
+	str_v ret;
+
+	if ( args.size() > 1 ) {
+		std::string& username = args.at(0);
+		std::string& required_ability = args.at(1);
+
+		/* Ask to DB ? */
+		if ( required_ability == required_ability ) {
+			ret.push_back("ok");
+		}
+
+	}
+
+	return ret;
+
+}
 
 str_v SecurityManager::on_message( PortComposantProvided* provided_port, str_v args ) {
 

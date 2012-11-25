@@ -53,7 +53,7 @@ private:
 
 	/* Used for receiving messages */
 	std::queue<MessageP> _messages_queue;
-	std::string _rcv_messages_buffer;
+	//std::string _rcv_messages_buffer;
 
 	/** END NETWORKING **/
 
