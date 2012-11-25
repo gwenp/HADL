@@ -12,6 +12,7 @@ public:
 	std::string getType(){ return "provided"; };
 
 	void bindTo( PortComposantProvided* portProvided );
+	MessageP receive_message( MessageP msg );
 	
 private:
 	PortComposantProvided* _bindingProvided;

@@ -12,6 +12,7 @@ public:
 	std::string getType(){ return "required"; };
 	
 	void bindTo( RoleRequired* roleRequired );
+	MessageP propagate_message( MessageP msg );	
 private:
 	RoleRequired* _bindingRequired;
 };

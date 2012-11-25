@@ -19,7 +19,6 @@ public:
 	// Doublon
 	void propagateNotificationToPort();
 
-	
 	MessageP propagate_message( MessageP msg );
 
 private:

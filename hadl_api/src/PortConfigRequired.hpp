@@ -12,6 +12,7 @@ public:
 	std::string getType(){ return "required"; };
 
 	void bindTo( PortComposantRequired* portRequired );
+	MessageP send_message( MessageP msg );
 
 private:
 	PortComposantRequired* _bindingRequired;
