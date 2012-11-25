@@ -69,7 +69,8 @@ int main(int argc, char const* argv[]) {
 
 			Server* srv = (Server*) l.getComponent("Server");
 			srv->onInit();
-			CS_Connector* c = (CS_Connector*) l.getConnector("CS_Connector");
+
+			CS_Connector* c = (CS_Connector*) l.getConnector("connectorClient_serverSide");
 			c->setProperty("mode","server");
 			c->setProperty("port","2345");
 			c->onInit();
@@ -79,7 +80,8 @@ int main(int argc, char const* argv[]) {
 
 			Client* client = new Client();
 			client->onInit();
-			CS_Connector* c = (CS_Connector*) l.getConnector("CS_Connector");
+			
+			CS_Connector* c = (CS_Connector*) l.getConnector("connectorClient_clientSide");
 			c->setProperty("mode","client");
 			c->setProperty("port","2345");
 			c->setProperty("host","127.0.0.1");
