@@ -16,11 +16,6 @@
 
 #include "MessageP.pb.h"
 
-extern "C" {
-	#include "networking.h"
-}
-
-
 class Component;
 
 class Connector : public ConnectableElement
@@ -37,61 +32,30 @@ public:
 	void attachToComponent(Component* c, std::string roleName, std::string portName);
 
 	// Doublon
-	void sendNotificationTo(std::string roleRequired, MessageP& message ); //this should be protected in the future
+	//void sendNotificationTo(std::string roleRequired, MessageP& message ); //this should be protected in the future
 
 	std::map<std::string, RoleProvided*> _rolesProvided;
 	std::map<std::string, RoleRequired*> _rolesRequired;
+
 
 	/* Other side */
 
 	MessageP propagate_message( MessageP msg );
 
 
-	void listen_from( int port );
 
-	void monitoring_routine( SOCKET sock );
+protected:
 
-	void connect();
+		/* For debuging */
+	void debug_message( MessageP& msg );
 
-private:
+	virtual MessageP glue_message_propagation( MessageP msg, const std::string& role );
 
 	Configuration* _linkedConfiguration;
 
 	/* Other side */
 
-	/** BEGIN NETWORKING **/
-	MessageP generate_discovery_message( MessageP::DiscoverType disco_type );
-	void interpret_discovery_message( MessageP msg, SOCKET sock );
 
-	SOCKET connect_to( std::string host, int port ); // Connect
-
-	void wait_for_messages_ntk( SOCKET sock );
-
-	MessageP receive_message_ntk( SOCKET sock );
-	MessageP send_message_ntk( SOCKET sock, MessageP& msg, bool needs_response = true );
-
-	void on_message_received_ntk( MessageP& msg, SOCKET sock = INVALID_SOCKET );
-
-	void send_discoveries_ntk( SOCKET sock );
-
-	/* For debuging */
-	void debug_message( MessageP& msg );
-
-	// Temp ? Can be used to store Roles
-	std::map<std::string, SOCKET> _rolesProvided_connections;
-	std::map<SOCKET,std::string> _rolesProvided_connections_reverse;
-
-	std::map<std::string, SOCKET> _rolesRequired_connections;
-	std::map<SOCKET,std::string> _rolesRequired_connections_reverse;
-
-
-	/* Used for receiving messages */
-	std::queue<MessageP> _messages_queue;
-	std::string _rcv_messages_buffer;
-
-	/** END NETWORKING **/
-
-	MessageP send_message_to_role( MessageP msg, const std::string& role );
 
 	/* How to know to which ROle a message should be sent */
 	std::map<std::string,std::string> _roles_association;
