@@ -34,10 +34,10 @@
 #include "src/factories/ClientComponentFactory.hpp"
 #include "src/factories/ServerComponentFactory.hpp"
 #include "src/factories/CS_ConnectorFactory.hpp"
-//#include "src/factories/DatabaseFactory.hpp"
-//#include "src/factories/ConnectionManagerFactory.hpp"
-//#include "src/factories/SecurityManagerFactory.hpp"
-//#include "src/factories/DefaultConnectorFactory.hpp"
+#include "src/factories/DatabaseFactory.hpp"
+#include "src/factories/ConnectionManagerFactory.hpp"
+#include "src/factories/SecurityManagerFactory.hpp"
+#include "src/factories/DefaultConnectorFactory.hpp"
 
 #include "src/Utils/Dbg.hpp"
 
@@ -52,14 +52,14 @@ int main(int argc, char const* argv[]) {
 
 	l.registerComponentFactory("Client", new ClientComponentFactory());
 	l.registerComponentFactory("Server", new ServerComponentFactory());
-	//l.registerComponentFactory("Database", new DatabaseFactory());
-	//l.registerComponentFactory("ConnectionManager", new ConnectionManagerFactory());
-	//l.registerComponentFactory("SecurityManager", new SecurityManagerFactory());
+	l.registerComponentFactory("Database", new DatabaseFactory());
+	l.registerComponentFactory("ConnectionManager", new ConnectionManagerFactory());
+	l.registerComponentFactory("SecurityManager", new SecurityManagerFactory());
+
+	l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
+	l.registerConnectorFactory("Default", new DefaultConnectorFactory());
 //
-//	//l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
-//	//l.registerConnectorFactory("Default", new DefaultConnectorFactory());
-//
-	//l.parseJSON("../data/language.json");
+	l.parseJSON("../data/language.json");
 	
 	// l.addRequiredPortToComponent("Client", "PortRequisCS");
 	// l.addProvidedPortToComponent("Server", "PortFourniCS");
@@ -74,11 +74,11 @@ int main(int argc, char const* argv[]) {
 
 		if ( !strcmp(argv[1],"server") ) {
 			// l.setConnectorListenFrom("CS_Connector", 2345);
-			//Server* srv = (Server*) l.getComponent("Server");
-			Server* srv = new Server();
-			PortComposantProvided* port = new PortComposantProvided();
-			//port->set_callback(&Component::callback_method);
-			//port->setComponent(srv);
+			Server* srv = (Server*) l.getComponent("Server");
+			// Server* srv = new Server();
+			PortComposantProvided* port = l.getPortProvided("portProvidedServer1");
+			// port->set_callback(&Component::callback_method);
+			port->setComponent(srv);
 			srv->addPortProvided( "testReq", port );
 			srv->onInit();
 

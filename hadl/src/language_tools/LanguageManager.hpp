@@ -22,6 +22,12 @@ public:
 	Component* getComponent(std::string name);
 	Connector* getConnector(std::string name);
 
+	PortComposantProvided* getPortProvided(std::string name);
+	PortComposantRequired* getPortRequired(std::string name);
+
+	RoleProvided* getRoleProvided(std::string name);
+	RoleRequired* getRoleRequired(std::string name);
+
 	void addRequiredPortToComponent(std::string componentName, std::string portName);
 	void addProvidedPortToComponent(std::string componentName, std::string portName);
 
@@ -44,6 +50,12 @@ private:
 	
 	std::map<std::string, Component*> _componentsByPort;
 	std::map<std::string, Connector*> _connectorsByRole;
+
+	std::map<std::string, RoleProvided*> _rolesProvided;
+	std::map<std::string, RoleRequired*> _rolesRequired;
+
+	std::map<std::string, PortComposantProvided*> _portsProvided;
+	std::map<std::string, PortComposantRequired*> _portsRequired;
 };
 
 #endif
