@@ -32,7 +32,7 @@ public:
 	void addProvidedPortToComponent(std::string componentName, std::string portName, std::string toMethod);
 
 	void addRequiredRoleToConnector(std::string connectorName, std::string roleName);
-	void addProvidedRoleToConnector(std::string connectorName, std::string roleName);
+	void addProvidedRoleToConnector(std::string connectorName, std::string roleName, std::string toMethod);
 
 	void addPropertyToElement(Element* e, std::string key, std::string value);
 
