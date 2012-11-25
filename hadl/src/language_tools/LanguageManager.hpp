@@ -40,6 +40,7 @@ public:
 	void addElementToConfiguration(std::string elementName, std::string elementType, std::string configurationName);
 
 	void makeAttachment(std::string fromType, std::string fromName, std::string toType, std::string toName);
+	void addBinding(std::string configName, std::string bindingName, std::string type, std::string destName);
 private:
 	std::map<std::string, ComponentFactory*> _componentFactories;
 	std::map<std::string, ConnectorFactory*> _connectorFactories;

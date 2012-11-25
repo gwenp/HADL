@@ -137,3 +137,8 @@ void LanguageManager::makeAttachment(std::string fromType, std::string fromName,
 		_connectorsByRole[fromName]->attachToComponent(_componentsByPort[toName], fromName, toName);
 	}
 }
+
+void LanguageManager::addBinding(std::string configName, std::string bindingName, std::string type, std::string destName)
+{
+
+}
