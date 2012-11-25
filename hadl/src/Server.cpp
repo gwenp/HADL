@@ -4,7 +4,7 @@ Server::Server() {
 	//PortRequired* pr = new PortRequired();
 	//_methods["test"] = 
 
-	_methods["testm"] = &Server::testm;
+	_methods["receive"] = &Server::receive;
 
 }
 
@@ -21,7 +21,7 @@ void Server::onInit() {
 	std::cout << "Init Server" << std::endl;
 }
 
-str_v Server::testm( std::vector<std::string> args ) {
+str_v Server::receive( std::vector<std::string> args ) {
 		std::cout << "Server Method" << std::endl;
 
 }
