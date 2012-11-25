@@ -88,7 +88,7 @@ void LanguageManager::addRequiredRoleToConnector(std::string connectorName, std:
 void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std::string roleName)
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] addRoleProvided : "<< roleName << " to Connector : " << connectorName << std::endl;
-	_rolesProvided[roleName] =  new RoleProvided()
+	_rolesProvided[roleName] =  new RoleProvided();
 	_connectors[connectorName]->addRoleProvided(roleName, _rolesProvided[roleName]);
 	_connectorsByRole[roleName] = _connectors[connectorName];
 }
