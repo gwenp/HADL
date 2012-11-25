@@ -30,7 +30,6 @@ str_v Server::on_message( PortComposantProvided* provided_port, str_v args ) {
 
 	std::cout << "Server Callback" << std::endl;
 
-
 	str_v response;
 
 	if ( _portsRequired_methodNames.find(provided_port) != _portsRequired_methodNames.end() ) {

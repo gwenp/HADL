@@ -16,6 +16,13 @@ void RoleRequired::propagateNotificationToPort()
 
 MessageP RoleRequired::propagate_message( MessageP msg ) {
 
-	return _portProvided->receive_message( msg );
+
+
+	MessageP response_msg = _portProvided->receive_message( msg );
+	
+	/* Return to sender */
+	response_msg.set_receiver(msg.sender());
+
+	return response_msg;
 
 }
