@@ -13,7 +13,7 @@
 		{
 			"type" : "Connector",
 			"factory" : "CS_Connector",
-			"name" : "connectorClient",
+			"name" : "connectorClient_clientSide",
 			"properties" : {
 				"mode" : "client",
 				"host" : "string",
@@ -111,7 +111,7 @@
 		{
 			"type" : "Connector",
 			"factory" : "CS_Connector",
-			"name" : "connectorClient",
+			"name" : "connectorClient_serverSide",
 			"properties" : {
 				"mode" : "client",
 				"host" : "string",
