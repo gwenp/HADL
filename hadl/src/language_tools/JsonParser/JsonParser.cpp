@@ -62,7 +62,7 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 		const Json::Value portsProvided = elt["PortsProvided"];
 		for ( int index = 0; index < portsProvided.size(); ++index )
 		{
-			l->addProvidedPortToComponent(name, portsProvided[index].asString());
+			l->addProvidedPortToComponent(name, portsProvided[index]["name"].asString(),portsProvided[index]["toMethod"].asString());
 		}
 
 		const Json::Value properties = elt["properties"];

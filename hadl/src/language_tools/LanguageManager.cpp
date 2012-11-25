@@ -69,11 +69,11 @@ void LanguageManager::addRequiredPortToComponent(std::string componentName, std:
 	_componentsByPort[portName] = _components[componentName];
 }
 
-void LanguageManager::addProvidedPortToComponent(std::string componentName, std::string portName)
+void LanguageManager::addProvidedPortToComponent(std::string componentName, std::string portName, std::string toMethod)
 {
 	_portsProvided[portName] = new PortComposantProvided();
 	Dbg::out("LanguageManager") << "[LanguageManager] addPortProvided : "<< portName << " to Component : " << componentName << std::endl;
-	_components[componentName]->addPortProvided(portName,_portsProvided[portName]);
+	_components[componentName]->addPortProvided(portName,_portsProvided[portName], std::string toMethod);
 	_componentsByPort[portName] = _components[componentName];
 }
 
