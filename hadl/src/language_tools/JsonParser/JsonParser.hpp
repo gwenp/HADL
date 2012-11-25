@@ -17,6 +17,7 @@ private:
 	static void parseApplication(LanguageManager* l, Json::Value app);
 	static void parseElement(LanguageManager* l, Json::Value element);
 	static void parseProperies(LanguageManager* l, std::string elementName, std::string elementType, Json::Value properties);
+	static void parseAttachment(LanguageManager* l, Json::Value attachment);
 };
 
 #endif

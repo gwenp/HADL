@@ -2,12 +2,13 @@
 	"applications":
 	[
 	{
-		"name" : "Client",
+		"name" : "ClientApplication",
 		"elements" : [
 		{
 			"type" : "Component",
-			"factory" : "Server",
-			"name" : "Client"
+			"factory" : "Client",
+			"name" : "Client",
+			"PortsRequired" : ["portClient"]
 		},
 		{
 			"type" : "Connector",
@@ -20,10 +21,18 @@
 			},
 			"RolesProvided" : ["roleProvided_CSconnector"]
 		}
+		],
+		"attachments" : [
+			{
+				"fromType" : "Port",
+				"fromName" : "portClient",
+				"toType"   : "Role",
+				"toName"   : "roleProvided_CSconnector" 
+			}
 		]
 	},
 	{
-		"name" : "Server",
+		"name" : "ServerApplication",
 		"elements" : [	
 		{
 			"type" : "Component",

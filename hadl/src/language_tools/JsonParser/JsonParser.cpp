@@ -32,7 +32,14 @@ void JsonParser::parseApplication(LanguageManager* l, Json::Value app)
 	for ( int index = 0; index < elements.size(); ++index )
 	{
 		JsonParser::parseElement(l, elements[index]);
-	}	
+	}
+	
+	const Json::Value attachments = app["attachments"];
+	for ( int index = 0; index < attachments.size(); ++index )
+	{
+		JsonParser::parseAttachment(l, attachments[index]);
+	}
+
 }
 
 void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
@@ -125,4 +132,9 @@ void JsonParser::parseProperies(LanguageManager* l, std::string elementName, std
 	{
 		l->addPropertyToElement(e,(*it), properties.get((*it), "").asString());
 	}
+}
+
+void JsonParser::parseAttachment(LanguageManager* l, Json::Value attachment)
+{
+	l->makeAttachment(attachment["fromType"].asString(), attachment["fromName"].asString(), attachment["toType"].asString(), attachment["toName"].asString());
 }

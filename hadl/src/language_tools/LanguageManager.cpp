@@ -44,24 +44,28 @@ void LanguageManager::addRequiredPortToComponent(std::string componentName, std:
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] addPortRequired : "<< portName << " to Component : " << componentName << std::endl;
 	_components[componentName]->addPortRequired(portName, new PortComposantRequired());
+	_componentsByPort[portName] = _components[componentName];
 }
 
 void LanguageManager::addProvidedPortToComponent(std::string componentName, std::string portName)
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] addPortProvided : "<< portName << " to Component : " << componentName << std::endl;
 	_components[componentName]->addPortProvided(portName, new PortComposantProvided());
+	_componentsByPort[portName] = _components[componentName];
 }
 
 void LanguageManager::addRequiredRoleToConnector(std::string connectorName, std::string roleName)
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] addRoleRequired : "<< roleName << " to Connector : " << connectorName << std::endl;
 	_connectors[connectorName]->addRoleRequired(roleName, new RoleRequired());
+	_connectorsByRole[roleName] = _connectors[connectorName];
 }
 
 void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std::string roleName)
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] addRoleProvided : "<< roleName << " to Connector : " << connectorName << std::endl;
 	_connectors[connectorName]->addRoleProvided(roleName, new RoleProvided());
+	_connectorsByRole[roleName] = _connectors[connectorName];
 }
 
 void LanguageManager::addPropertyToElement(Element* e, std::string key, std::string value)
@@ -81,7 +85,7 @@ void LanguageManager::attachConfigurationToComponent(std::string componentName, 
 void LanguageManager::addElementToConfiguration(std::string elementName, std::string elementType, std::string configurationName)
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] addElementToConfiguration : "<< elementName << "  : " << configurationName << std::endl;
-	
+
 	if(_configurations[configurationName] != NULL)
 		if(elementType == "Connector")
 		{
@@ -95,3 +99,16 @@ void LanguageManager::addElementToConfiguration(std::string elementName, std::st
 		}
 }
 
+void LanguageManager::makeAttachment(std::string fromType, std::string fromName, std::string toType, std::string toName)
+{
+	Dbg::out("LanguageManager") << "[LanguageManager] makeAttachment : "<< fromName << "  : " << toName << std::endl;
+	
+	if(fromType == "Port" && toType == "Role")
+	{
+		_componentsByPort[fromName]->attachToConnector(_connectorsByRole[toName], fromName, toName);
+	}
+	else if(fromType == "Role" && toType == "Port")
+	{
+		_connectorsByRole[fromName]->attachToComponent(_componentsByPort[toName], fromName, toName);
+	}
+}

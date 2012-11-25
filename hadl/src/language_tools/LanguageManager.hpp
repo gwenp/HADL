@@ -32,6 +32,8 @@ public:
 
 	void attachConfigurationToComponent(std::string componentName, std::string configurationName);
 	void addElementToConfiguration(std::string elementName, std::string elementType, std::string configurationName);
+
+	void makeAttachment(std::string fromType, std::string fromName, std::string toType, std::string toName);
 private:
 	std::map<std::string, ComponentFactory*> _componentFactories;
 	std::map<std::string, ConnectorFactory*> _connectorFactories;
@@ -39,6 +41,9 @@ private:
 	std::map<std::string, Connector*> _connectors;
 	std::map<std::string, Component*> _components;
 	std::map<std::string, Configuration*> _configurations;
+	
+	std::map<std::string, Component*> _componentsByPort;
+	std::map<std::string, Connector*> _connectorsByRole;
 };
 
 #endif
