@@ -103,9 +103,9 @@
 			"factory" : "CS_Connector",
 			"name" : "connectorClient_serverSide",
 			"properties" : {
-				"mode" : "client",
-				"host" : "string",
-				"port" : "string"
+				"mode" : "",
+				"host" : "127.0.0.1",
+				"port" : "2345"
 			},
 			"RolesProvided" : [{"name" : "roleProvided_CSconnector", "toRole" : "roleRequired_CSconnector" }],
 			"RolesRequired" : ["roleRequired_CSconnector"]

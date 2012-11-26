@@ -30,10 +30,10 @@ public:
 	void info();
 
 	void attachToConnector(Connector* c, std::string portName, std::string roleName);
-	void sendNotificationTo(std::string portRequired);
+	//void sendNotificationTo(std::string portRequired);
 	
 	// DOUBLON
-	void on_notify(PortComposantProvided* port);
+	//void on_notify(PortComposantProvided* port);
 
 	virtual std::vector<std::string> on_message( PortComposantProvided* provided_port, std::vector<std::string> args );
 
@@ -43,17 +43,7 @@ public:
 	//std::map< std::string, a_fun >;
 	str_v stub_method( str_v args );
 
-	static MessageP error_message( std::string& error ) {
 
-		MessageP msg;
-		msg.set_sender("");
-		msg.set_receiver("");
-		//msg.set_code(-1);
-		msg.add_argument("Error : " + error );
-
-		return msg;
-
-	}
 
 protected:
 

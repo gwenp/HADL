@@ -27,7 +27,7 @@ public:
 	void addRoleRequired(std::string name, RoleRequired* roleRequired);
 
 	void info();
-	void on_notify(RoleProvided* port);
+	//void on_notify(RoleProvided* port);
 
 	void attachToComponent(Component* c, std::string roleName, std::string portName);
 
@@ -43,7 +43,17 @@ public:
 	MessageP on_message_from_provided_role( RoleProvided* from, MessageP msg );
 	MessageP propagate_message( MessageP msg, const std::string& role );
 
+	static MessageP error_message( std::string error ) {
 
+		MessageP msg;
+		msg.set_sender("");
+		msg.set_receiver("");
+		//msg.set_code(-1);
+		msg.add_argument("Error : " + error );
+
+		return msg;
+
+	}
 
 protected:
 

@@ -49,15 +49,19 @@ void Component::attachToConnector(Connector* c, std::string portName, std::strin
 		std::cout << "[ERROR] : The Connector and the Component does not have the same parent Configuration!" <<std::endl;
 }
 
+/*
 void Component::sendNotificationTo(std::string portRequired)
 {
 	_portsRequired[portRequired]->propagateNotificationToRole();
 }
+*/
 
+/*
 void Component::on_notify(PortComposantProvided* port)
 {
 	std::cout << "Component notification received!" <<std::endl;
 }
+*/
 
 std::vector<std::string> Component::stub_method( std::vector<std::string> args ) {
 	std::cout << "Stub method called\n";

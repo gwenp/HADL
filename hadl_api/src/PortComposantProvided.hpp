@@ -21,7 +21,7 @@ public:
 	}
 	*/
 	std::string getType(){ return "provided"; };
-	void notifyComponent();
+	//void notifyComponent();
 
 	MessageP receive_message( MessageP msg );
 	

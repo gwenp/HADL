@@ -33,10 +33,12 @@ void Connector::info()
 	std::cout << std::endl;
 }
 
+/*
 void Connector::on_notify(RoleProvided* port)
 {
 	std::cout << "Connector notification received!" <<std::endl;
 }
+*/
 
 void Connector::attachToComponent(Component* c, std::string roleName, std::string portName)
 {
@@ -57,10 +59,12 @@ MessageP Connector::on_message_from_provided_role( RoleProvided* from, MessageP 
 	/* Get sender ROLE */
 
 	if ( _roles_association.find(from) != _roles_association.end() ) {
+		std::cout << "Local role found : " << _roles_association[from] << std::endl;
 		return this->propagate_message( msg, _roles_association[from] );
 	}
 	else {
 		std::cout << "Error : No linked role for '" << "a role" << "'" << std::endl;
+		return error_message("Role unreachable");
 	}
 
 }

@@ -2,10 +2,12 @@
 
 #include "Connector.hpp"
 
+/*
 void RoleProvided::notifyConnector()
 {
 	getConnector()->on_notify(this);
 }
+*/
 
 MessageP RoleProvided::propagate_message( MessageP msg ) {
 

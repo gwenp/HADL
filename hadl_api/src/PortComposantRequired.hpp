@@ -18,7 +18,7 @@ public:
 	std::string getType(){ return "required"; };
 
 	// Doublon
-	void propagateNotificationToRole();
+	//void propagateNotificationToRole();
 
 	str_v send_message( str_v args );
 

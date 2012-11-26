@@ -9,11 +9,12 @@ PortComposantProvided::PortComposantProvided( ComponentMethod component_method )
 
 }
 */
+/*
 void PortComposantProvided::notifyComponent()
 {
 	getComponent()->on_notify(this);
 }
-
+*/
 MessageP PortComposantProvided::receive_message( MessageP msg ) {
 
 	/* Ici lancer la methode associee au composant */

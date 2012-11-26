@@ -13,7 +13,7 @@ class RoleProvided : public Role
 public:
 	std::string getType(){ return "provided"; };
 	
-	void notifyConnector();
+	//void notifyConnector();
 
 	MessageP propagate_message( MessageP msg );
 

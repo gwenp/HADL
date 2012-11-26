@@ -4,6 +4,16 @@ DataBase::DataBase()
 {
 	_methods["getPasswordOfUser"] = &DataBase::getPasswordOfUser;
 	_methods["getAbilitiesOfUser"] = &DataBase::getAbilitiesOfUser;
+
+
+	_user_passwords["demo"] = "demo";
+	_user_passwords["test_login"] = "test_password";
+
+	str_v abilities;
+	abilities.push_back("do stuff");
+	abilities.push_back("cook marmalade");
+
+	_user_abilities["demo"] = abilities;
 }
 
 DataBase::~DataBase()

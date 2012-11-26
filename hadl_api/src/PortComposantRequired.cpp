@@ -3,6 +3,7 @@
 #include "RoleProvided.hpp"
 
 
+/*
 void PortComposantRequired::propagateNotificationToRole()
 {
 	if(_providedRole != NULL)
@@ -13,6 +14,7 @@ void PortComposantRequired::propagateNotificationToRole()
 		std::cout << "[ERROR] No Connector attached to the port" <<std::endl;
 
 }
+*/
 
 str_v PortComposantRequired::send_message( str_v args ) {
 

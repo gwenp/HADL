@@ -17,7 +17,7 @@ public:
 	PortComposantProvided* _portProvided;
 
 	// Doublon
-	void propagateNotificationToPort();
+	//void propagateNotificationToPort();
 
 	MessageP propagate_message( MessageP msg );
 
