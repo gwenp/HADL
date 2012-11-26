@@ -192,7 +192,7 @@ MessageP CS_Connector::send_message_ntk( SOCKET sock, MessageP& msg, bool needs_
 		std::cout << "Message sent\n";
 	}
 
-	if ( needs_response ) {
+	if ( needs_response && msg.type() != MessageP::RESPONSE ) {
 		return receive_message_ntk(sock);
 	}
 	else {
@@ -354,8 +354,9 @@ void CS_Connector::on_message_received_ntk( MessageP& msg, SOCKET sock ) {
 			break;
 		default:
 			MessageP msg_response = this->propagate_message(msg,msg.receiver());
+			std::cout << "Sending response...\n";
 			this->send_message_ntk(sock, msg_response, false);
-			std::cout << "Message type not supported\n";
+			std::cout << "Ok !\n";
 			break;
 	}
 	// Switch/case here

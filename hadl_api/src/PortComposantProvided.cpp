@@ -19,6 +19,7 @@ MessageP PortComposantProvided::receive_message( MessageP msg ) {
 	/* Ici lancer la methode associee au composant */
 
 	MessageP reponse_message;
+	reponse_message.set_type(MessageP::RESPONSE);
 
 	if ( _component != NULL ) {
 
@@ -36,14 +37,8 @@ MessageP PortComposantProvided::receive_message( MessageP msg ) {
 
 	}
 
-	/* STUB */
-	MessageP msgr;
-	msgr.set_sender("me");
-	msgr.set_receiver( msg.sender() );
-	msg.set_type(MessageP::RESPONSE);
+	reponse_message.set_receiver( msg.sender() );
 
-	return msgr;
-
-	/* END STUB */
+	return reponse_message;
 
 }

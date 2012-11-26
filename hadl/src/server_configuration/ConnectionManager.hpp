@@ -15,6 +15,7 @@ public:
 	ConnectionManager();
 	~ConnectionManager();
 
+	std::string getUserPassword( std::string& username );
 
 	str_v authenticate( str_v args );
 	str_v makeACoolRequest( str_v args );

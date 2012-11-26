@@ -22,8 +22,12 @@ void Server::onInit() {
 }
 
 str_v Server::receive( std::vector<std::string> args ) {
-		std::cout << "Server Method" << std::endl;
 
+	std::cout << "Server Method" << std::endl;
+	str_v ret;
+	ret.push_back("Hello ! That's my response !");
+
+	return ret;
 }
 
 str_v Server::on_message( PortComposantProvided* provided_port, str_v args ) {

@@ -22,7 +22,11 @@ void Client::send_a_request() {
 		args.push_back("test_message");
 		args.push_back("test_message_arg2");
 		str_v response = _portsRequired["portClient"]->send_message(args);
-		std::cout << "Sent\n";
+		std::cout << "Sent !!!\n";
+		std::cout << "Response : " << std::endl;
+		for ( int i=0; i<response.size(); i++ ) {
+			std::cout << "\t- " << response.at(i) << std::endl;
+		}
 	}
 	else {
 		std::cout << "Port not found : " << "portClient" << std::endl;

@@ -10,6 +10,22 @@ SecurityManager::~SecurityManager()
 	
 }
 
+std::vector<std::string> SecurityManager::getUserAbilities( std::string& username ) {
+
+	std::vector<std::string> response;
+	if ( _portsRequired.find("portRequiredLoginSecurity") != _portsRequired.end() ) {
+
+		str_v request;
+		request.push_back(username);
+
+		response = _portsRequired["portRequiredLoginSecurity"]->send_message( request );
+
+	}
+
+	return response;
+
+}
+
 str_v SecurityManager::isUserAbleTo( str_v args ) {
 
 	str_v ret;
@@ -19,8 +35,12 @@ str_v SecurityManager::isUserAbleTo( str_v args ) {
 		std::string& required_ability = args.at(1);
 
 		/* Ask to DB ? */
-		if ( required_ability == required_ability ) {
-			ret.push_back("ok");
+		std::vector<std::string> abilities = getUserAbilities(username);
+		if ( std::find(abilities.begin(), abilities.end(), required_ability) != abilities.end() ) {
+			ret.push_back("granted");
+		}
+		else {
+			ret.push_back("denied");
 		}
 
 	}

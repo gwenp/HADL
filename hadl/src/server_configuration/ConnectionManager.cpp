@@ -13,6 +13,25 @@ ConnectionManager::~ConnectionManager() {
 
 }
 
+std::string ConnectionManager::getUserPassword( std::string& username ) {
+
+	if ( _portsRequired.find("portRequiredRequest") != _portsRequired.end() ) {
+
+		str_v request;
+		request.push_back(username);
+
+		str_v response = _portsRequired["portRequiredRequest"]->send_message( request );
+
+		if ( response.size() > 0 ) {
+			return response.at(0);
+		}
+
+	}
+
+	return "";
+
+}
+
 str_v ConnectionManager::authenticate( str_v args ) {
 
 	str_v ret;
@@ -22,7 +41,7 @@ str_v ConnectionManager::authenticate( str_v args ) {
 		std::string& password = args.at(1);
 
 		/* Ask to DB ? */
-		if ( password == password ) {
+		if ( password == this->getUserPassword(username) ) {
 			_user_sessions.insert(username);
 			ret.push_back("ok");
 		}

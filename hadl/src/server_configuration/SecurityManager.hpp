@@ -2,6 +2,7 @@
 #define _H_SecurityManager_H_
 
 #include <HADL/Component.hpp>
+#include <algorithm>
 
 class SecurityManager;
 typedef std::vector<std::string> (SecurityManager::*SecurityManagerMethod)(std::vector<std::string>);
@@ -14,6 +15,7 @@ public:
 	SecurityManager();
 	~SecurityManager();
 
+	std::vector<std::string> getUserAbilities( std::string& username );
 
 	str_v isUserAbleTo( str_v args );
 
