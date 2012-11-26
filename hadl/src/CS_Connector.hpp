@@ -15,18 +15,17 @@ public:
 	~CS_Connector();
 
 	virtual void onInit();
-	/* Should be private ? */
-	void listen_from( int port );
-	void connect();
 	void monitoring_routine( SOCKET sock );
-
-
 
 private:
 	virtual MessageP glue_message_propagation( MessageP msg, const std::string& role );
 
 
  	/** BEGIN NETWORKING **/
+
+	void listen_from( int port );
+
+
 	void exchange_discoveries_ntk( SOCKET sock );
 
 	MessageP generate_discovery_message( MessageP::DiscoverType disco_type );

@@ -4,15 +4,16 @@
 
 void Component::addPortRequired(std::string name, PortComposantRequired* port)
 {
+	std::cout << "||||||||||||||| Port Required added : " << name << std::endl;
 	port->setComponent(this);
-	_portsRequired.insert(std::pair<std::string, PortComposantRequired*>(name, port));
+	_portsRequired[name] = port;
 }
 
 void Component::addPortProvided(std::string name, PortComposantProvided* port, std::string method_index )
 {
+	std::cout << "||||||||||||||| Port Provided added : " << name << std::endl;
 	port->setComponent(this);
-	//port->set_callback(&Component::callback_method_rb);
-	_portsProvided.insert(std::pair<std::string, PortComposantProvided*>(name, port));
+	_portsProvided[name] = port;
 	
 	if ( !method_index.empty() ) {
 		_portsRequired_methodNames[port] = method_index;

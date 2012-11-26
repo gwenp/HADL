@@ -20,7 +20,7 @@ public:
 	// Doublon
 	void propagateNotificationToRole();
 
-	MessageP send_message( str_v args );
+	str_v send_message( str_v args );
 
 	RoleProvided* _providedRole;
 };

@@ -40,6 +40,7 @@ MessageP PortComposantProvided::receive_message( MessageP msg ) {
 	MessageP msgr;
 	msgr.set_sender("me");
 	msgr.set_receiver( msg.sender() );
+	msg.set_type(MessageP::RESPONSE);
 
 	return msgr;
 

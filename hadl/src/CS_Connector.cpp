@@ -203,23 +203,6 @@ MessageP CS_Connector::send_message_ntk( SOCKET sock, MessageP& msg, bool needs_
 
 
 
-/* TODO remove */
-void CS_Connector::connect() {
-	std::cout << "Connecting ..." << std::endl;
-
-	/* TODO */
-	SOCKET sock = this->connect_to("127.0.0.1",2345);
-
-	if ( sock == INVALID_SOCKET ) {
-		std::cout << "Bad socket ?\n";
-		return;
-	}
-
-
-
-	this->monitoring_routine( sock );
-}
-
 void CS_Connector::exchange_discoveries_ntk( SOCKET sock ) {
 	this->send_discoveries_ntk(sock);
 

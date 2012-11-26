@@ -48,8 +48,6 @@ int main(int argc, char const* argv[]) {
 
 	Dbg::init("config/debug.conf");
 
-	
-
 	if ( argc > 2 ) {
 
 		LanguageManager l;
@@ -70,6 +68,9 @@ int main(int argc, char const* argv[]) {
 			Server* srv = (Server*) l.getComponent("Server");
 			srv->onInit();
 
+			srv->info();
+
+
 			CS_Connector* c = (CS_Connector*) l.getConnector("connectorClient_serverSide");
 			c->setProperty("mode","server");
 			c->setProperty("port","2345");
@@ -78,17 +79,19 @@ int main(int argc, char const* argv[]) {
 		}
 		else {
 
-			Client* client = new Client();
+			Client* client = (Client*) l.getComponent("Client");
 			client->onInit();
 
+			client->info();
+
+			
 			CS_Connector* c = (CS_Connector*) l.getConnector("connectorClient_clientSide");
 			c->setProperty("mode","client");
 			c->setProperty("port","2345");
 			c->setProperty("host","127.0.0.1");
 			c->onInit();
 
-
-
+			
 			std::cout << "Type something to send request : ";
 			std::string test;
 			std::cin >> test;
