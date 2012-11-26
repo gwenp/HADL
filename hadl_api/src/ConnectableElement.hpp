@@ -10,6 +10,7 @@ class Configuration;
 class ConnectableElement : public Element
 {
 public:
+	virtual void onInit(){};
 	void addToConfiguration(Configuration* c);
 	Configuration* getParentConfiguration();
 	void setParentConfiguration(Configuration* cfg);
