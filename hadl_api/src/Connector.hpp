@@ -27,13 +27,9 @@ public:
 	void addRoleRequired(std::string name, RoleRequired* roleRequired);
 
 	void info();
-	//void on_notify(RoleProvided* port);
 
 	void attachToComponent(Component* c, std::string roleName, std::string portName);
-
-	// Doublon
-	//void sendNotificationTo(std::string roleRequired, MessageP& message ); //this should be protected in the future
-
+	
 	std::map<std::string, RoleProvided*> _rolesProvided;
 	std::map<std::string, RoleRequired*> _rolesRequired;
 
@@ -48,7 +44,6 @@ public:
 		MessageP msg;
 		msg.set_sender("");
 		msg.set_receiver("");
-		//msg.set_code(-1);
 		msg.add_argument("Error : " + error );
 
 		return msg;

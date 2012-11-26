@@ -17,9 +17,6 @@ class PortComposantRequired : public PortComposant
 public:
 	std::string getType(){ return "required"; };
 
-	// Doublon
-	//void propagateNotificationToRole();
-
 	str_v send_message( str_v args );
 
 	RoleProvided* _providedRole;
