@@ -52,6 +52,14 @@ void Connector::attachToComponent(Component* c, std::string roleName, std::strin
 }
 
 
+void Connector::attachToComponent(Configuration* c, std::string roleName, std::string portName) {
+	
+
+	PortComposantProvided* port = c->_portsProvided[portName];
+	_rolesRequired[roleName]->_portProvided = port;
+
+}
+
 /* Other side */
 
 MessageP Connector::on_message_from_provided_role( RoleProvided* from, MessageP msg ) {

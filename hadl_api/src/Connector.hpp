@@ -27,7 +27,7 @@ public:
 	void addRoleRequired(std::string name, RoleRequired* roleRequired);
 
 	void info();
-
+	void attachToComponent(Configuration* c, std::string roleName, std::string portName);
 	void attachToComponent(Component* c, std::string roleName, std::string portName);
 	
 	std::map<std::string, RoleProvided*> _rolesProvided;

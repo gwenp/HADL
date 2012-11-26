@@ -27,12 +27,12 @@ public:
 
 	void addElement(ConnectableElement* elt);
 
-private:
 	std::list<Element*> _elements;
 	std::map<std::string, PortConfigRequired*> _portsRequired;
 	std::map<std::string, PortConfigProvided*> _portsProvided;
 	std::map<std::string, RoleConfigProvided*> _rolesProvided;
 	std::map<std::string, RoleConfigRequired*> _rolesRequired;
+private:
 
 	ConnectableElement* _linkedElement;
 };
