@@ -18,7 +18,7 @@ public:
 
 	void start_cli();
 
-	void send_a_request();
+	void send_a_request( std::string request_name );
 
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
 

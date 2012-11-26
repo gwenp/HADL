@@ -13,18 +13,21 @@ Client::~Client() {
 void Client::start_cli() {
 
 	std::cout << "Type something to send request (test mode): ";
-	std::string test;
-	std::cin >> test;
-
-	this->send_a_request();
-	std::cout << "Request sent to port\n";
+	std::string request_name;
 
 
-	std::cin >> test;
+	while ( request_name != "quit" ) {
+		std::cin >> request_name;
+
+		this->send_a_request(request_name);
+		std::cout << "Request sent to port\n";
+	}
+
+	std::cout << "Exiting..." << std::endl;
 
 }
 
-void Client::send_a_request() {
+void Client::send_a_request( std::string request_name ) {
 
 	if ( _portsRequired.find("portClient") != _portsRequired.end() ) {
 
@@ -33,7 +36,7 @@ void Client::send_a_request() {
 		std::cout << "Sending to '" << "portClient" << "'\n";
 
 		str_v args;
-		args.push_back("test_message");
+		args.push_back(request_name);
 		args.push_back("test_message_arg2");
 		str_v response = _portsRequired["portClient"]->send_message(args);
 		std::cout << "Sent !!!\n";
@@ -60,7 +63,7 @@ void Client::onLaunch() {
 
 
 	}
-	
+
 str_v Client::on_message( PortComposantProvided* provided_port, str_v args ) {
 	std::cout << "Client callback" << std::endl;
 
