@@ -6,6 +6,27 @@ void LanguageManager::parseJSON(std::string jsonUrl, std::string app)
 	JsonParser::parse(this, jsonUrl, app);
 }
 
+void LanguageManager::initialize()
+{
+	for (std::map<std::string, Component*>::iterator it = _components.begin(); it != _components.end(); ++it)
+	{
+		(*it).second->onInit();
+	}
+
+	for (std::map<std::string, Connector*>::iterator it = _connectors.begin(); it != _connectors.end(); ++it)
+	{
+		(*it).second->onInit();
+	}
+}
+
+void LanguageManager::launch()
+{
+	for (std::map<std::string, Component*>::iterator it = _components.begin(); it != _components.end(); ++it)
+	{
+		(*it).second->onLaunch();
+	}	
+}
+
 void LanguageManager::registerComponentFactory(std::string name, ComponentFactory* factory)
 {
 	_componentFactories[name] = factory;

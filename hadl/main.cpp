@@ -64,7 +64,8 @@ int main(int argc, char const* argv[]) {
 		l.registerConnectorFactory("Default", new DefaultConnectorFactory());
 	
 		l.parseJSON(std::string(argv[2]), std::string(argv[1]));
-	
+		l.initialize();
+		l.launch();
 	}
 	else {
 		std::cout << "Usage : \n" << argv[0] << " <config_file.json> [client|server]" << std::endl;

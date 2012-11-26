@@ -184,7 +184,6 @@ void JsonParser::lookForTheLostConnector(LanguageManager* l, std::string connect
 						JsonParser::parseElement(l, elements[index]);
 						l->getConnector(connectorName)->setProperty("mode","client");
 					}	
-
 				}
 			}	
 		

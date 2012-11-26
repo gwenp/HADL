@@ -12,6 +12,8 @@
 class LanguageManager {
 public:
 	void parseJSON(std::string jsonUrl, std::string app);
+	void initialize();
+	void launch();
 
 	void registerComponentFactory(std::string name, ComponentFactory* factory);
 	Component* makeComponent(std::string name, std::string factory);
