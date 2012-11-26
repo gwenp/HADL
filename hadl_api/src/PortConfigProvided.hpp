@@ -6,7 +6,7 @@
 
 #include <string>
 
-class PortConfigProvided : public PortConfig
+class PortConfigProvided : public PortConfig, public PortComposantProvided
 {
 public:
 	std::string getType(){ return "provided"; };

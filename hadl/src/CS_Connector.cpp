@@ -1,7 +1,7 @@
 #include "CS_Connector.hpp"
 
 CS_Connector::CS_Connector() {
-
+	init_exit_signals();
 }
 
 CS_Connector::~CS_Connector() {
