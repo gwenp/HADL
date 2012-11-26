@@ -2,7 +2,7 @@
 	"applications":
 	[
 	{
-		"name" : "ClientApplication",
+		"name" : "client",
 		"elements" : [
 		{
 			"type" : "Component",
@@ -22,7 +22,7 @@
 		]
 	},
 	{
-		"name" : "ServerApplication",
+		"name" : "server",
 		"elements" : [	
 		{
 			"type" : "Component",
