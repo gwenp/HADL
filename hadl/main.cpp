@@ -63,7 +63,7 @@ int main(int argc, char const* argv[]) {
 		l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
 		l.registerConnectorFactory("Default", new DefaultConnectorFactory());
 	
-		l.parseJSON(std::string(argv[2]), std::string(argv[1]));
+		l.parseJSON(std::string(argv[1]), std::string(argv[2]));
 		l.initialize();
 		l.launch();
 	}
