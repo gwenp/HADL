@@ -12,21 +12,13 @@ void CS_Connector::onInit() {
 
 	const std::string& client_server = getProperty("mode");
 
-	if ( client_server.empty() ) {
-		std::cout << "Bad properties (mode)" << std::endl;
-		return;
-	}
-
 	int port = atoi( getProperty("port").c_str() );
 	if ( port <= 0 ) {
 		std::cout << "Bad properties (port)" << std::endl;
 		return;
 	}
 
-	if ( client_server == "server" ) {
-		this->listen_from(port);
-	}
-	else if ( client_server == "client" ) {
+	if ( client_server == "client" ) {
 
 		const std::string& host = getProperty("host");
 
@@ -35,9 +27,14 @@ void CS_Connector::onInit() {
 			return;		
 		}
 
+		std::cout << "CLIENT MODE\n";
 		SOCKET sock = this->connect_to( host, port );
 		//this->monitoring_routine( sock );
 
+	}
+	else {
+		std::cout << "SERVER MODE\n";
+		this->listen_from(port);
 	}
 
 }
