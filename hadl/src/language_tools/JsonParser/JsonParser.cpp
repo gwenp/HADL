@@ -43,7 +43,7 @@ void JsonParser::parseApplication(LanguageManager* l, Json::Value app, Json::Val
 
 }
 
-void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
+void JsonParser::parseElement(LanguageManager* l, Json::Value elt, bool onlyRolesProvided)
 {
 	Dbg::out("json") << "[JSON] element : " << elt.get("name", "").asString() << "; type: " << elt.get("type", "").asString() << std::endl;
 	std::string type = elt.get("type", "").asString();
@@ -105,10 +105,13 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt)
 		{
 			l->makeConnector(name, factory);
 
-			const Json::Value rolesRequired = elt["RolesRequired"];
-			for ( int index = 0; index < rolesRequired.size(); ++index )
+			if(onlyRolesProvided == false)
 			{
-				l->addRequiredRoleToConnector(name, rolesRequired[index].asString());
+				const Json::Value rolesRequired = elt["RolesRequired"];
+				for ( int index = 0; index < rolesRequired.size(); ++index )
+				{
+					l->addRequiredRoleToConnector(name, rolesRequired[index].asString());
+				}
 			}
 
 			const Json::Value rolesProvided = elt["RolesProvided"];
@@ -181,7 +184,7 @@ void JsonParser::lookForTheLostConnector(LanguageManager* l, std::string connect
 
 					if(elements[index].get("name","").asString() == connectorName)
 					{
-						JsonParser::parseElement(l, elements[index]);
+						JsonParser::parseElement(l, elements[index],true);
 						l->getConnector(connectorName)->setProperty("mode","client");
 					}	
 				}
