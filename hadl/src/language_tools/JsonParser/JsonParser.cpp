@@ -105,8 +105,12 @@ void JsonParser::parseElement(LanguageManager* l, Json::Value elt, bool onlyRole
 		{
 			l->makeConnector(name, factory);
 
+			std::cout << "//// implementing roles provided??" << std::endl;
+
 			if(onlyRolesProvided == false)
 			{
+				std::cout << "implementing roles Required" << std::endl;
+
 				const Json::Value rolesRequired = elt["RolesRequired"];
 				for ( int index = 0; index < rolesRequired.size(); ++index )
 				{
@@ -156,9 +160,12 @@ void JsonParser::parseAttachment(LanguageManager* l, Json::Value attachment, Jso
 		std::cout << "Connector not found" << std::endl;
 
 		lookForTheLostConnector(l, attachment["destinationElementName"].asString(), root);
-
 	}	
 
+	if(attachment["toType"] == "Port" && attachment.get("emmiterElementName", "") != "" && l->getComponent(attachment["emmiterElementName"].asString()) == NULL)
+	{
+		// _connector[attachment.get("emmiterElementName", "")]->clearRequiredRoles();
+	}	
 	l->makeAttachment(attachment["fromType"].asString(), attachment["fromName"].asString(), attachment["toType"].asString(), attachment["toName"].asString());
 }
 
@@ -169,7 +176,7 @@ void JsonParser::parseBinding(LanguageManager* l, std::string configName, Json::
 
 void JsonParser::lookForTheLostConnector(LanguageManager* l, std::string connectorName, Json::Value root)
 {
-	if(l->appName == "ClientApplication")
+	if(l->appName == "client")
 	{
 		const Json::Value apps = root["applications"];
 		for ( int index = 0; index < apps.size(); ++index )

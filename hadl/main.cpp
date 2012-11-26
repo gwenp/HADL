@@ -48,8 +48,6 @@ int main(int argc, char const* argv[]) {
 
 	Dbg::init("config/debug.conf");
 
-	
-
 	if ( argc > 2 ) {
 
 		LanguageManager l;

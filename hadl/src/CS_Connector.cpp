@@ -308,8 +308,6 @@ MessageP CS_Connector::generate_discovery_message( MessageP::DiscoverType disco_
 		}	
 	}
 
-
-
 	return disco_msg;
 
 }
