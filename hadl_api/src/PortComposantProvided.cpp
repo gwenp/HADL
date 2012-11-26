@@ -24,6 +24,11 @@ MessageP PortComposantProvided::receive_message( MessageP msg ) {
 		}
 
 	}
+	else {
+
+		std::cout << "Error : Port has not Component\n";
+
+	}
 
 	reponse_message.set_receiver( msg.sender() );
 
