@@ -63,6 +63,9 @@ int main(int argc, char const* argv[]) {
 	
 		l.parseJSON(std::string(argv[1]), std::string(argv[2]));
 		l.initialize();
+
+		std::cout << " _____________________ \n";
+
 		l.launch();
 	}
 	else {

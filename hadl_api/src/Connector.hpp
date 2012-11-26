@@ -21,8 +21,7 @@ class Component;
 class Connector : public ConnectableElement
 {
 public:
-	//Connector() { _messages_queue = std::queue<MessageP>(); }
-
+	
 	void addRoleProvided(std::string name, RoleProvided* roleProvided, std::string& linkedRole );
 	void addRoleRequired(std::string name, RoleRequired* roleRequired);
 

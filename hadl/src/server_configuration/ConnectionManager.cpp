@@ -36,7 +36,7 @@ std::string ConnectionManager::getUserPassword( std::string& username ) {
 
 str_v ConnectionManager::authenticate( str_v args ) {
 
-	std::cout << "ConnectionManager::authenticate" << std::endl;
+	std::cout << "\tConnectionManager::authenticate" << std::endl;
 
 	str_v ret;
 
@@ -61,7 +61,7 @@ str_v ConnectionManager::authenticate( str_v args ) {
 
 str_v ConnectionManager::makeACoolRequest( str_v args ) {
 
-	std::cout << "ConnectionManager::makeACoolRequest" << std::endl;
+	std::cout << "\tConnectionManager::makeACoolRequest" << std::endl;
 
 	if ( args.size() > 1 ) {
 
@@ -80,7 +80,8 @@ str_v ConnectionManager::makeACoolRequest( str_v args ) {
 
 str_v ConnectionManager::on_message( PortComposantProvided* provided_port, str_v args ) {
 
-	std::cout << "ConnectionManager Callback" << std::endl;
+	std::cout << "[][][] Arrivee au Composant\n";
+	std::cout << "\tConnectionManager Callback" << std::endl;
 
 	str_v response;
 

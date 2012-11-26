@@ -165,7 +165,7 @@ MessageP CS_Connector::receive_message_ntk( SOCKET sock ) {
 
 	while ( _messages_queue.empty() ) {
 
-		std::cout << "Empty queue. Receiving through network" << std::endl;
+		//std::cout << "Empty queue. Receiving through network" << std::endl;
 		this->wait_for_messages_ntk( sock );
 
 	}
@@ -333,16 +333,10 @@ void CS_Connector::interpret_discovery_message( MessageP msg, SOCKET sock ) {
 
 	}
 
-	std::cout << "ROLES LIST UPDATED !\n";
-
 }
 
 
 void CS_Connector::on_message_received_ntk( MessageP& msg, SOCKET sock ) {
-
-	std::cout << "New message ! --> " << std::endl;
-
-	//debug_message(msg);
 
 	switch( msg.type() ) {
 		case MessageP::DISCOVER:

@@ -6,8 +6,20 @@ void PortConfigRequired::bindTo( PortComposantRequired* portRequired ) {
 }
 
 str_v PortConfigRequired::send_message( str_v args ) {
+
+	std::cout << "@@@ Passage par PortConfigRequis @@@\n";
+	std::cout << "--- Sent arguments : " << std::endl;
+	for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); ++it) {
+		std::cout << "+ " << (*it) << std::endl;
+	}
+
 	if ( _bindingRequired != NULL ) {
-		return _bindingRequired->send_message(args);
+
+		str_v ret_vector = _bindingRequired->send_message(args);
+		std::cout << "<<< Retourne par PortConfigRequis <<<\n";
+		
+		return ret_vector;
+
 	}
 	else {
 		std::cout << "BindingRequired not found" << std::endl;

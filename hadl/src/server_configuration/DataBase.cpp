@@ -22,7 +22,7 @@ DataBase::~DataBase()
 
 str_v DataBase::getPasswordOfUser( str_v args ) {
 
-	std::cout << "DataBase::getPasswordOfUser" << std::endl;
+	std::cout << "\tDataBase::getPasswordOfUser" << std::endl;
 
 	str_v ret;
 
@@ -44,7 +44,7 @@ str_v DataBase::getPasswordOfUser( str_v args ) {
 
 str_v DataBase::getAbilitiesOfUser( str_v args ) {
 
-	std::cout << "DataBase::getAbilitiesOfUser" << std::endl;
+	std::cout << "\tDataBase::getAbilitiesOfUser" << std::endl;
 
 	str_v ret;
 
@@ -68,7 +68,8 @@ str_v DataBase::getAbilitiesOfUser( str_v args ) {
 
 str_v DataBase::on_message( PortComposantProvided* provided_port, str_v args ) {
 
-	std::cout << "DataBase Callback" << std::endl;
+	std::cout << "[][][] Arrivee au Composant\n";
+	std::cout << "\tDataBase Callback" << std::endl;
 
 	str_v response;
 

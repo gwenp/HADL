@@ -5,9 +5,14 @@ void PortConfigProvided::bindTo( PortComposantProvided* portProvided ) {
 }
 
 MessageP PortConfigProvided::receive_message( MessageP msg ) {
+	
+	std::cout << "@@@ Passage par PortConfigFourni @@@\n";
+
 	if ( _bindingProvided != NULL ) {
 
-		return _bindingProvided->receive_message(msg);
+		MessageP response_msg = _bindingProvided->receive_message(msg);
+		std::cout << "<<< Retourne par PortConfigFourni <<<\n";
+		return response_msg;
 	}
 	else {
 		std::cout << "Binding NOT FOUND\n";
