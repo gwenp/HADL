@@ -119,14 +119,6 @@
 
 		"attachments" : [
 			{
-				"fromType" : "Role",
-				"fromName" : "roleRequired_CSconnector",
-				"toType"   : "Port",
-				"toName"   : "portProvidedReceptionServer",
-				"destinationElementName" : "Server",
-				"emmiterElementName" : "Client"
-			},
-			{
 				"fromType" : "Port",
 				"fromName" : "portRequiredRequest",
 				"toType"   : "Role",
