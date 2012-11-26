@@ -10,12 +10,17 @@ void LanguageManager::initialize()
 {
 	for (std::map<std::string, Component*>::iterator it = _components.begin(); it != _components.end(); ++it)
 	{
-		(*it).second->onInit();
+		Dbg::out("Initialization") << "[Initialization] Compo : "<< (*it).first << std::endl;
+
+		if(_components[(*it).first] != NULL)
+			(*it).second->onInit();
 	}
 
 	for (std::map<std::string, Connector*>::iterator it = _connectors.begin(); it != _connectors.end(); ++it)
 	{
-		(*it).second->onInit();
+		Dbg::out("Initialization") << "[Initialization] Connector : "<< (*it).first << std::endl;
+		if(_connectors[(*it).first] != NULL)
+			(*it).second->onInit();
 	}
 }
 
@@ -34,7 +39,7 @@ void LanguageManager::registerComponentFactory(std::string name, ComponentFactor
 
 Component* LanguageManager::makeComponent(std::string name, std::string factory)
 {
-	Dbg::out("LanguageManager") << "[LanguageManager] makeComponent : "<< name << "; from factory : " << factory  << std::endl;
+	Dbg::out("LanguageManagerMake") << "[LanguageManager] makeComponent : "<< name << "; from factory : " << factory  << std::endl;
 	_components[name] = _componentFactories[factory]->make();
 	return _components[name];
 }
@@ -46,7 +51,7 @@ void LanguageManager::registerConnectorFactory(std::string name, ConnectorFactor
 
 Connector* LanguageManager::makeConnector(std::string name, std::string factory)
 {
-	Dbg::out("LanguageManager") << "[LanguageManager] makeConnector : "<< name << "; from factory : " << factory << std::endl;
+	Dbg::out("LanguageManagerMake") << "[LanguageManager] makeConnector : "<< name << "; from factory : " << factory << std::endl;
 
 	_connectors[name] = _connectorFactories[factory]->make();
 	return _connectors[name];

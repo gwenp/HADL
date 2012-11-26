@@ -148,7 +148,7 @@ void JsonParser::parseProperies(LanguageManager* l, std::string elementName, std
 
 void JsonParser::parseAttachment(LanguageManager* l, Json::Value attachment, Json::Value root)
 {
-	if(attachment["toType"] == "Role" && l->getConnector(attachment["destinationElementName"].asString()) == NULL)
+	if(attachment["toType"] == "Role" && l->getConnector(attachment["destinationElementName"].asString()) == NULL && l->getComponent(attachment["destinationElementName"].asString()) == NULL)
 	{
 		std::cout << "Connector not found" << std::endl;
 
