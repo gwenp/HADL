@@ -119,6 +119,13 @@
 
 		"attachments" : [
 			{
+				"fromType" : "Role",
+				"fromName" : "roleProvided_CSconnector",
+				"toType"   : "Port",
+				"toName"   : "toInnerServerAuthentication",
+				"destinationElementName" : "Server"
+			},
+			{
 				"fromType" : "Port",
 				"fromName" : "portRequiredRequest",
 				"toType"   : "Role",
