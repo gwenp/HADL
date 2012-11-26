@@ -161,7 +161,11 @@ void LanguageManager::makeAttachment(std::string fromType, std::string fromName,
 	}
 	else if(fromType == "Role" && toType == "Port")
 	{
-		_connectorsByRole[fromName]->attachToComponent(_componentsByPort[toName], fromName, toName);
+		if(_componentsByPort[toName] != NULL)
+			_connectorsByRole[fromName]->attachToComponent(_componentsByPort[toName], fromName, toName);
+		if(_configurationsByPortProvided[toName] != NULL)
+			_connectorsByRole[fromName]->attachToComponent(_configurationsByPortProvided[toName], fromName, toName);
+		
 	}
 }
 
@@ -180,5 +184,8 @@ void LanguageManager::addBinding(std::string configName, std::string bindingName
 		_portsConfigProvided[bindingName] =  new PortConfigProvided();
 		_portsConfigProvided[bindingName]->bindTo(_portsProvided[destName]);
 		_configurations[configName]->addPortProvided(bindingName, _portsConfigProvided[bindingName]);
+
+		_configurationsByPortProvided[bindingName] = _configurations[configName];
+
 	}
 }

@@ -54,6 +54,7 @@ private:
 	std::map<std::string, Connector*> _connectors;
 	std::map<std::string, Component*> _components;
 	std::map<std::string, Configuration*> _configurations;
+	std::map<std::string, Configuration*> _configurationsByPortProvided;
 	
 	std::map<std::string, Component*> _componentsByPort;
 	std::map<std::string, Connector*> _connectorsByRole;
