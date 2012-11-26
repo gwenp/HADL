@@ -7,7 +7,7 @@ void PortConfigRequired::bindTo( PortComposantRequired* portRequired ) {
 
 str_v PortConfigRequired::send_message( str_v args ) {
 
-	std::cout << "@@@ Passage par PortConfigRequis @@@\n";
+	std::cout << "@@@ Passage par PortConfigRequis '" << _name << "' @@@\n";
 	std::cout << "--- Sent arguments : " << std::endl;
 	for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); ++it) {
 		std::cout << "+ " << (*it) << std::endl;

@@ -6,7 +6,7 @@ void RoleConfigRequired::bindTo( RoleRequired* roleRequired ) {
 
 MessageP RoleConfigRequired::propagate_message( MessageP msg ) {
 	
-	std::cout << "@@@ Passage par RoleConfigRequis @@@\n";
+	std::cout << "@@@ Passage par RoleConfigRequis '" << _name << "' @@@\n";
 
 	if ( _bindingRequired != NULL ) {
 		return _bindingRequired->propagate_message(msg);

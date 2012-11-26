@@ -6,7 +6,7 @@ void PortConfigProvided::bindTo( PortComposantProvided* portProvided ) {
 
 MessageP PortConfigProvided::receive_message( MessageP msg ) {
 	
-	std::cout << "@@@ Passage par PortConfigFourni @@@\n";
+	std::cout << "@@@ Passage par PortConfigFourni '" << _name << "' @@@\n";
 
 	if ( _bindingProvided != NULL ) {
 

@@ -1,5 +1,7 @@
 #include "Element.hpp"
 
+
+
 void Element::setProperty( const std::string& key, const std::string& value ) {
 	_properties[key] = value;
 }
@@ -11,4 +13,12 @@ std::string Element::getProperty( const std::string& key ) {
 	else {
 		return "";
 	}
+}
+
+const std::string& Element::getName() const {
+	return _name;
+}
+
+void Element::setName( const std::string& name) {
+	_name = name;
 }

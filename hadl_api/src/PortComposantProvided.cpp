@@ -4,7 +4,7 @@
 
 MessageP PortComposantProvided::receive_message( MessageP msg ) {
 
-	std::cout << "@@@ Passage par PortFourni @@@\n";
+	std::cout << "@@@ Passage par PortFourni '" << _name << "' @@@\n";
 
 	/* Ici lancer la methode associee au composant */
 
@@ -21,7 +21,7 @@ MessageP PortComposantProvided::receive_message( MessageP msg ) {
 		std::vector<std::string> response_args;
 		response_args = _component->on_message(this,args);
 
-		std::cout << "<<< Retourne par PortFourni\n";
+		std::cout << "<<< Retourne par PortFourni '" << _name << "'\n";
 		std::cout << "--- Arguments retournes : \n";
 		for ( int i=0; i<response_args.size(); i++ ) {
 			std::cout << "+ " << response_args.at(i) << std::endl;

@@ -12,7 +12,7 @@
 
 class RoleProvided;
 
-class PortComposantRequired : public PortComposant
+class PortComposantRequired : public PortComposant, public Element
 {
 public:
 	std::string getType(){ return "required"; };

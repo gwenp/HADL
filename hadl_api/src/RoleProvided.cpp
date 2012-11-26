@@ -4,13 +4,13 @@
 
 MessageP RoleProvided::propagate_message( MessageP msg ) {
 
-	std::cout << "@@@ Passage par RoleFourni @@@\n";
+	std::cout << "@@@ Passage par RoleFourni '" << _name << "' @@@\n";
 
 	if ( _connector != NULL ) {
 
 		MessageP response_msg = _connector->on_message_from_provided_role( this, msg );
 
-		std::cout << "<<< Retourne par RoleFourni <<<	\n";
+		std::cout << "<<< Retourne par RoleFourni '" << _name << "' <<<	\n";
 
 		return response_msg;
 	}

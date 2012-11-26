@@ -5,7 +5,7 @@
 
 MessageP RoleRequired::propagate_message( MessageP msg ) {
 
-	std::cout << "@@@ Passage par RoleRequis @@@\n";
+	std::cout << "@@@ Passage par RoleRequis '" << _name << "' @@@\n";
 
 	MessageP response_msg;
 	/* Return to sender */
@@ -15,7 +15,7 @@ MessageP RoleRequired::propagate_message( MessageP msg ) {
 	if ( _portProvided != NULL ) {
 
 		response_msg = _portProvided->receive_message( msg );
-		std::cout << "<<< Retourne par RoleRequis <<<\n";
+		std::cout << "<<< Retourne par RoleRequis '" << _name << "' <<<\n";
 
 	}
 	else {

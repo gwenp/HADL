@@ -92,6 +92,8 @@ void LanguageManager::addRequiredPortToComponent(std::string componentName, std:
 	Dbg::out("LanguageManager") << "[LanguageManager] addPortRequired : "<< portName << " to Component : " << componentName << std::endl;
 	_portsRequired[portName] = new PortComposantRequired();
 
+	_portsRequired[portName]->setName(portName);
+
 	_components[componentName]->addPortRequired(portName, _portsRequired[portName]);
 	_componentsByPort[portName] = _components[componentName];
 }
@@ -99,6 +101,8 @@ void LanguageManager::addRequiredPortToComponent(std::string componentName, std:
 void LanguageManager::addProvidedPortToComponent(std::string componentName, std::string portName, std::string toMethod)
 {
 	_portsProvided[portName] = new PortComposantProvided();
+
+	_portsProvided[portName]->setName(portName);
 	Dbg::out("LanguageManager") << "[LanguageManager] addPortProvided : "<< portName << " to Component : " << componentName << std::endl;
 	_components[componentName]->addPortProvided(portName,_portsProvided[portName], toMethod);
 	_componentsByPort[portName] = _components[componentName];
@@ -108,6 +112,8 @@ void LanguageManager::addRequiredRoleToConnector(std::string connectorName, std:
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] addRoleRequired : "<< roleName << " to Connector : " << connectorName << std::endl;
 	_rolesRequired[roleName] = new RoleRequired();
+
+	_rolesRequired[roleName]->setName(roleName);
 	_connectors[connectorName]->addRoleRequired(roleName, _rolesRequired[roleName]);
 	_connectorsByRole[roleName] = _connectors[connectorName];
 }
@@ -116,6 +122,8 @@ void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std:
 {
 	Dbg::out("LanguageManager") << "[LanguageManager] addRoleProvided : "<< roleName << " to Connector : " << connectorName << std::endl;
 	_rolesProvided[roleName] =  new RoleProvided();
+
+	_rolesProvided[roleName]->setName(roleName);
 	_connectors[connectorName]->addRoleProvided(roleName, _rolesProvided[roleName], toMethod);
 	_connectorsByRole[roleName] = _connectors[connectorName];
 }
@@ -131,6 +139,8 @@ void LanguageManager::attachConfigurationToComponent(std::string componentName, 
 	Dbg::out("LanguageManager") << "[LanguageManager] attachConfigurationToComponent : "<< componentName << "  : " << configurationName << std::endl;
 
 	_configurations[configurationName] = new Configuration();
+
+	_configurations[configurationName]->setName(configurationName);
 	_components[componentName]->linkConfiguration(_configurations[configurationName], false);
 }
 

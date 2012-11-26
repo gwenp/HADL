@@ -6,7 +6,7 @@ void RoleConfigProvided::bindTo( RoleProvided* roleProvided ) {
 
 MessageP RoleConfigProvided::propagate_message( MessageP msg ) {
 
-	std::cout << "@@@ Passage par RoleConfigFourni @@@\n";
+	std::cout << "@@@ Passage par  '" << _name << "' @@@\n";
 
 	if ( _bindingProvided != NULL ) {
 		return _bindingProvided->propagate_message(msg);

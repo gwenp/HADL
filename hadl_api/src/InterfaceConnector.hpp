@@ -6,7 +6,7 @@
 
 #include <map>
 
-class InterfaceConnector : public Interface
+class InterfaceConnector : public Interface, public Element
 {
 public:
 

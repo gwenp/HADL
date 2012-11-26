@@ -8,7 +8,7 @@
 
 #include "Common.hpp"
 
-class PortComposantProvided : public PortComposant
+class PortComposantProvided : public PortComposant, public Element
 {
 public:
 

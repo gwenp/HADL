@@ -5,7 +5,7 @@
 
 str_v PortComposantRequired::send_message( str_v args ) {
 
-	std::cout << "@@@ Passage par PortRequis @@@\n";
+	std::cout << "@@@ Passage par PortRequis '" << _name << "' @@@\n";
 	std::cout << "--- Sent arguments : " << std::endl;
 	for (std::vector<std::string>::iterator it = args.begin(); it != args.end(); ++it) {
 		std::cout << "+ " << (*it) << std::endl;
@@ -26,7 +26,7 @@ str_v PortComposantRequired::send_message( str_v args ) {
 		std::cout << "ProvidedRole not found" << std::endl;
 	}
 
-	std::cout << "<<< Retourne par PortRequis <<<\n";
+	std::cout << "<<< Retourne par PortRequis '" << _name << "' <<<\n";
 	std::cout << "--- Arguments retournes : \n";
 	str_v ret_args;
 	for ( int i=0; i<response_msg.argument_size(); i++ ) {

@@ -5,9 +5,10 @@
 
 class Configuration;
 
-class RoleConfig : public InterfaceConfiguration
+class RoleConfig : public InterfaceConfiguration, public Element
 {
 public:
+
 	Configuration* getConfiguration();
 	void setConfiguration(Configuration* c);
 

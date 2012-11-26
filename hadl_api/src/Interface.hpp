@@ -2,6 +2,7 @@
 #define INTERFACE_HPP
 
 #include <string>
+#include "Element.hpp"
 
 class Interface
 {

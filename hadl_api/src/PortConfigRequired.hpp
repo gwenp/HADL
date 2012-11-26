@@ -6,9 +6,10 @@
 
 #include <string>
 
-class PortConfigRequired : public PortConfig
+class PortConfigRequired : public PortConfig, public Element
 {
 public:
+
 	std::string getType(){ return "required"; };
 
 	void bindTo( PortComposantRequired* portRequired );
