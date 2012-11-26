@@ -22,6 +22,8 @@ typedef std::map<std::string, ComponentMethod> MethodsIndex;
 class Component : public ConnectableElement
 {
 public:
+	virtual void onLaunch() {};
+
 	void addPortRequired(std::string name, PortComposantRequired* port);
 	void addPortProvided(std::string name, PortComposantProvided* port, std::string method_index = "");
 
