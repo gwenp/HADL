@@ -16,9 +16,6 @@ public:
 	std::string getType(){ return "required"; };
 	PortComposantProvided* _portProvided;
 
-	// Doublon
-	//void propagateNotificationToPort();
-
 	MessageP propagate_message( MessageP msg );
 
 private:

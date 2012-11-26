@@ -30,21 +30,12 @@ public:
 	void info();
 
 	void attachToConnector(Connector* c, std::string portName, std::string roleName);
-	//void sendNotificationTo(std::string portRequired);
-	
-	// DOUBLON
-	//void on_notify(PortComposantProvided* port);
 
 	virtual std::vector<std::string> on_message( PortComposantProvided* provided_port, std::vector<std::string> args );
 
 	std::map<std::string, PortComposantRequired*> _portsRequired;
 	std::map<std::string, PortComposantProvided*> _portsProvided;
-
-	//std::map< std::string, a_fun >;
-	str_v stub_method( str_v args );
-
-
-
+	
 protected:
 
 	std::map<PortComposantProvided*,std::string> _portsRequired_methodNames;
