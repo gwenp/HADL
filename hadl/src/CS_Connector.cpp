@@ -27,12 +27,14 @@ void CS_Connector::onInit() {
 			return;		
 		}
 
+		_rolesRequired.clear();
 		std::cout << "CLIENT MODE\n";
 		SOCKET sock = this->connect_to( host, port );
 		//this->monitoring_routine( sock );
 
 	}
 	else {
+		_rolesProvided.clear();
 		std::cout << "SERVER MODE\n";
 		this->listen_from(port);
 	}
