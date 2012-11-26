@@ -18,7 +18,7 @@ AC_PROG_CC
 
 # Checks for libraries.
 PKG_CHECK_MODULES([LIBSIGC], [sigc++-2.0])
-#PKG_CHECK_MODULES([LIBHADL],[libhadl])
+PKG_CHECK_MODULES([LIBPROTOBUF], [protobuf])
 
 # Checks for header files.
 
