@@ -63,7 +63,7 @@ int main(int argc, char const* argv[]) {
 		l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
 		l.registerConnectorFactory("Default", new DefaultConnectorFactory());
 	
-		l.parseJSON(std::string(argv[2]));
+		l.parseJSON(std::string(argv[2]), std::string(argv[1]));
 	
 		if ( !strcmp(argv[1],"server") ) {
 
@@ -81,7 +81,7 @@ int main(int argc, char const* argv[]) {
 			Client* client = new Client();
 			client->onInit();
 
-			CS_Connector* c = (CS_Connector*) l.getConnector("connectorClient_clientSide");
+			CS_Connector* c = (CS_Connector*) l.getConnector("connectorClient_serverSide");
 			c->setProperty("mode","client");
 			c->setProperty("port","2345");
 			c->setProperty("host","127.0.0.1");

@@ -20,11 +20,12 @@ void JsonParser::parse(LanguageManager* l,std::string fileUrl, std::string appli
 	const Json::Value apps = root["applications"];
 	for ( int index = 0; index < apps.size(); ++index )
 	{
-		JsonParser::parseApplication(l, apps[index]);
+		if(apps[index].get("name","").asString() == applicationContext)
+			JsonParser::parseApplication(l, apps[index], root);
 	}
 }
 
-void JsonParser::parseApplication(LanguageManager* l, Json::Value app)
+void JsonParser::parseApplication(LanguageManager* l, Json::Value app, Json::Value root)
 {
 	Dbg::out("json") << "[JSON] application : " << app.get("name", "").asString() << std::endl;
 	
@@ -37,7 +38,7 @@ void JsonParser::parseApplication(LanguageManager* l, Json::Value app)
 	const Json::Value attachments = app["attachments"];
 	for ( int index = 0; index < attachments.size(); ++index )
 	{
-		JsonParser::parseAttachment(l, attachments[index]);
+		JsonParser::parseAttachment(l, attachments[index], root);
 	}
 
 }
@@ -145,12 +146,49 @@ void JsonParser::parseProperies(LanguageManager* l, std::string elementName, std
 	}
 }
 
-void JsonParser::parseAttachment(LanguageManager* l, Json::Value attachment)
+void JsonParser::parseAttachment(LanguageManager* l, Json::Value attachment, Json::Value root)
 {
+	if(attachment["toType"] == "Role" && l->getConnector(attachment["destinationElementName"].asString()) == NULL)
+	{
+		std::cout << "Connector not found" << std::endl;
+
+		lookForTheLostConnector(l, attachment["destinationElementName"].asString(), root);
+
+	}	
+
 	l->makeAttachment(attachment["fromType"].asString(), attachment["fromName"].asString(), attachment["toType"].asString(), attachment["toName"].asString());
 }
 
 void JsonParser::parseBinding(LanguageManager* l, std::string configName, Json::Value binding)
 {
 	l->addBinding(configName, binding["bindingName"].asString(), binding["type"].asString(), binding["destinationName"].asString() );
+}
+
+void JsonParser::lookForTheLostConnector(LanguageManager* l, std::string connectorName, Json::Value root)
+{
+	if(l->appName == "ClientApplication")
+	{
+		const Json::Value apps = root["applications"];
+		for ( int index = 0; index < apps.size(); ++index )
+		{
+			if(apps[index].get("name","").asString() != l->appName)
+			{
+				Json::Value elements = apps[index]["elements"];
+
+				for ( int index = 0; index < elements.size(); ++index )
+				{
+					std::cout << "lookForTheLostConnector "<< elements[index].get("name","").asString() << std::endl;
+
+					if(elements[index].get("name","").asString() == connectorName)
+					{
+						JsonParser::parseElement(l, elements[index]);
+						l->getConnector(connectorName)->setProperty("mode","client");
+					}	
+
+				}
+			}	
+		
+		}
+
+	}
 }

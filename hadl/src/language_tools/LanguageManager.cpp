@@ -1,8 +1,9 @@
 #include "LanguageManager.hpp"
 
-void LanguageManager::parseJSON(std::string jsonUrl)
+void LanguageManager::parseJSON(std::string jsonUrl, std::string app)
 {
-	JsonParser::parse(this, jsonUrl, "Server");
+	appName = app;
+	JsonParser::parse(this, jsonUrl, app);
 }
 
 void LanguageManager::registerComponentFactory(std::string name, ComponentFactory* factory)
@@ -95,7 +96,7 @@ void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std:
 
 void LanguageManager::addPropertyToElement(Element* e, std::string key, std::string value)
 {
-	Dbg::out("LanguageManager") << "[LanguageManager] addPropertyToElement : "<< key << "  : " << value << std::endl;
+	std::cout << "[LanguageManager] addPropertyToElement : "<< key << "  : " << value << std::endl;
 	e->setProperty(key, value);
 }
 

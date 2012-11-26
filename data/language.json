@@ -9,17 +9,6 @@
 			"factory" : "Client",
 			"name" : "Client",
 			"PortsRequired" : ["portClient"]
-		},
-		{
-			"type" : "Connector",
-			"factory" : "CS_Connector",
-			"name" : "connectorClient_clientSide",
-			"properties" : {
-				"mode" : "client",
-				"host" : "string",
-				"port" : "string"
-			},
-			"RolesProvided" : [{"name" : "roleProvided_CSconnector", "toRole" : "roleRequired_CSconnector" }]
 		}
 		],
 		"attachments" : [
@@ -27,7 +16,8 @@
 				"fromType" : "Port",
 				"fromName" : "portClient",
 				"toType"   : "Role",
-				"toName"   : "roleProvided_CSconnector" 
+				"toName"   : "roleProvided_CSconnector",
+				"destinationElementName" : "connectorClient_serverSide"
 			}
 		]
 	},
@@ -117,6 +107,7 @@
 				"host" : "string",
 				"port" : "string"
 			},
+			"RolesProvided" : [{"name" : "roleProvided_CSconnector", "toRole" : "roleRequired_CSconnector" }],
 			"RolesRequired" : ["roleRequired_CSconnector"]
 		}
 		],
@@ -126,43 +117,50 @@
 				"fromType" : "Role",
 				"fromName" : "roleRequired_CSconnector",
 				"toType"   : "Port",
-				"toName"   : "portProvidedReceptionServer" 
+				"toName"   : "portProvidedReceptionServer",
+				"destinationElementName" : "Server"
 			},
 			{
 				"fromType" : "Port",
 				"fromName" : "portRequiredRequest",
 				"toType"   : "Role",
-				"toName"   : "roleProvidedRequest" 
+				"toName"   : "roleProvidedRequest",
+				"destinationElementName" : "Server"
 			},
 			{
 				"fromType" : "Role",
 				"fromName" : "roleRequiredRequest",
 				"toType"   : "Port",
-				"toName"   : "portProvidedRequest" 
+				"toName"   : "portProvidedRequest",
+				"destinationElementName" : "Database"
 			},
 			{
 				"fromType" : "Port",
 				"fromName" : "portRequiredAuthentication",
 				"toType"   : "Role",
-				"toName"   : "roleProvidedAuthentication" 
+				"toName"   : "roleProvidedAuthentication",
+				"destinationElementName" : "CM_to_SM"
 			},
 			{
 				"fromType" : "Role",
 				"fromName" : "roleRequiredAuthentication",
 				"toType"   : "Port",
-				"toName"   : "portProvidedAuthentication" 
+				"toName"   : "portProvidedAuthentication",
+				"destinationElementName" : "SecurityManager" 
 			},
 			{
 				"fromType" : "Port",
 				"fromName" : "portRequiredLoginSecurity",
 				"toType"   : "Role",
-				"toName"   : "roleProvidedLoginSecurity" 
+				"toName"   : "roleProvidedLoginSecurity",
+				"destinationElementName" : "SM_to_DB"
 			},
 			{
 				"fromType" : "Role",
 				"fromName" : "roleRequiredLoginSecurity",
 				"toType"   : "Port",
-				"toName"   : "portProvidedLoginSecurity" 
+				"toName"   : "portProvidedLoginSecurity",
+				"destinationElementName" : "Database"
 			}
 		]
 	}

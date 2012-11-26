@@ -11,7 +11,7 @@
 
 class LanguageManager {
 public:
-	void parseJSON(std::string jsonUrl);
+	void parseJSON(std::string jsonUrl, std::string app);
 
 	void registerComponentFactory(std::string name, ComponentFactory* factory);
 	Component* makeComponent(std::string name, std::string factory);
@@ -41,6 +41,8 @@ public:
 
 	void makeAttachment(std::string fromType, std::string fromName, std::string toType, std::string toName);
 	void addBinding(std::string configName, std::string bindingName, std::string type, std::string destName);
+
+	std::string appName;
 private:
 	std::map<std::string, ComponentFactory*> _componentFactories;
 	std::map<std::string, ConnectorFactory*> _connectorFactories;
