@@ -10,6 +10,8 @@ CS_Connector::~CS_Connector() {
 
 void CS_Connector::onInit() {
 
+	std::cout << "+++++ INIT CONNECTOR ++++++" << std::endl;
+
 	const std::string& client_server = getProperty("mode");
 
 	int port = atoi( getProperty("port").c_str() );
@@ -18,7 +20,7 @@ void CS_Connector::onInit() {
 		return;
 	}
 
-	if ( client_server == "client" ) {
+	if ( client_server.compare("client") == 0 ) {
 
 		const std::string& host = getProperty("host");
 

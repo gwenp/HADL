@@ -16,8 +16,6 @@ Server::~Server() {
 //Server::ServerMethodsIndex(test);
 
 void Server::onInit() {
-	//_methods_index["test"] = &Client::test_method;
-	//_methods["test"] = &Component::stub_method;
 	std::cout << "Init Server" << std::endl;
 }
 

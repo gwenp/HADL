@@ -51,12 +51,16 @@ void Client::send_a_request() {
 
 void Client::onInit() {
 
-
 	std::cout << "Init Client" << std::endl;
 
-	this->start_cli();
 }
 
+void Client::onLaunch() {
+		this->start_cli();
+
+
+	}
+	
 str_v Client::on_message( PortComposantProvided* provided_port, str_v args ) {
 	std::cout << "Client callback" << std::endl;
 

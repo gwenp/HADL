@@ -14,6 +14,7 @@ public:
 	~Client();
 
 	void onInit();
+	void onLaunch();
 
 	void start_cli();
 
