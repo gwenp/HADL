@@ -13,13 +13,15 @@ Client::~Client() {
 void Client::send_a_request() {
 
 	if ( _portsRequired.find("portClient") != _portsRequired.end() ) {
+
+	//if ( _portsRequired.find("portClient") != _portsRequired.end() ) {
 	
 		std::cout << "Sending to '" << "portClient" << "'\n";
 
 		str_v args;
 		args.push_back("test_message");
 		args.push_back("test_message_arg2");
-		MessageP response = _portsRequired["portClient"]->send_message(args);
+		str_v response = _portsRequired["portClient"]->send_message(args);
 		std::cout << "Sent\n";
 	}
 	else {
