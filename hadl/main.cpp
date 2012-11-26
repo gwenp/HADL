@@ -66,7 +66,9 @@ int main(int argc, char const* argv[]) {
 		l.parseJSON(std::string(argv[2]), std::string(argv[1]));
 	
 	}
-
+	else {
+		std::cout << "Usage : \n" << argv[0] << " <config_file.json> [client|server]" << std::endl;
+	}
 
 	return 0;
 }
