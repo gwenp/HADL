@@ -5,6 +5,8 @@
 #include <HADL/Component.hpp>
 #include <HADL/Connector.hpp>
 #include <HADL/Configuration.hpp>
+#include <HADL/PortConfigProvided.hpp>
+
 #include "JsonParser/JsonParser.hpp"
 #include "ComponentFactory.hpp"
 #include "ConnectorFactory.hpp"
@@ -63,6 +65,7 @@ private:
 	std::map<std::string, PortComposantRequired*> _portsRequired;
 
 	std::map<std::string, PortConfigRequired*> _portsConfigRequired;
+	std::map<std::string, PortConfigProvided*> _portsConfigProvided;
 };
 
 #endif

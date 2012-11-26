@@ -172,6 +172,13 @@ void LanguageManager::addBinding(std::string configName, std::string bindingName
 		Dbg::out("LanguageManager") << "[LanguageManager] !!!!! addBinding : "<< configName << "  : " << bindingName << std::endl;
 		_portsConfigRequired[bindingName] =  new PortConfigRequired();
 		_portsConfigRequired[bindingName]->bindTo(_portsRequired[destName]);
-		_configurations[configName]->addPortProvided(bindingName, new PortConfigProvided());
+		_configurations[configName]->addPortRequired(bindingName, _portsConfigRequired[bindingName]);
+	}
+	if(type == "toPortProvided")
+	{
+		Dbg::out("LanguageManager") << "[LanguageManager] !!!!! addBinding : "<< configName << "  : " << bindingName << std::endl;
+		_portsConfigProvided[bindingName] =  new PortConfigProvided();
+		_portsConfigProvided[bindingName]->bindTo(_portsProvided[destName]);
+		_configurations[configName]->addPortProvided(bindingName, _portsConfigProvided[bindingName]);
 	}
 }

@@ -94,6 +94,11 @@
 						"bindingName" : "toInnerServerAuthentication",
 						"type" : "toPortRequired",
 						"destinationName" : "portRequiredRequest"
+					},
+					{
+						"bindingName" : "toInnerServerAuthentication",
+						"type" : "toPortProvided",
+						"destinationName" : "portProvidedRequest"
 					}
 				] 
 			}
