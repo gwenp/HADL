@@ -4,6 +4,7 @@
 
 void onSigTerm() {
 	printf("Graceful exit\n");
+	exit(0);
 
 }
 
@@ -144,6 +145,7 @@ void* wait_for_clients( void* data ) {
 
 	if ( (bind(sock, (SOCKADDR*) &local_address, la_size)) == SOCKET_ERROR ) {
 		printf("Error : Localhost not found\n");
+		exit(1);
 		return 4;
 	}
 

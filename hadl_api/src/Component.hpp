@@ -39,8 +39,6 @@ public:
 protected:
 
 	std::map<PortComposantProvided*,std::string> _portsRequired_methodNames;
-
-private:
 	Configuration* _linkedConfiguration;
 };
 

@@ -14,7 +14,7 @@ public:
 
 	std::string getType(){ return "provided"; };
 
-	MessageP receive_message( MessageP msg );
+	virtual MessageP receive_message( MessageP msg );
 	
 
 };
