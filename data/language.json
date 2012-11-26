@@ -38,7 +38,7 @@
 					"factory" : "Database",
 					"name" : "Database",
 					"PortsProvided" : [
-										{ "name" : "portProvidedRequest", "toMethod" : "getAbilitiesOfUser"},
+										{ "name" : "portProvidedRequest", "toMethod" : "getAbilitiesOfUsergetPasswordOfUser"},
 										{ "name" : "portProvidedLoginSecurity", "toMethod" : "getPasswordOfUser"}
 									  ]
 				},
@@ -54,7 +54,8 @@
 					"factory" : "ConnectionManager",
 					"name" : "LoginManager",
 
-					"PortsRequired" : ["portRequiredRequest","portRequiredAuthentication"]
+					"PortsRequired" : ["portRequiredRequest","portRequiredAuthentication"],
+					"PortsProvided" : [{ "name" : "portProvidedCM", "toMethod" : "authenticate" }]
 				},
 				{
 					"type" : "Connector",
@@ -87,18 +88,8 @@
 				"bindings" : [
 					{
 						"bindingName" : "toInnerServerAuthentication",
-						"type" : "toPortRequired",
-						"destinationName" : "portRequiredAuthentication"
-					},
-					{
-						"bindingName" : "toInnerServerAuthentication",
-						"type" : "toPortRequired",
-						"destinationName" : "portRequiredRequest"
-					},
-					{
-						"bindingName" : "toInnerServerAuthentication",
 						"type" : "toPortProvided",
-						"destinationName" : "portProvidedRequest"
+						"destinationName" : "portProvidedCM"
 					}
 				] 
 			}
@@ -120,7 +111,7 @@
 		"attachments" : [
 			{
 				"fromType" : "Role",
-				"fromName" : "roleProvided_CSconnector",
+				"fromName" : "roleRequired_CSconnector",
 				"toType"   : "Port",
 				"toName"   : "toInnerServerAuthentication",
 				"destinationElementName" : "Server"

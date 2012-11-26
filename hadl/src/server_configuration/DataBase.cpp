@@ -12,6 +12,7 @@ DataBase::DataBase()
 	str_v abilities;
 	abilities.push_back("do stuff");
 	abilities.push_back("cook marmalade");
+	abilities.push_back("demo");
 
 	_user_abilities["demo"] = abilities;
 }
@@ -20,6 +21,8 @@ DataBase::~DataBase()
 {}
 
 str_v DataBase::getPasswordOfUser( str_v args ) {
+
+	std::cout << "DataBase::getPasswordOfUser" << std::endl;
 
 	str_v ret;
 
@@ -41,6 +44,7 @@ str_v DataBase::getPasswordOfUser( str_v args ) {
 
 str_v DataBase::getAbilitiesOfUser( str_v args ) {
 
+	std::cout << "DataBase::getAbilitiesOfUser" << std::endl;
 
 	str_v ret;
 
@@ -48,8 +52,11 @@ str_v DataBase::getAbilitiesOfUser( str_v args ) {
 		
 		std::string& username = args.at(0);
 
-		if ( _user_passwords.find(username) != _user_passwords.end() ) {
+		if ( _user_abilities.find(username) != _user_abilities.end() ) {
 			return _user_abilities[username];
+		}
+		else {
+			ret.push_back(username + " : User not found !");
 		}
 
 	}

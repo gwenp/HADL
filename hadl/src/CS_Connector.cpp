@@ -182,7 +182,7 @@ MessageP CS_Connector::send_message_ntk( SOCKET sock, MessageP& msg, bool needs_
 	msg.set_sender("Test1")	;
 
 	std::cout << "To send :\n";
-	debug_message(msg);
+	//debug_message(msg);
 
 	std::string cpp_string;
 	msg.SerializeToString(&cpp_string);
@@ -345,7 +345,7 @@ void CS_Connector::on_message_received_ntk( MessageP& msg, SOCKET sock ) {
 
 	std::cout << "New message ! --> " << std::endl;
 
-	debug_message(msg);
+	//debug_message(msg);
 
 	switch( msg.type() ) {
 		case MessageP::DISCOVER:

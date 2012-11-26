@@ -21,6 +21,9 @@ std::vector<std::string> SecurityManager::getUserAbilities( std::string& usernam
 		response = _portsRequired["portRequiredLoginSecurity"]->send_message( request );
 
 	}
+	else {
+		std::cout << "Port Required not found : " << "portRequiredLoginSecurity" << std::endl;
+	}
 
 	return response;
 
@@ -28,12 +31,15 @@ std::vector<std::string> SecurityManager::getUserAbilities( std::string& usernam
 
 str_v SecurityManager::isUserAbleTo( str_v args ) {
 
+	std::cout << "SecurityManager::isUserAbleTo" << std::endl;
+
 	str_v ret;
 
-	if ( args.size() > 1 ) {
+	if ( args.size() > 0 ) {
 		std::string& username = args.at(0);
-		std::string& required_ability = args.at(1);
+		std::string required_ability = "cook marmalade";
 
+		std::cout << "Asking for DB ...\n";
 		/* Ask to DB ? */
 		std::vector<std::string> abilities = getUserAbilities(username);
 		if ( std::find(abilities.begin(), abilities.end(), required_ability) != abilities.end() ) {

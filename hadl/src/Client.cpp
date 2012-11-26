@@ -12,15 +12,21 @@ Client::~Client() {
 
 void Client::start_cli() {
 
-	std::cout << "Type something to send request (test mode): ";
-	std::string request_name;
+	std::string login;
+	std::string password;
+
+	while ( true ) {
+
+		std::cout << "Login : ";
+		std::cin >> login;
+		std::cout << "Password : ";
+		std::cin >> password;
+
+		std::string response = this->login(login,password);
+
+		std::cout << "Reponse : " << response << std::endl;
 
 
-	while ( request_name != "quit" ) {
-		std::cin >> request_name;
-
-		this->send_a_request(request_name);
-		std::cout << "Request sent to port\n";
 	}
 
 	std::cout << "Exiting..." << std::endl;
@@ -63,6 +69,24 @@ void Client::onLaunch() {
 
 
 	}
+
+
+std::string Client::login( std::string login, std::string password ) {
+
+	str_v args;
+	args.push_back(login);
+	args.push_back(password);
+	
+	str_v response = _portsRequired["portClient"]->send_message(args);
+
+	if ( response.size() > 0 ) {
+		return response.at(0);
+	}
+	else {
+		return "(empty response)";
+	}
+}
+
 
 str_v Client::on_message( PortComposantProvided* provided_port, str_v args ) {
 	std::cout << "Client callback" << std::endl;

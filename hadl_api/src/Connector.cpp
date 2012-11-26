@@ -54,7 +54,8 @@ void Connector::attachToComponent(Component* c, std::string roleName, std::strin
 
 void Connector::attachToComponent(Configuration* c, std::string roleName, std::string portName) {
 	
-
+	// TODO
+	std::cout << "Attaching role " << roleName << " to port " << portName << std::endl;
 	PortComposantProvided* port = c->_portsProvided[portName];
 	_rolesRequired[roleName]->_portProvided = port;
 

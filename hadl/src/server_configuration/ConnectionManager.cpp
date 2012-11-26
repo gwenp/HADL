@@ -15,14 +15,16 @@ ConnectionManager::~ConnectionManager() {
 
 std::string ConnectionManager::getUserPassword( std::string& username ) {
 
-	if ( _portsRequired.find("portRequiredRequest") != _portsRequired.end() ) {
+	if ( _portsRequired.find("portRequiredAuthentication") != _portsRequired.end() ) {
 
 		str_v request;
 		request.push_back(username);
 
-		str_v response = _portsRequired["portRequiredRequest"]->send_message( request );
+		str_v response = _portsRequired["portRequiredAuthentication"]->send_message( request );
+
 
 		if ( response.size() > 0 ) {
+			std::cout << "Response : " << response.at(0) << std::endl;
 			return response.at(0);
 		}
 
@@ -34,6 +36,8 @@ std::string ConnectionManager::getUserPassword( std::string& username ) {
 
 str_v ConnectionManager::authenticate( str_v args ) {
 
+	std::cout << "ConnectionManager::authenticate" << std::endl;
+
 	str_v ret;
 
 	if ( args.size() > 1 ) {
@@ -43,7 +47,10 @@ str_v ConnectionManager::authenticate( str_v args ) {
 		/* Ask to DB ? */
 		if ( password == this->getUserPassword(username) ) {
 			_user_sessions.insert(username);
-			ret.push_back("ok");
+			ret.push_back("Connected !");
+		}
+		else {
+			ret.push_back("Denied");
 		}
 
 	}
@@ -53,6 +60,8 @@ str_v ConnectionManager::authenticate( str_v args ) {
 }
 
 str_v ConnectionManager::makeACoolRequest( str_v args ) {
+
+	std::cout << "ConnectionManager::makeACoolRequest" << std::endl;
 
 	if ( args.size() > 1 ) {
 
