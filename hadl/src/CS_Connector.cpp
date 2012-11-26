@@ -80,7 +80,7 @@ void CS_Connector::wait_for_messages_ntk( SOCKET sock ) {
 
 			if ( ( recv_size = receive_data(sock, buffer_tmp) ) < 0 )  {
 
-				std::cout << "Communication error\n";
+				std::cout << "Disconnecting...\n";
 				exit(-1);
 
 			}
@@ -179,10 +179,7 @@ MessageP CS_Connector::receive_message_ntk( SOCKET sock ) {
 
 MessageP CS_Connector::send_message_ntk( SOCKET sock, MessageP& msg, bool needs_response ) {
 
-	msg.set_sender("Test1")	;
-
-	std::cout << "To send :\n";
-	//debug_message(msg);
+	msg.set_sender("[]")	;
 
 	std::string cpp_string;
 	msg.SerializeToString(&cpp_string);
@@ -190,7 +187,7 @@ MessageP CS_Connector::send_message_ntk( SOCKET sock, MessageP& msg, bool needs_
 	int size = cpp_string.size();
 
 	if ( send_data(sock,cpp_string.data(),size) > 0 ) {
-		std::cout << "Message sent\n";
+		//std::cout << "Message sent\n";
 	}
 
 	if ( needs_response && msg.type() != MessageP::RESPONSE ) {
