@@ -48,23 +48,23 @@ int main(int argc, char const* argv[]) {
 
 	Dbg::init("config/debug.conf");
 
-	LanguageManager l;
-
-	l.registerComponentFactory("Client", new ClientComponentFactory());
-	l.registerComponentFactory("Server", new ServerComponentFactory());
-	l.registerComponentFactory("Database", new DatabaseFactory());
-	l.registerComponentFactory("ConnectionManager", new ConnectionManagerFactory());
-	l.registerComponentFactory("SecurityManager", new SecurityManagerFactory());
-
-	l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
-	l.registerConnectorFactory("Default", new DefaultConnectorFactory());
-//
-	l.parseJSON("../data/language.json");
 	
 
-	if ( argc > 1 ) {
+	if ( argc > 2 ) {
 
+		LanguageManager l;
 
+		l.registerComponentFactory("Client", new ClientComponentFactory());
+		l.registerComponentFactory("Server", new ServerComponentFactory());
+		l.registerComponentFactory("Database", new DatabaseFactory());
+		l.registerComponentFactory("ConnectionManager", new ConnectionManagerFactory());
+		l.registerComponentFactory("SecurityManager", new SecurityManagerFactory());
+	
+		l.registerConnectorFactory("CS_Connector", new CS_ConnectorFactory());
+		l.registerConnectorFactory("Default", new DefaultConnectorFactory());
+	
+		l.parseJSON(std::string(argv[2]));
+	
 		if ( !strcmp(argv[1],"server") ) {
 
 			Server* srv = (Server*) l.getComponent("Server");
