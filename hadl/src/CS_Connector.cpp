@@ -35,7 +35,8 @@ void CS_Connector::onInit() {
 			return;		
 		}
 
-		this->connect_to( host, port );
+		SOCKET sock = this->connect_to( host, port );
+		//this->monitoring_routine( sock );
 
 	}
 
@@ -214,9 +215,26 @@ void CS_Connector::connect() {
 		return;
 	}
 
+
+
 	this->monitoring_routine( sock );
 }
 
+void CS_Connector::exchange_discoveries_ntk( SOCKET sock ) {
+	this->send_discoveries_ntk(sock);
+
+	for ( int i=0; i<2; i++ ) {
+		MessageP msg = receive_message_ntk(sock);
+		
+		if ( msg.has_type() ) {
+			this->on_message_received_ntk( msg, sock );
+		}
+		else {
+			std::cout << "Bad message received (dropped)" << std::endl;
+		}
+	}
+
+}
 
 void CS_Connector::send_discoveries_ntk( SOCKET sock ) {
 
@@ -246,6 +264,8 @@ SOCKET CS_Connector::connect_to( std::string host, int port ) {
 
 	SOCKET sock = connect_to_server(host.c_str(),port);
 
+	exchange_discoveries_ntk(sock);
+
 	return sock;
 
 }
@@ -253,8 +273,8 @@ SOCKET CS_Connector::connect_to( std::string host, int port ) {
 void CS_Connector::monitoring_routine( SOCKET sock ) {
 
 	/* Firstly, we send all directly reachable Roles */
-	this->send_discoveries_ntk( sock );
-
+	//this->send_discoveries_ntk( sock );
+	this->exchange_discoveries_ntk(sock);
 	// TODO
 	while ( true ) {
 	

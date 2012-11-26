@@ -25,7 +25,9 @@ public:
 private:
 	virtual MessageP glue_message_propagation( MessageP msg, const std::string& role );
 
+
  	/** BEGIN NETWORKING **/
+	void exchange_discoveries_ntk( SOCKET sock );
 
 	MessageP generate_discovery_message( MessageP::DiscoverType disco_type );
 	void interpret_discovery_message( MessageP msg, SOCKET sock );
