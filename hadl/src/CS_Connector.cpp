@@ -320,7 +320,7 @@ void CS_Connector::interpret_discovery_message( MessageP msg, SOCKET sock ) {
 		for( int i=0; i<msg.argument_size(); i++ ) {
 			std::string role = msg.argument(i);
 			_rolesRequired_connections[role] = sock;
-			_rolesRequired_connections_reverse[sock] = role;
+			//_rolesRequired_connections_reverse[sock] = role;
 		}
 
 	}
@@ -329,7 +329,7 @@ void CS_Connector::interpret_discovery_message( MessageP msg, SOCKET sock ) {
 		for( int i=0; i<msg.argument_size(); i++ ) {
 			std::string role = msg.argument(i);
 			_rolesProvided_connections[role] = sock;
-			_rolesProvided_connections_reverse[sock] = role;
+			//_rolesProvided_connections_reverse[sock] = role;
 		}
 
 	}

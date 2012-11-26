@@ -65,42 +65,6 @@ int main(int argc, char const* argv[]) {
 	
 		l.parseJSON(std::string(argv[2]), std::string(argv[1]));
 	
-		if ( !strcmp(argv[1],"server") ) {
-
-			Server* srv = (Server*) l.getComponent("Server");
-			srv->onInit();
-
-			CS_Connector* c = (CS_Connector*) l.getConnector("connectorClient_serverSide");
-			c->setProperty("mode","server");
-			c->setProperty("port","2345");
-			c->onInit();
-
-		}
-		else {
-
-			Client* client = new Client();
-			client->onInit();
-
-			CS_Connector* c = (CS_Connector*) l.getConnector("connectorClient_serverSide");
-			c->setProperty("mode","client");
-			c->setProperty("port","2345");
-			c->setProperty("host","127.0.0.1");
-			c->onInit();
-
-
-
-			std::cout << "Type something to send request : ";
-			std::string test;
-			std::cin >> test;
-
-			client->send_a_request();
-			std::cout << "Request sent to port\n";
-
-
-			std::cin >> test;
-
-		}
-
 	}
 
 

@@ -15,6 +15,8 @@ public:
 
 	void onInit();
 
+	void start_cli();
+
 	void send_a_request();
 
 	str_v on_message( PortComposantProvided* provided_port, str_v args );

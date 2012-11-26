@@ -10,6 +10,20 @@ Client::~Client() {
 
 }
 
+void Client::start_cli() {
+
+	std::cout << "Type something to send request (test mode): ";
+	std::string test;
+	std::cin >> test;
+
+	this->send_a_request();
+	std::cout << "Request sent to port\n";
+
+
+	std::cin >> test;
+
+}
+
 void Client::send_a_request() {
 
 	if ( _portsRequired.find("portClient") != _portsRequired.end() ) {
@@ -39,6 +53,8 @@ void Client::onInit() {
 
 
 	std::cout << "Init Client" << std::endl;
+
+	this->start_cli();
 }
 
 str_v Client::on_message( PortComposantProvided* provided_port, str_v args ) {

@@ -43,22 +43,17 @@ private:
 	void send_discoveries_ntk( SOCKET sock );
 
 
-
-	// Temp ? Can be used to store Roles
 	std::map<std::string, SOCKET> _rolesProvided_connections;
-	std::map<SOCKET,std::string> _rolesProvided_connections_reverse;
+	//std::map<SOCKET,std::string> _rolesProvided_connections_reverse;
 
 	std::map<std::string, SOCKET> _rolesRequired_connections;
-	std::map<SOCKET,std::string> _rolesRequired_connections_reverse;
-
+	//std::map<SOCKET,std::string> _rolesRequired_connections_reverse;
 
 	/* Used for receiving messages */
 	std::queue<MessageP> _messages_queue;
-	//std::string _rcv_messages_buffer;
 
 	/** END NETWORKING **/
 
-	/* data */
 };
 
 #endif
