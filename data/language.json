@@ -118,7 +118,8 @@
 				"fromName" : "roleRequired_CSconnector",
 				"toType"   : "Port",
 				"toName"   : "portProvidedReceptionServer",
-				"destinationElementName" : "Server"
+				"destinationElementName" : "Server",
+				"emmiterElementName" : "Client"
 			},
 			{
 				"fromType" : "Port",

@@ -156,9 +156,12 @@ void JsonParser::parseAttachment(LanguageManager* l, Json::Value attachment, Jso
 		std::cout << "Connector not found" << std::endl;
 
 		lookForTheLostConnector(l, attachment["destinationElementName"].asString(), root);
-
 	}	
 
+	if(attachment["toType"] == "Port" && attachment.get("emmiterElementName", "") != "" && l->getComponent(attachment["emmiterElementName"].asString()) == NULL)
+	{
+		_component[attachment.get("emmiterElementName", "")]->clearRequiredRoles();
+	}	
 	l->makeAttachment(attachment["fromType"].asString(), attachment["fromName"].asString(), attachment["toType"].asString(), attachment["toName"].asString());
 }
 
