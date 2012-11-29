@@ -26,9 +26,3 @@ MessageP RoleProvided::propagate_message( MessageP msg ) {
 
 }
 
-
-void RoleProvided::attachToPortRequired( PortComposantRequired* port ) {
-
-	
-
-}

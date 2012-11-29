@@ -12,9 +12,6 @@ class RoleProvided : public Role
 {
 public:
 	std::string getType(){ return "provided"; };
-	
-	void attachToPortRequired( PortComposantRequired* port );
-
 
 	MessageP propagate_message( MessageP msg );
 

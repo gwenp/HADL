@@ -80,8 +80,10 @@ void CS_Connector::wait_for_messages_ntk( SOCKET sock ) {
 
 			if ( ( recv_size = receive_data(sock, buffer_tmp) ) < 0 )  {
 
-				std::cout << "Disconnecting...\n";
-				exit(-1);
+				std::cout << "Disconnecting from a peer...\n";
+				
+				int ret = -1;
+				pthread_exit(&ret);
 
 			}
 
