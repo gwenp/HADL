@@ -80,7 +80,7 @@ MessageP Connector::on_message_from_provided_role( RoleProvided* from, MessageP 
 
 MessageP Connector::propagate_message( MessageP msg, const std::string& role ) {
 
-	std::cout << "=== Passage par Connecteur::propagate_message vers Role " << role << " @@@\n";
+	std::cout << "=== Passage par Connecteur " << _name << "::propagate_message() vers Role " << role << " @@@\n";
 
 	msg.set_receiver(role);
 	/* Get sender ROLE */

@@ -57,7 +57,7 @@ str_v SecurityManager::isUserAbleTo( str_v args ) {
 
 str_v SecurityManager::on_message( PortComposantProvided* provided_port, str_v args ) {
 
-	std::cout << "[][][] Arrivee au Composant\n";
+	std::cout << "[][][] Arrivee au Composant " << _name << "\n";
 	std::cout << "\tSecurityManager Callback" << std::endl;
 
 	str_v response;

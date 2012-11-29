@@ -41,6 +41,11 @@ Component* LanguageManager::makeComponent(std::string name, std::string factory)
 {
 	Dbg::out("LanguageManagerMake") << "[LanguageManager] makeComponent : "<< name << "; from factory : " << factory  << std::endl;
 	_components[name] = _componentFactories[factory]->make();
+
+	if ( _components[name] != NULL ) {
+		_components[name]->setName(name);
+	}
+
 	return _components[name];
 }
 
@@ -54,6 +59,11 @@ Connector* LanguageManager::makeConnector(std::string name, std::string factory)
 	Dbg::out("LanguageManagerMake") << "[LanguageManager] makeConnector : "<< name << "; from factory : " << factory << std::endl;
 
 	_connectors[name] = _connectorFactories[factory]->make();
+
+	if ( _connectors[name] != NULL ) {
+		_connectors[name]->setName(name);
+	}
+
 	return _connectors[name];
 }
 

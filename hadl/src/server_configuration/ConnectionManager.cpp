@@ -80,7 +80,7 @@ str_v ConnectionManager::makeACoolRequest( str_v args ) {
 
 str_v ConnectionManager::on_message( PortComposantProvided* provided_port, str_v args ) {
 
-	std::cout << "[][][] Arrivee au Composant\n";
+	std::cout << "[][][] Arrivee au Composant " << _name << "\n";
 	std::cout << "\tConnectionManager Callback" << std::endl;
 
 	str_v response;
