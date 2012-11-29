@@ -22,13 +22,12 @@ class Connector : public ConnectableElement
 {
 public:
 	
-	void addRoleProvided(std::string name, RoleProvided* roleProvided, std::string& linkedRole );
-	void addRoleRequired(std::string name, RoleRequired* roleRequired);
+	void addRoleProvided( RoleProvided* roleProvided, std::string& linkedRole );
+	void addRoleRequired( RoleRequired* roleRequired);
 
 	void info();
-	void attachToComponent(Configuration* c, std::string roleName, std::string portName);
-	void attachToComponent(Component* c, std::string roleName, std::string portName);
-	
+
+
 	std::map<std::string, RoleProvided*> _rolesProvided;
 	std::map<std::string, RoleRequired*> _rolesRequired;
 

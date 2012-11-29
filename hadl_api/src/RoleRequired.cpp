@@ -25,3 +25,12 @@ MessageP RoleRequired::propagate_message( MessageP msg ) {
 	return response_msg;
 
 }
+
+
+void RoleRequired::attachToPortProvided( PortComposantProvided* port ) {
+
+	if ( _portProvided != port ) {
+		_portProvided = port;
+	}
+
+}

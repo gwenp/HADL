@@ -15,10 +15,14 @@ std::vector<std::string> SecurityManager::getUserAbilities( std::string& usernam
 	std::vector<std::string> response;
 	if ( _portsRequired.find("portRequiredLoginSecurity") != _portsRequired.end() ) {
 
+		std::cout << "Demande de permission utilisateur. Demandons a la DataBase\n" << std::endl;
+
 		str_v request;
 		request.push_back(username);
 
 		response = _portsRequired["portRequiredLoginSecurity"]->send_message( request );
+
+			std::cout << "~~ SecurityManager recupere le retour de la DataBase\n" << std::endl;
 
 	}
 	else {

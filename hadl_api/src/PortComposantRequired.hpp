@@ -19,6 +19,9 @@ public:
 
 	str_v send_message( str_v args );
 
+	void attachToRoleProvided( RoleProvided* role );
+
+protected:
 	RoleProvided* _providedRole;
 };
 

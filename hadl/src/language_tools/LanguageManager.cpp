@@ -104,7 +104,7 @@ void LanguageManager::addRequiredPortToComponent(std::string componentName, std:
 
 	_portsRequired[portName]->setName(portName);
 
-	_components[componentName]->addPortRequired(portName, _portsRequired[portName]);
+	_components[componentName]->addPortRequired( _portsRequired[portName]);
 	_componentsByPort[portName] = _components[componentName];
 }
 
@@ -114,7 +114,7 @@ void LanguageManager::addProvidedPortToComponent(std::string componentName, std:
 
 	_portsProvided[portName]->setName(portName);
 	Dbg::out("LanguageManager") << "[LanguageManager] addPortProvided : "<< portName << " to Component : " << componentName << std::endl;
-	_components[componentName]->addPortProvided(portName,_portsProvided[portName], toMethod);
+	_components[componentName]->addPortProvided(_portsProvided[portName], toMethod);
 	_componentsByPort[portName] = _components[componentName];
 }
 
@@ -124,7 +124,7 @@ void LanguageManager::addRequiredRoleToConnector(std::string connectorName, std:
 	_rolesRequired[roleName] = new RoleRequired();
 
 	_rolesRequired[roleName]->setName(roleName);
-	_connectors[connectorName]->addRoleRequired(roleName, _rolesRequired[roleName]);
+	_connectors[connectorName]->addRoleRequired( _rolesRequired[roleName]);
 	_connectorsByRole[roleName] = _connectors[connectorName];
 }
 
@@ -134,7 +134,7 @@ void LanguageManager::addProvidedRoleToConnector(std::string connectorName, std:
 	_rolesProvided[roleName] =  new RoleProvided();
 
 	_rolesProvided[roleName]->setName(roleName);
-	_connectors[connectorName]->addRoleProvided(roleName, _rolesProvided[roleName], toMethod);
+	_connectors[connectorName]->addRoleProvided( _rolesProvided[roleName], toMethod);
 	_connectorsByRole[roleName] = _connectors[connectorName];
 }
 
@@ -177,15 +177,38 @@ void LanguageManager::makeAttachment(std::string fromType, std::string fromName,
 
 	if(fromType == "Port" && toType == "Role")
 	{
-		_componentsByPort[fromName]->attachToConnector(_connectorsByRole[toName], fromName, toName);
+		if( _componentsByPort[fromName]->getParentConfiguration() == _connectorsByRole[toName]->getParentConfiguration() ) {
+			_portsRequired[fromName]->attachToRoleProvided(_rolesProvided[toName]);
+		}
+		else {
+			std::cout << "[ERROR] : The Connector and the Component does not have the same parent Configuration!" <<std::endl;
+		}
+
+		//_componentsByPort[fromName]->attachToConnector(_connectorsByRole[toName], fromName, toName);
 	}
 	else if(fromType == "Role" && toType == "Port")
 	{
-		if(_componentsByPort[toName] != NULL)
-			_connectorsByRole[fromName]->attachToComponent(_componentsByPort[toName], fromName, toName);
-		if(_configurationsByPortProvided[toName] != NULL)
-			_connectorsByRole[fromName]->attachToComponent(_configurationsByPortProvided[toName], fromName, toName);
+		if(_componentsByPort[toName] != NULL) {
+
+			if(_connectorsByRole[fromName]->getParentConfiguration() == _componentsByPort[toName]->getParentConfiguration()) {
+				PortComposantProvided* port = _portsProvided[toName];
+				_rolesRequired[fromName]->attachToPortProvided(port);
+			}
+			else {
+				std::cout << "[ERROR] : The Connector and the Component does not have the same parent Configuration!" <<std::endl;
+			}
+			//_connectorsByRole[fromName]->attachToComponent(_componentsByPort[toName], fromName, toName);
 		
+
+		}
+		if(_configurationsByPortProvided[toName] != NULL) {
+
+			PortComposantProvided* port = _configurationsByPortProvided[toName]->_portsProvided[toName];
+			_rolesRequired[fromName]->attachToPortProvided(port);
+
+			//_connectorsByRole[fromName]->attachToComponent(_configurationsByPortProvided[toName], fromName, toName);
+
+		}
 	}
 }
 

@@ -17,10 +17,14 @@ std::string ConnectionManager::getUserPassword( std::string& username ) {
 
 	if ( _portsRequired.find("portRequiredAuthentication") != _portsRequired.end() ) {
 
+		std::cout << "Demande du mot de passe. Demandons au SecurityManager\n" << std::endl;
+
 		str_v request;
 		request.push_back(username);
 
 		str_v response = _portsRequired["portRequiredAuthentication"]->send_message( request );
+
+		std::cout << "~~ ConnectionManager recupere le retour du SecurityManager\n" << std::endl;
 
 
 		if ( response.size() > 0 ) {

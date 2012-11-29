@@ -52,7 +52,7 @@
 				{
 					"type" : "Component",
 					"factory" : "ConnectionManager",
-					"name" : "LoginManager",
+					"name" : "ConnectionManager",
 
 					"PortsRequired" : ["portRequiredRequest","portRequiredAuthentication"],
 					"PortsProvided" : [{ "name" : "portProvidedCM", "toMethod" : "authenticate" }]

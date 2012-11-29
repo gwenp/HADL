@@ -39,3 +39,10 @@ str_v PortComposantRequired::send_message( str_v args ) {
 	return ret_args;
 
 }
+
+void PortComposantRequired::attachToRoleProvided( RoleProvided* role ) {
+
+	if ( _providedRole != role ) {
+		_providedRole = role;
+	}
+}

@@ -2,17 +2,17 @@
 
 #include "Component.hpp"
 
-void Connector::addRoleProvided(std::string name, RoleProvided* role, std::string& linkedRole)
+void Connector::addRoleProvided( RoleProvided* role, std::string& linkedRole)
 {
 	role->setConnector(this);
-	_rolesProvided.insert(std::pair<std::string, RoleProvided*>(name, role));
+	_rolesProvided.insert(std::pair<std::string, RoleProvided*>(role->getName(), role));
 	_roles_association[role] = linkedRole;
 }
 
-void Connector::addRoleRequired(std::string name, RoleRequired* role)
+void Connector::addRoleRequired( RoleRequired* role)
 {
 	role->setConnector(this);
-	_rolesRequired.insert(std::pair<std::string, RoleRequired*>(name, role));
+	_rolesRequired.insert(std::pair<std::string, RoleRequired*>(role->getName(), role));
 }
 
 void Connector::info()
@@ -33,33 +33,6 @@ void Connector::info()
 	std::cout << std::endl;
 }
 
-/*
-void Connector::on_notify(RoleProvided* port)
-{
-	std::cout << "Connector notification received!" <<std::endl;
-}
-*/
-
-void Connector::attachToComponent(Component* c, std::string roleName, std::string portName)
-{
-	if(getParentConfiguration() == c->getParentConfiguration())
-	{
-		PortComposantProvided* port = c->_portsProvided[portName];
-		_rolesRequired[roleName]->_portProvided = port;
-	}
-	else
-		std::cout << "[ERROR] : The Connector and the Component does not have the same parent Configuration!" <<std::endl;
-}
-
-
-void Connector::attachToComponent(Configuration* c, std::string roleName, std::string portName) {
-	
-	// TODO
-	std::cout << "Attaching role " << roleName << " to port " << portName << std::endl;
-	PortComposantProvided* port = c->_portsProvided[portName];
-	_rolesRequired[roleName]->_portProvided = port;
-
-}
 
 /* Other side */
 
