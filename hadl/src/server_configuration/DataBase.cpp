@@ -10,7 +10,7 @@ DataBase::DataBase()
 	_user_passwords["test_login"] = "test_password";
 
 	str_v abilities;
-	abilities.push_back("do stuff");
+	abilities.push_back("do_stuff");
 	abilities.push_back("cook marmalade");
 	abilities.push_back("demo");
 

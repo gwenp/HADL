@@ -2,8 +2,8 @@
 
 ConnectionManager::ConnectionManager() {
 
-	_methods["authenticate"] = &ConnectionManager::authenticate;
-	_methods["makeACoolRequest"] = &ConnectionManager::makeACoolRequest;
+	_methods["receive_command"] = &ConnectionManager::receive_command;
+	//_methods["makeACoolRequest"] = &ConnectionManager::makeACoolRequest;
 
 }
 
@@ -17,14 +17,14 @@ std::string ConnectionManager::getUserPassword( std::string& username ) {
 
 	if ( _portsRequired.find("portRequiredAuthentication") != _portsRequired.end() ) {
 
-		std::cout << "Demande du mot de passe. Demandons au SecurityManager\n" << std::endl;
+		std::cout << "Demande du mot de passe. Demandons a la DataBase\n" << std::endl;
 
 		str_v request;
 		request.push_back(username);
 
 		str_v response = _portsRequired["portRequiredAuthentication"]->send_message( request );
 
-		std::cout << "~~ ConnectionManager recupere le retour du SecurityManager\n" << std::endl;
+		std::cout << "~~ ConnectionManager recupere le retour de la DataBase\n" << std::endl;
 
 
 		if ( response.size() > 0 ) {
@@ -38,49 +38,92 @@ std::string ConnectionManager::getUserPassword( std::string& username ) {
 
 }
 
-str_v ConnectionManager::authenticate( str_v args ) {
+bool ConnectionManager::checkUserAbilityFor( std::string& username, std::string& request_type ) {
 
-	std::cout << "\tConnectionManager::authenticate" << std::endl;
+	if ( _portsRequired.find("portRequiredUserAbility") != _portsRequired.end() ) {
+
+		std::cout << "Requete specifique. Demandons au SecurityManager\n" << std::endl;
+
+		str_v request;
+		request.push_back(username);
+		request.push_back(request_type);
+
+		str_v response = _portsRequired["portRequiredUserAbility"]->send_message( request );
+
+		std::cout << "~~ ConnectionManager recupere le retour du SecurityManager\n" << std::endl;
+
+
+		if ( response.size() > 0 ) {
+			std::cout << "Response : " << response.at(0) << std::endl;
+			return ( response.at(0) == "OK" );
+
+		}
+
+	}
+
+	return false;
+
+}
+
+str_v ConnectionManager::receive_command( str_v args ) {
+
+	std::cout << "\tConnectionManager::receive_command" << std::endl;
 
 	str_v ret;
 
-	if ( args.size() > 1 ) {
-		std::string& username = args.at(0);
-		std::string& password = args.at(1);
+	if ( args.size() > 2 ) {
 
-		/* Ask to DB ? */
-		if ( password == this->getUserPassword(username) ) {
-			_user_sessions.insert(username);
-			ret.push_back("Connected !");
+		std::string& username = args.at(1);
+
+		if ( args.at(0) == "connect" ) {
+
+			std::string& password = args.at(2);
+
+			/* Ask to DB ? */
+			if ( password == this->getUserPassword(username) ) {
+				_user_sessions.insert(username);
+				ret.push_back("Connected !");
+			}
+			else {
+				ret.push_back("Denied");
+			}
+		}
+		else if ( args.at(0) == "request" ) {
+			std::string& request_type = args.at(2);
+
+			if ( _user_sessions.find(username) != _user_sessions.end() ) {
+
+				if ( checkUserAbilityFor(username,request_type) ) {
+					// A fictive Component executes the request
+					ret.push_back("Request Executed !");
+				}
+				else {
+					ret.push_back("You haven't permission to do that ! :'(");
+				}
+
+			}
+			else {
+				ret.push_back("You are not connected !");
+			}
+
+		}
+		else if ( args.at(0) == "disconnect" ) {
+			// STUB
+			ret.push_back("Successfully disconnected");
 		}
 		else {
-			ret.push_back("Denied");
+			ret.push_back("Bad request : '" + args.at(0) + "'");
 		}
 
+	}
+	else {
+		ret.push_back("Too few arguments.");
 	}
 
 	return ret;
 
 }
 
-str_v ConnectionManager::makeACoolRequest( str_v args ) {
-
-	std::cout << "\tConnectionManager::makeACoolRequest" << std::endl;
-
-	if ( args.size() > 1 ) {
-
-		std::string& username = args.at(0);
-
-		/* If connected */
-		if ( _user_sessions.find(username) != _user_sessions.end() ) {
-			std::string& request = args.at(1);
-
-			std::cout << "Do stuff : " << request << std::endl;
-		}
-
-	}
-
-}
 
 str_v ConnectionManager::on_message( PortComposantProvided* provided_port, str_v args ) {
 

@@ -15,13 +15,14 @@ public:
 	SecurityManager();
 	~SecurityManager();
 
+private:
+
 	std::vector<std::string> getUserAbilities( std::string& username );
 
 	str_v isUserAbleTo( str_v args );
 
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
 
-private:
 	SecurityManagerMethodsIndex _methods;
 	/* data */
 };

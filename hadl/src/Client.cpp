@@ -15,16 +15,33 @@ void Client::start_cli() {
 	std::string login;
 	std::string password;
 
+
 	while ( true ) {
 
-		std::cout << "Login : ";
-		std::cin >> login;
-		std::cout << "Password : ";
-		std::cin >> password;
+		if ( _connected_user.empty() ) {
 
-		std::string response = this->login(login,password);
+			std::cout << "Login : ";
+			std::cin >> login;
+			std::cout << "Password : ";
+			std::cin >> password;
 
-		std::cout << "Reponse : " << response << std::endl;
+			if ( this->login(login,password) ) {
+				_connected_user = login;
+			}
+
+		}
+		else {
+			std::cout << ":: " << _connected_user << " > ";
+			std::string request;
+
+			std::cin >> request;
+			if ( send_a_request(request) ) {
+				std::cout << "Success\n";
+			}
+			else {
+				std::cout << "Failure\n";
+			}
+		}
 
 
 	}
@@ -33,58 +50,67 @@ void Client::start_cli() {
 
 }
 
-void Client::send_a_request( std::string request_name ) {
+void Client::onInit() {
+	std::cout << "Init Client" << std::endl;
+}
+
+void Client::onLaunch() {
+	this->start_cli();
+}
+
+bool Client::send_a_request( std::string request_name ) {
 
 	if ( _portsRequired.find("portClient") != _portsRequired.end() ) {
-
-	//if ( _portsRequired.find("portClient") != _portsRequired.end() ) {
 	
 		std::cout << "Sending to '" << "portClient" << "'\n";
 
 		str_v args;
+		args.push_back("request");
+		args.push_back(_connected_user);
 		args.push_back(request_name);
-		args.push_back("test_message_arg2");
+
 		str_v response = _portsRequired["portClient"]->send_message(args);
 		std::cout << "Sent !!!\n";
 		std::cout << "Response : " << std::endl;
 		for ( int i=0; i<response.size(); i++ ) {
 			std::cout << "\t- " << response.at(i) << std::endl;
 		}
+
+		if ( response.at(0) == "Request Executed !" ) {
+			return true;
+		}
+
 	}
 	else {
 		std::cout << "Port not found : " << "portClient" << std::endl;
 	}
 
-}
-
-
-void Client::onInit() {
-
-	std::cout << "Init Client" << std::endl;
+	return false;
 
 }
 
-void Client::onLaunch() {
-		this->start_cli();
 
 
-	}
 
-
-std::string Client::login( std::string login, std::string password ) {
+bool Client::login( std::string login, std::string password ) {
 
 	str_v args;
+	args.push_back("connect");
 	args.push_back(login);
 	args.push_back(password);
 	
 	str_v response = _portsRequired["portClient"]->send_message(args);
 
 	if ( response.size() > 0 ) {
-		return response.at(0);
+		std::cout << "~ Client : Received response : " + response.at(0) + "\n";
+		
+		return (response.at(0) == "Connected !");
 	}
 	else {
 		return "(empty response)";
 	}
+
+	return false;
 }
 
 

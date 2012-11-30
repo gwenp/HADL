@@ -18,14 +18,16 @@ public:
 
 	void start_cli();
 
-	void send_a_request( std::string request_name );
-	std::string login( std::string login, std::string password );
+	bool send_a_request( std::string request_name );
+	bool login( std::string login, std::string password );
 
 
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
 
 private:
 	ClientMethodsIndex _methods;
+
+	std::string _connected_user;
 
 };
 

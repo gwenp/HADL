@@ -13,12 +13,14 @@ public:
 	DataBase();
 	~DataBase();
 
-	str_v getPasswordOfUser( str_v args );
-	str_v getAbilitiesOfUser( str_v args );
-
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
 
 private:
+
+	str_v getPasswordOfUser( str_v args );
+	str_v getAbilitiesOfUser( str_v args );
+
+
 	DataBaseMethodsIndex _methods;
 	/* data */
 

@@ -38,51 +38,53 @@
 					"factory" : "Database",
 					"name" : "Database",
 					"PortsProvided" : [
-										{ "name" : "portProvidedRequest", "toMethod" : "getAbilitiesOfUsergetPasswordOfUser"},
-										{ "name" : "portProvidedLoginSecurity", "toMethod" : "getPasswordOfUser"}
+										{ "name" : "portProvidedPasswordsStore", "toMethod" : "getPasswordOfUser"},
+										{ "name" : "portProvidedPermissionsStore", "toMethod" : "getAbilitiesOfUser"}
 									  ]
 				},
 				{
 					"type" : "Component",
 					"factory" : "SecurityManager",
 					"name" : "SecurityManager",
-					"PortsRequired" : ["portRequiredLoginSecurity"],
-					"PortsProvided" : [{ "name" : "portProvidedAuthentication", "toMethod" : "isUserAbleTo" }]
+					"PortsRequired" : ["portRequiredPermissionsStore"],
+					"PortsProvided" : [{ "name" : "portProvidedUserAbility", "toMethod" : "isUserAbleTo" }]
 				},
 				{
 					"type" : "Component",
 					"factory" : "ConnectionManager",
 					"name" : "ConnectionManager",
 
-					"PortsRequired" : ["portRequiredRequest","portRequiredAuthentication"],
-					"PortsProvided" : [{ "name" : "portProvidedCM", "toMethod" : "authenticate" }]
+					"PortsRequired" : ["portRequiredUserAbility","portRequiredAuthentication"],
+					"PortsProvided" : [{ "name" : "portProvidedCM", "toMethod" : "receive_command" }]
 				},
 				{
 					"type" : "Connector",
 					"factory" : "Default",
 					"name" : "CM_to_SM",
 					"RolesProvided" : [
-										{ "name" : "roleProvidedAuthentication", "toRole" : "roleRequiredAuthentication" }
+										{ "name" : "roleProvidedUserAbility", "toRole" : "roleRequiredUserAbility" }
 									  ],
-					"RolesRequired" : [ "roleRequiredAuthentication" ]
+					"RolesRequired" : [ "roleRequiredUserAbility" ]
+			
 				},
 				{
 					"type" : "Connector",
 					"factory" : "Default",
 					"name" : "CM_to_DB",
-					"RolesProvided" : [
-										{ "name" : "roleProvidedRequest", "toRole" : "roleRequiredRequest" }
+							"RolesProvided" : [
+										{ "name" : "roleProvidedPasswordsStore", "toRole" : "roleRequiredPasswordsStore" }
 									  ],
-					"RolesRequired" : [ "roleRequiredRequest" ]
+					"RolesRequired" : [ "roleRequiredPasswordsStore" ]
+
 				},
 				{
 					"type" : "Connector",
 					"factory" : "Default",
 					"name" : "SM_to_DB",
 					"RolesProvided" : [
-										{ "name" : "roleProvidedLoginSecurity", "toRole" : "roleRequiredLoginSecurity" }
+										{ "name" : "roleProvidedPermissionsStore", "toRole" : "roleRequiredPermissionsStore" }
 									  ],
-					"RolesRequired" : [ "roleRequiredLoginSecurity" ]
+					"RolesRequired" : [ "roleRequiredPermissionsStore" ]
 				}
 				],
 				"bindings" : [
@@ -118,44 +120,44 @@
 			},
 			{
 				"fromType" : "Port",
-				"fromName" : "portRequiredRequest",
+				"fromName" : "portRequiredUserAbility",
 				"toType"   : "Role",
-				"toName"   : "roleProvidedRequest",
+				"toName"   : "roleProvidedUserAbility",
 				"destinationElementName" : "Server"
 			},
 			{
 				"fromType" : "Role",
-				"fromName" : "roleRequiredRequest",
+				"fromName" : "roleRequiredUserAbility",
 				"toType"   : "Port",
-				"toName"   : "portProvidedRequest",
-				"destinationElementName" : "Database"
+				"toName"   : "portProvidedUserAbility",
+				"destinationElementName" : "SecurityManager"
 			},
 			{
 				"fromType" : "Port",
 				"fromName" : "portRequiredAuthentication",
 				"toType"   : "Role",
-				"toName"   : "roleProvidedAuthentication",
-				"destinationElementName" : "CM_to_SM"
+				"toName"   : "roleProvidedPasswordsStore",
+				"destinationElementName" : "CM_to_DB"
 			},
 			{
 				"fromType" : "Role",
-				"fromName" : "roleRequiredAuthentication",
+				"fromName" : "roleRequiredPasswordsStore",
 				"toType"   : "Port",
-				"toName"   : "portProvidedAuthentication",
-				"destinationElementName" : "SecurityManager" 
+				"toName"   : "portProvidedPasswordsStore",
+				"destinationElementName" : "DataBase" 
 			},
 			{
 				"fromType" : "Port",
-				"fromName" : "portRequiredLoginSecurity",
+				"fromName" : "portRequiredPermissionsStore",
 				"toType"   : "Role",
-				"toName"   : "roleProvidedLoginSecurity",
+				"toName"   : "roleProvidedPermissionsStore",
 				"destinationElementName" : "SM_to_DB"
 			},
 			{
 				"fromType" : "Role",
-				"fromName" : "roleRequiredLoginSecurity",
+				"fromName" : "roleRequiredPermissionsStore",
 				"toType"   : "Port",
-				"toName"   : "portProvidedLoginSecurity",
+				"toName"   : "portProvidedPermissionsStore",
 				"destinationElementName" : "Database"
 			}
 		]

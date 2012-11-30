@@ -4,6 +4,8 @@
 #include <HADL/Component.hpp>
 
 #include <set>
+#include <vector>
+#include <algorithm>
 
 class ConnectionManager;
 typedef std::vector<std::string> (ConnectionManager::*ConnectionManagerMethod)(std::vector<std::string>);
@@ -15,16 +17,16 @@ public:
 	ConnectionManager();
 	~ConnectionManager();
 
-	std::string getUserPassword( std::string& username );
-
-	str_v authenticate( str_v args );
-	str_v makeACoolRequest( str_v args );
-
 	str_v on_message( PortComposantProvided* provided_port, str_v args );
 
 private:
-	ConnectionManagerMethodsIndex _methods;
 
+	std::string getUserPassword( std::string& username );
+	bool checkUserAbilityFor( std::string& username, std::string& request_type );
+
+	str_v receive_command( str_v args );
+
+	ConnectionManagerMethodsIndex _methods;
 
 	std::set<std::string> _user_sessions;
 };

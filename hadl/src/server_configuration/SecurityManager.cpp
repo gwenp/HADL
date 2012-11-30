@@ -13,20 +13,20 @@ SecurityManager::~SecurityManager()
 std::vector<std::string> SecurityManager::getUserAbilities( std::string& username ) {
 
 	std::vector<std::string> response;
-	if ( _portsRequired.find("portRequiredLoginSecurity") != _portsRequired.end() ) {
+	if ( _portsRequired.find("portRequiredPermissionsStore") != _portsRequired.end() ) {
 
 		std::cout << "Demande de permission utilisateur. Demandons a la DataBase\n" << std::endl;
 
 		str_v request;
 		request.push_back(username);
 
-		response = _portsRequired["portRequiredLoginSecurity"]->send_message( request );
+		response = _portsRequired["portRequiredPermissionsStore"]->send_message( request );
 
-			std::cout << "~~ SecurityManager recupere le retour de la DataBase\n" << std::endl;
+		std::cout << "~~ SecurityManager recupere le retour de la DataBase\n" << std::endl;
 
 	}
 	else {
-		std::cout << "Port Required not found : " << "portRequiredLoginSecurity" << std::endl;
+		std::cout << "Port Required not found : " << "portRequiredPermissionsStore" << std::endl;
 	}
 
 	return response;
@@ -39,18 +39,17 @@ str_v SecurityManager::isUserAbleTo( str_v args ) {
 
 	str_v ret;
 
-	if ( args.size() > 0 ) {
+	if ( args.size() > 1 ) {
 		std::string& username = args.at(0);
-		std::string required_ability = "cook marmalade";
+		std::string required_ability = args.at(1);
 
-		std::cout << "Asking for DB ...\n";
 		/* Ask to DB ? */
 		std::vector<std::string> abilities = getUserAbilities(username);
 		if ( std::find(abilities.begin(), abilities.end(), required_ability) != abilities.end() ) {
-			ret.push_back("granted");
+			ret.push_back("OK");
 		}
 		else {
-			ret.push_back("denied");
+			ret.push_back("Not Allowed !");
 		}
 
 	}
